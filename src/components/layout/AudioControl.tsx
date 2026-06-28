@@ -9,6 +9,7 @@ function VolumePanel({
   muted,
   setVolume,
   toggleMute,
+  ensureMusicPlaying,
   className,
   onClose,
 }: {
@@ -16,6 +17,7 @@ function VolumePanel({
   muted: boolean
   setVolume: (v: number) => void
   toggleMute: () => void
+  ensureMusicPlaying: () => void
   className?: string
   onClose?: () => void
 }) {
@@ -42,7 +44,10 @@ function VolumePanel({
         max={100}
         step={1}
         value={Math.round(displayVolume * 100)}
-        onChange={(e) => setVolume(Number(e.target.value) / 100)}
+        onChange={(e) => {
+          ensureMusicPlaying()
+          setVolume(Number(e.target.value) / 100)
+        }}
         style={{ '--fill': `${Math.round(displayVolume * 100)}%` } as React.CSSProperties}
         className="audio-slider w-full mb-3 touch-manipulation min-h-[44px]"
         aria-label="Theme song volume"
@@ -51,6 +56,7 @@ function VolumePanel({
       <button
         type="button"
         onClick={() => {
+          ensureMusicPlaying()
           toggleMute()
           onClose?.()
         }}
@@ -63,7 +69,7 @@ function VolumePanel({
 }
 
 export function AudioControl() {
-  const { muted, volume, setVolume, toggleMute } = useSound()
+  const { muted, volume, setVolume, toggleMute, ensureMusicPlaying } = useSound()
   const [open, setOpen] = useState(false)
   const [touchUi, setTouchUi] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -102,12 +108,13 @@ export function AudioControl() {
   }, [clearCloseTimer, touchUi])
 
   const handleToggle = useCallback(() => {
+    ensureMusicPlaying()
     if (touchUi) {
       setOpen((o) => !o)
       return
     }
     toggleMute()
-  }, [touchUi, toggleMute])
+  }, [touchUi, toggleMute, ensureMusicPlaying])
 
   const displayVolume = muted ? 0 : volume
   const VolumeIcon =
@@ -143,6 +150,7 @@ export function AudioControl() {
               muted={muted}
               setVolume={setVolume}
               toggleMute={toggleMute}
+              ensureMusicPlaying={ensureMusicPlaying}
               onClose={() => setOpen(false)}
               className="fixed left-4 right-4 top-[calc(4.5rem+env(safe-area-inset-top))] max-w-sm mx-auto"
             />
@@ -152,6 +160,7 @@ export function AudioControl() {
               muted={muted}
               setVolume={setVolume}
               toggleMute={toggleMute}
+              ensureMusicPlaying={ensureMusicPlaying}
               className="absolute top-full right-0 mt-2 w-56"
             />
           )

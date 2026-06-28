@@ -3,6 +3,7 @@ import { AnimatedSection, SectionHeading } from '@/components/ui/SectionHeading'
 import { GlowCard } from '@/components/ui/GlowCard'
 import { FiBell, FiCheck, FiClock, FiTrendingUp } from 'react-icons/fi'
 import { staggerContainer, fadeInUp } from '@/animations/variants'
+import { isTouchDevice } from '@/hooks/useDevice'
 
 const approvals = [
   { child: 'Sofia', action: 'Completed "Clean Room"', coins: 50, time: '2m ago' },
@@ -17,6 +18,7 @@ const pendingChores = [
 ]
 
 export function ParentDashboard() {
+  const touch = isTouchDevice()
   const pieSegments = [
     { percent: 40, color: '#0FAF9C', label: 'Savings' },
     { percent: 30, color: '#3B82F6', label: 'Spending' },
@@ -101,18 +103,22 @@ export function ParentDashboard() {
           <GlowCard className="p-6">
             <h3 className="font-semibold text-ink dark:text-white mb-4">Spending Breakdown</h3>
             <svg viewBox="0 0 160 160" className="w-full max-w-[200px] mx-auto">
-              {piePaths.map((seg, i) => (
-                <motion.path
-                  key={seg.label}
-                  d={seg.d}
-                  fill={seg.color}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.15 }}
-                  style={{ transformOrigin: '80px 80px' }}
-                />
-              ))}
+              {touch
+                ? piePaths.map((seg) => (
+                    <path key={seg.label} d={seg.d} fill={seg.color} />
+                  ))
+                : piePaths.map((seg, i) => (
+                    <motion.path
+                      key={seg.label}
+                      d={seg.d}
+                      fill={seg.color}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.15 }}
+                      style={{ transformOrigin: '80px 80px' }}
+                    />
+                  ))}
               <circle cx="80" cy="80" r="35" className="fill-white dark:fill-navy" />
             </svg>
             <div className="grid grid-cols-2 gap-2 mt-4">

@@ -21,6 +21,7 @@ interface SoundContextValue {
   setMuted: (v: boolean) => void
   toggleMute: () => void
   playClick: () => void
+  ensureMusicPlaying: () => void
 }
 
 const SoundContext = createContext<SoundContextValue>({
@@ -31,6 +32,7 @@ const SoundContext = createContext<SoundContextValue>({
   setMuted: () => {},
   toggleMute: () => {},
   playClick: () => {},
+  ensureMusicPlaying: () => {},
 })
 
 function readVolume(): number {
@@ -108,7 +110,11 @@ export function SoundProvider({
 
   const tryPlay = useCallback(async () => {
     const audio = audioRef.current
-    if (!audio || startedRef.current) return
+    if (!audio) return
+    if (startedRef.current && !audio.paused) {
+      setMusicPlaying(true)
+      return
+    }
     try {
       await audio.play()
       startedRef.current = true
@@ -117,6 +123,10 @@ export function SoundProvider({
       setMusicPlaying(false)
     }
   }, [])
+
+  const ensureMusicPlaying = useCallback(() => {
+    void tryPlay()
+  }, [tryPlay])
 
   useEffect(() => {
     if (!ready) return
@@ -130,19 +140,27 @@ export function SoundProvider({
     audio.setAttribute('webkit-playsinline', '')
     audioRef.current = audio
 
-    tryPlay()
-
     const onInteract = () => {
-      tryPlay()
+      void tryPlay()
     }
-    document.addEventListener('pointerdown', onInteract, { once: true, passive: true })
-    document.addEventListener('touchstart', onInteract, { once: true, passive: true })
-    document.addEventListener('keydown', onInteract, { once: true })
+    const onReady = () => {
+      void tryPlay()
+    }
+
+    void tryPlay()
+
+    document.addEventListener('pointerdown', onInteract, { passive: true })
+    document.addEventListener('touchstart', onInteract, { passive: true })
+    document.addEventListener('keydown', onInteract)
+    audio.addEventListener('canplaythrough', onReady)
+    audio.addEventListener('loadeddata', onReady)
 
     return () => {
       document.removeEventListener('pointerdown', onInteract)
       document.removeEventListener('touchstart', onInteract)
       document.removeEventListener('keydown', onInteract)
+      audio.removeEventListener('canplaythrough', onReady)
+      audio.removeEventListener('loadeddata', onReady)
       audio.pause()
       audio.src = ''
       audioRef.current = null
@@ -154,7 +172,10 @@ export function SoundProvider({
     const audio = audioRef.current
     if (!audio) return
     audio.volume = muted ? 0 : volume
-  }, [volume, muted])
+    if (!muted && volume > 0) {
+      void tryPlay()
+    }
+  }, [volume, muted, tryPlay])
 
   const playClick = useCallback(() => {
     if (muted) return
@@ -176,7 +197,7 @@ export function SoundProvider({
 
   return (
     <SoundContext.Provider
-      value={{ muted, volume, musicPlaying, setVolume, setMuted, toggleMute, playClick }}
+      value={{ muted, volume, musicPlaying, setVolume, setMuted, toggleMute, playClick, ensureMusicPlaying }}
     >
       {children}
     </SoundContext.Provider>
