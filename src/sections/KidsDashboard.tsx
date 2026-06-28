@@ -1,6 +1,7 @@
-import { useState, useEffect, useId } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useId, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { FiPlay, FiExternalLink } from 'react-icons/fi'
+import { isTouchDevice } from '@/hooks/useDevice'
 import { AnimatedSection, SectionHeading } from '@/components/ui/SectionHeading'
 import { GlowCard } from '@/components/ui/GlowCard'
 import { ProgressRing } from '@/components/ui/ProgressRing'
@@ -28,7 +29,15 @@ const weeklyActivity = [
 
 const CHART = { w: 320, h: 120, pad: { t: 12, r: 12, b: 28, l: 36 } }
 
+function useChartVisible() {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, amount: 0.15 })
+  const skipAnimation = isTouchDevice()
+  return { ref, visible: skipAnimation || isInView, animate: !skipAnimation }
+}
+
 function BalanceLineChart() {
+  const { ref, visible, animate } = useChartVisible()
   const gradientId = useId()
   const { w, h, pad } = CHART
   const chartW = w - pad.l - pad.r
@@ -55,7 +64,7 @@ function BalanceLineChart() {
   })
 
   return (
-    <div>
+    <div ref={ref}>
       <div className="flex items-center justify-between mb-2">
         <p className="text-sm font-semibold text-ink">Balance Trend</p>
         <p className="text-xs text-ink-subtle">This week</p>
@@ -85,41 +94,61 @@ function BalanceLineChart() {
           </g>
         ))}
 
-        <motion.path
-          d={areaPath}
-          fill={`url(#${gradientId})`}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        />
-        <motion.path
-          d={linePath}
-          fill="none"
-          stroke="#0FAF9C"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
-        />
-
-        {points.map((p, i) => (
-          <motion.g key={p.day} initial={{ opacity: 0, scale: 0 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 + i * 0.08 }}>
-            <circle cx={p.x} cy={p.y} r="4" fill="#0FAF9C" stroke="white" strokeWidth="1.5" className="dark:stroke-navy" />
-            <text x={p.x} y={h - 8} textAnchor="middle" className="fill-ink-subtle text-[9px] font-medium">
-              {p.day}
-            </text>
-          </motion.g>
-        ))}
+        {animate ? (
+          <>
+            <motion.path
+              d={areaPath}
+              fill={`url(#${gradientId})`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: visible ? 1 : 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            />
+            <motion.path
+              d={linePath}
+              fill="none"
+              stroke="#0FAF9C"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: visible ? 1 : 0 }}
+              transition={{ duration: 1.2, ease: 'easeInOut' }}
+            />
+            {points.map((p, i) => (
+              <motion.g
+                key={p.day}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0 }}
+                transition={{ delay: 0.4 + i * 0.08 }}
+              >
+                <circle cx={p.x} cy={p.y} r="4" fill="#0FAF9C" stroke="white" strokeWidth="1.5" className="dark:stroke-navy" />
+                <text x={p.x} y={h - 8} textAnchor="middle" className="fill-ink-subtle text-[9px] font-medium">
+                  {p.day}
+                </text>
+              </motion.g>
+            ))}
+          </>
+        ) : (
+          <>
+            <path d={areaPath} fill={`url(#${gradientId})`} />
+            <path d={linePath} fill="none" stroke="#0FAF9C" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            {points.map((p) => (
+              <g key={p.day}>
+                <circle cx={p.x} cy={p.y} r="4" fill="#0FAF9C" stroke="white" strokeWidth="1.5" className="dark:stroke-navy" />
+                <text x={p.x} y={h - 8} textAnchor="middle" className="fill-ink-subtle text-[9px] font-medium">
+                  {p.day}
+                </text>
+              </g>
+            ))}
+          </>
+        )}
       </svg>
     </div>
   )
 }
 
 function EarnedSpentBarChart() {
+  const { ref, visible, animate } = useChartVisible()
   const { w, h, pad } = CHART
   const chartW = w - pad.l - pad.r
   const chartH = h - pad.t - pad.b
@@ -128,7 +157,7 @@ function EarnedSpentBarChart() {
   const barW = barGroupW * 0.28
 
   return (
-    <div>
+    <div ref={ref}>
       <div className="flex items-center justify-between mb-2">
         <p className="text-sm font-semibold text-ink">Earned vs Spent</p>
         <div className="flex items-center gap-3 text-xs text-ink-subtle">
@@ -161,27 +190,34 @@ function EarnedSpentBarChart() {
 
           return (
             <g key={d.day}>
-              <motion.rect
-                x={groupX - barW - 1}
-                width={barW}
-                rx={3}
-                fill="#0FAF9C"
-                initial={{ height: 0, y: baseY }}
-                whileInView={{ height: earnedH, y: baseY - earnedH }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              />
-              <motion.rect
-                x={groupX + 1}
-                width={barW}
-                rx={3}
-                fill="#FFD54A"
-                fillOpacity={0.85}
-                initial={{ height: 0, y: baseY }}
-                whileInView={{ height: spentH, y: baseY - spentH }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.06 + 0.03, ease: [0.22, 1, 0.36, 1] }}
-              />
+              {animate ? (
+                <>
+                  <motion.rect
+                    x={groupX - barW - 1}
+                    width={barW}
+                    rx={3}
+                    fill="#0FAF9C"
+                    initial={{ height: 0, y: baseY }}
+                    animate={{ height: visible ? earnedH : 0, y: visible ? baseY - earnedH : baseY }}
+                    transition={{ duration: 0.6, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                  <motion.rect
+                    x={groupX + 1}
+                    width={barW}
+                    rx={3}
+                    fill="#FFD54A"
+                    fillOpacity={0.85}
+                    initial={{ height: 0, y: baseY }}
+                    animate={{ height: visible ? spentH : 0, y: visible ? baseY - spentH : baseY }}
+                    transition={{ duration: 0.6, delay: i * 0.06 + 0.03, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </>
+              ) : (
+                <>
+                  <rect x={groupX - barW - 1} y={baseY - earnedH} width={barW} height={earnedH} rx={3} fill="#0FAF9C" />
+                  <rect x={groupX + 1} y={baseY - spentH} width={barW} height={spentH} rx={3} fill="#FFD54A" fillOpacity={0.85} />
+                </>
+              )}
               <text x={groupX} y={h - 8} textAnchor="middle" className="fill-ink-subtle text-[9px] font-medium">
                 {d.day.slice(0, 1)}
               </text>

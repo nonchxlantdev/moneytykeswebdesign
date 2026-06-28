@@ -3,7 +3,10 @@ import { FiPlay, FiArrowRight } from 'react-icons/fi'
 import { Button } from '@/components/ui/Button'
 import { GlowingOrbs, FloatingParticles } from '@/components/ui/BackgroundEffects'
 import { slideInLeft, slideInRight } from '@/animations/variants'
+import { isTouchDevice } from '@/hooks/useDevice'
 import { logo } from '@/img'
+
+const touchMotion = isTouchDevice() ? 'visible' : 'hidden'
 
 export function Hero() {
   return (
@@ -12,7 +15,7 @@ export function Hero() {
       <FloatingParticles />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-28 pb-16 grid lg:grid-cols-2 gap-10 items-center relative z-10">
-        <motion.div variants={slideInLeft} initial="hidden" animate="visible">
+        <motion.div variants={slideInLeft} initial={touchMotion} animate="visible">
           <motion.div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-semibold text-primary-text mb-4"
             initial={{ opacity: 0, y: 20 }}
@@ -71,26 +74,26 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* App preview placeholder — 3D section reserved for later */}
+        {/* App preview placeholder — visible on tablet & mobile too (iPad is below lg) */}
         <motion.div
           variants={slideInRight}
-          initial="hidden"
+          initial={touchMotion}
           animate="visible"
-          className="hidden lg:flex items-center justify-center min-h-[420px]"
+          className="flex items-center justify-center min-h-[220px] sm:min-h-[300px] lg:min-h-[420px] mt-8 sm:mt-10 lg:mt-0 w-full"
         >
-          <div className="w-full h-[480px] rounded-3xl border-2 border-dashed border-navy/12 dark:border-white/15 bg-surface-secondary/60 dark:bg-white/5 flex flex-col items-center justify-center gap-5 px-8 pt-16 pb-10 text-center">
+          <div className="w-full min-h-[220px] h-[240px] sm:h-[340px] lg:h-[480px] rounded-2xl sm:rounded-3xl border-2 border-dashed border-navy/12 dark:border-white/15 bg-surface-secondary/60 dark:bg-white/5 flex flex-col items-center justify-center gap-3 sm:gap-5 px-4 sm:px-8 pt-10 sm:pt-16 pb-6 sm:pb-10 text-center">
             <img
               src={logo}
               alt="MoneyTykes"
-              className="max-h-48 md:max-h-[15rem] w-auto max-w-[94%] object-contain"
+              className="max-h-32 sm:max-h-40 lg:max-h-[15rem] w-auto max-w-[94%] object-contain"
               loading="lazy"
               decoding="async"
             />
             <div className="space-y-1">
-              <p className="text-lg md:text-xl font-bold text-ink leading-snug max-w-sm">
+              <p className="text-base sm:text-lg md:text-xl font-bold text-ink leading-snug max-w-sm">
                 Spain: Boss I got an idea just wait...
               </p>
-              <p className="text-ink-muted text-sm">App preview launching shortly.</p>
+              <p className="text-ink-muted text-xs sm:text-sm">App preview launching shortly.</p>
             </div>
           </div>
         </motion.div>
