@@ -29,7 +29,7 @@ export const features: Feature[] = [
   {
     id: 'virtual-wallet',
     title: 'Virtual Wallet',
-    description: 'Kids manage their own digital coins with real-world spending at partner vendors.',
+    description: 'Kids manage their own digital coins at partner vendors.',
     icon: FiCreditCard,
     gradient: 'from-blue-500 to-purple-500',
   },

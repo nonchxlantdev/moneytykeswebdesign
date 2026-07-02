@@ -40,7 +40,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-ink-muted dark:text-white/80 text-sm leading-relaxed mb-6">
-              Belize&apos;s premier family fintech platform teaching kids smart money habits through chores, rewards, and real-world spending.
+              Belize&apos;s premier family fintech platform teaching kids smart money habits through chores, rewards, and savings goals.
             </p>
             <div className="flex gap-3">
               {socials.map(({ icon: Icon, href, label }) => (
