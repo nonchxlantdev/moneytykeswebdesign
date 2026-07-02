@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import {
   bindWalletFillGlobals,
   createWalletFill,
@@ -15,6 +15,7 @@ export function WalletFillScene({ children }: WalletFillSceneProps) {
   const sceneRef = useRef<HTMLDivElement>(null)
   const controllerRef = useRef<WalletFillController | null>(null)
   const tapLockRef = useRef(false)
+  const [showTapHint, setShowTapHint] = useState(true)
 
   useEffect(() => {
     const scene = sceneRef.current
@@ -26,7 +27,12 @@ export function WalletFillScene({ children }: WalletFillSceneProps) {
     controllerRef.current = controller
     bindWalletFillGlobals(controller)
 
+    const resetBtn = scene.querySelector('#mt-reset-btn')
+    const onReset = () => setShowTapHint(true)
+    resetBtn?.addEventListener('click', onReset)
+
     return () => {
+      resetBtn?.removeEventListener('click', onReset)
       controller.destroy()
       controllerRef.current = null
       unbindWalletFillGlobals()
@@ -36,6 +42,7 @@ export function WalletFillScene({ children }: WalletFillSceneProps) {
   const handleTap = () => {
     if (tapLockRef.current) return
     tapLockRef.current = true
+    setShowTapHint(false)
     controllerRef.current?.burst()
     window.setTimeout(() => {
       tapLockRef.current = false
@@ -76,14 +83,27 @@ export function WalletFillScene({ children }: WalletFillSceneProps) {
         {children}
       </div>
 
-      <button
-        id="mt-tap-btn"
-        type="button"
-        onClick={handleTap}
-        className="relative z-[12] mt-auto shrink-0 px-6 py-2.5 rounded-full bg-accent text-ink font-bold text-sm shadow-[0_4px_16px_rgba(255,213,74,0.45)] hover:bg-accent-dark active:scale-[0.97] transition-transform transition-colors touch-manipulation min-h-[44px] min-w-[44px]"
-      >
-        Tap here
-      </button>
+      <div className="relative z-[12] mt-auto shrink-0">
+        <button
+          id="mt-tap-btn"
+          type="button"
+          onClick={handleTap}
+          className="relative px-6 py-2.5 rounded-full bg-accent text-ink font-bold text-sm shadow-[0_4px_16px_rgba(255,213,74,0.45)] hover:bg-accent-dark active:scale-[0.97] transition-transform transition-colors touch-manipulation min-h-[44px] min-w-[44px]"
+        >
+          {showTapHint ? (
+            <span
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 pointer-events-none z-10"
+              aria-hidden="true"
+            >
+              <span className="mt-tap-hint relative block text-2xl sm:text-3xl leading-none drop-shadow-[0_2px_6px_rgba(46,31,122,0.3)]">
+                👆
+                <span className="mt-tap-ring absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full border-2 border-primary/55" />
+              </span>
+            </span>
+          ) : null}
+          <span className="relative z-[1]">Charge Wallet</span>
+        </button>
+      </div>
 
       {/* Hidden progress tracking — fill only, no visible wallet bar */}
       <div id="mt-progress-wrap" style={{ display: 'none' }} aria-hidden="true">

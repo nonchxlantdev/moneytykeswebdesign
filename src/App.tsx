@@ -7,6 +7,7 @@ import { LoadingScreen } from '@/components/layout/LoadingScreen'
 import { CustomCursor } from '@/components/layout/CustomCursor'
 import { MouseTrail } from '@/components/layout/MouseTrail'
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary'
+import { ThemeSongPrompt } from '@/components/layout/ThemeSongPrompt'
 import { Home } from '@/pages/Home'
 import { Terms } from '@/pages/Terms'
 import { Privacy } from '@/pages/Privacy'
@@ -57,6 +58,7 @@ export default function App() {
               </>
             )}
             <ErrorBoundary>
+              <ThemeSongPrompt />
               {page === 'terms' ? (
                 <Terms />
               ) : page === 'privacy' ? (

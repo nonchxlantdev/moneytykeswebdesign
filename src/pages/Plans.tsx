@@ -60,7 +60,7 @@ export function Plans() {
 
       {/* Pricing cards */}
       <section className="pb-12 md:pb-16 px-4 md:px-8">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 md:gap-8 items-start">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 md:gap-8 items-stretch">
           {pricingPlans.map((plan, index) => (
             <PricingCard key={plan.id} plan={plan} index={index} />
           ))}
@@ -70,7 +70,7 @@ export function Plans() {
       {/* Trust strip */}
       <section className="py-10 md:py-12 px-4 md:px-8 border-y border-navy/8 dark:border-white/10 bg-surface-secondary/50 dark:bg-navy-light/20">
         <motion.div
-          className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-center"
+          className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center"
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"

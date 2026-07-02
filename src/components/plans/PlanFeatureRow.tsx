@@ -23,7 +23,7 @@ function FeatureValue({ value }: { value: PlanFeature['value'] }) {
   }
 
   return (
-    <span className="text-accent-text dark:text-accent font-medium text-sm text-right sm:text-right">
+    <span className="text-accent-text dark:text-accent font-medium text-xs sm:text-sm text-right leading-snug max-w-[9.5rem] sm:max-w-[11rem] block">
       {value.value}
     </span>
   )
@@ -32,12 +32,12 @@ function FeatureValue({ value }: { value: PlanFeature['value'] }) {
 export function PlanFeatureRow({ feature, striped }: PlanFeatureRowProps) {
   return (
     <div
-      className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4 px-4 py-3 border-b border-navy/[0.08] dark:border-white/10 last:border-b-0 ${
+      className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 border-b border-navy/[0.08] dark:border-white/10 last:border-b-0 ${
         striped ? 'bg-surface-secondary/70 dark:bg-white/[0.03]' : ''
       }`}
     >
-      <span className="text-sm text-ink font-medium">{feature.label}</span>
-      <div className="sm:shrink-0 sm:text-right">
+      <span className="text-sm text-ink font-medium leading-snug">{feature.label}</span>
+      <div className="text-right justify-self-end">
         <FeatureValue value={feature.value} />
       </div>
     </div>
