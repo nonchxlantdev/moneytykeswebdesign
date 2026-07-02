@@ -224,8 +224,9 @@ html.dark {
 
   .audio-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
+    margin-top: -8px;
     border-radius: 50%;
     background: var(--color-primary);
     border: 2px solid white;
@@ -234,8 +235,8 @@ html.dark {
   }
 
   .audio-slider::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     background: var(--color-primary);
     border: 2px solid white;

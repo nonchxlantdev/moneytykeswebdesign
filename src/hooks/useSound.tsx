@@ -71,16 +71,81 @@ export function SoundProvider({
   const [musicPlaying, setMusicPlaying] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const startedRef = useRef(false)
+  const volumeRef = useRef(volume)
+  const mutedRef = useRef(muted)
+
+  volumeRef.current = volume
+  mutedRef.current = muted
+
+  const applyAudioVolume = useCallback((nextVolume = volumeRef.current, nextMuted = mutedRef.current) => {
+    const audio = audioRef.current
+    if (!audio) return
+    audio.volume = nextMuted ? 0 : nextVolume
+  }, [])
 
   const setVolume = useCallback((v: number) => {
     const next = Math.min(1, Math.max(0, v))
+    const shouldUnmute = next > 0
     setVolumeState(next)
+    volumeRef.current = next
     try {
       localStorage.setItem(STORAGE_VOLUME, String(next))
     } catch {
       /* ignore */
     }
-    if (next > 0) {
+    if (shouldUnmute) {
+      setMutedState(false)
+      mutedRef.current = false
+      try {
+        localStorage.setItem(STORAGE_MUTED, 'false')
+      } catch {
+        /* ignore */
+      }
+      applyAudioVolume(next, false)
+    } else {
+      applyAudioVolume(next, mutedRef.current)
+    }
+  }, [applyAudioVolume])
+
+  const setMuted = useCallback((m: boolean) => {
+    setMutedState(m)
+    mutedRef.current = m
+    try {
+      localStorage.setItem(STORAGE_MUTED, String(m))
+    } catch {
+      /* ignore */
+    }
+    applyAudioVolume(volumeRef.current, m)
+  }, [applyAudioVolume])
+
+  const toggleMute = useCallback(() => {
+    setMutedState((prev) => {
+      const next = !prev
+      mutedRef.current = next
+      try {
+        localStorage.setItem(STORAGE_MUTED, String(next))
+      } catch {
+        /* ignore */
+      }
+      applyAudioVolume(volumeRef.current, next)
+      return next
+    })
+  }, [applyAudioVolume])
+
+  const syncMusicPlaying = useCallback(() => {
+    const audio = audioRef.current
+    if (!audio) return
+    setMusicPlaying(!audio.paused && !audio.ended)
+  }, [])
+
+  const tryPlay = useCallback(async (options?: { unmute?: boolean }) => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    let effectiveMuted = mutedRef.current
+    if (options?.unmute && volumeRef.current > 0) {
+      effectiveMuted = false
+      mutedRef.current = false
       setMutedState(false)
       try {
         localStorage.setItem(STORAGE_MUTED, 'false')
@@ -88,44 +153,22 @@ export function SoundProvider({
         /* ignore */
       }
     }
-  }, [])
 
-  const setMuted = useCallback((m: boolean) => {
-    setMutedState(m)
-    try {
-      localStorage.setItem(STORAGE_MUTED, String(m))
-    } catch {
-      /* ignore */
-    }
-  }, [])
+    applyAudioVolume(volumeRef.current, effectiveMuted)
 
-  const toggleMute = useCallback(() => {
-    setMutedState((prev) => {
-      const next = !prev
-      try {
-        localStorage.setItem(STORAGE_MUTED, String(next))
-      } catch {
-        /* ignore */
-      }
-      return next
-    })
-  }, [])
-
-  const tryPlay = useCallback(async () => {
-    const audio = audioRef.current
-    if (!audio) return
     if (startedRef.current && !audio.paused) {
-      setMusicPlaying(true)
+      syncMusicPlaying()
       return
     }
+
     try {
       await audio.play()
       startedRef.current = true
-      setMusicPlaying(true)
+      syncMusicPlaying()
     } catch {
       setMusicPlaying(false)
     }
-  }, [])
+  }, [applyAudioVolume, syncMusicPlaying])
 
   const pauseMusic = useCallback(() => {
     const audio = audioRef.current
@@ -135,7 +178,7 @@ export function SoundProvider({
   }, [])
 
   const ensureMusicPlaying = useCallback(() => {
-    void tryPlay()
+    void tryPlay({ unmute: true })
   }, [tryPlay])
 
   useEffect(() => {
@@ -151,10 +194,14 @@ export function SoundProvider({
     audio.setAttribute('webkit-playsinline', '')
     audioRef.current = audio
 
-    const onPlay = () => setMusicPlaying(true)
-    const onPause = () => setMusicPlaying(false)
+    const onPlay = () => syncMusicPlaying()
+    const onPause = () => syncMusicPlaying()
+    const onPlaying = () => syncMusicPlaying()
+    const onEnded = () => syncMusicPlaying()
     audio.addEventListener('play', onPlay)
     audio.addEventListener('pause', onPause)
+    audio.addEventListener('playing', onPlaying)
+    audio.addEventListener('ended', onEnded)
 
     const onInteract = () => {
       void tryPlay()
@@ -174,6 +221,8 @@ export function SoundProvider({
     return () => {
       audio.removeEventListener('play', onPlay)
       audio.removeEventListener('pause', onPause)
+      audio.removeEventListener('playing', onPlaying)
+      audio.removeEventListener('ended', onEnded)
       if (!touch) {
         document.removeEventListener('pointerdown', onInteract)
         document.removeEventListener('keydown', onInteract)
@@ -185,16 +234,14 @@ export function SoundProvider({
       audioRef.current = null
       startedRef.current = false
     }
-  }, [ready, tryPlay])
+  }, [ready, tryPlay, syncMusicPlaying])
 
   useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-    audio.volume = muted ? 0 : volume
-    if (!isTouchDevice() && !muted && volume > 0) {
+    applyAudioVolume()
+    if (!isTouchDevice() && !mutedRef.current && volumeRef.current > 0) {
       void tryPlay()
     }
-  }, [volume, muted, tryPlay])
+  }, [volume, muted, tryPlay, applyAudioVolume])
 
   const playClick = useCallback(() => {
     if (muted) return
