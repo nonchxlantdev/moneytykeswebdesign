@@ -23,7 +23,7 @@ export const faqItems: FAQItem[] = [
   {
     id: '4',
     question: 'How does the virtual wallet work?',
-    answer: 'Kids earn virtual coins by completing chores and challenges. Parents approve every wallet action. Coins can be saved toward goals or used for parent-approved rewards with verified partner vendors.',
+    answer: 'Kids earn virtual coins by completing chores and challenges. Parents approve every wallet action. Coins can be saved toward goals or used for parent-approved rewards with verified partner vendors. When a parent approves spending, the amount is deducted from the parent wallet.',
   },
   {
     id: '5',
@@ -33,6 +33,6 @@ export const faqItems: FAQItem[] = [
   {
     id: '6',
     question: 'How do vendor partnerships work?',
-    answer: 'Local businesses join our marketplace as verified partners. Kids can use earned virtual coins toward parent-approved rewards, with every request reviewed by a parent first.',
+    answer: 'Local businesses join our marketplace as verified partners. Kids can use earned virtual coins toward parent-approved rewards, with every request reviewed by a parent first. When spending is approved, the deduction is made from the parent wallet.',
   },
 ]

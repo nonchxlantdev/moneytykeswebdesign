@@ -65,7 +65,7 @@ export const ecosystemMembers: EcosystemMember[] = [
     emoji: '🛍️',
     title: 'Merchants',
     description:
-      'Connecting families with parent-approved educational promotions and future youth-focused reward experiences.',
+      'Connecting families with parent-approved educational promotions and future youth-focused reward experiences. When spending is approved, the deduction is made from the parent wallet.',
   },
   {
     id: 'financial',

@@ -46,7 +46,7 @@ export function ParentDashboard() {
       <SectionHeading
         badge="Parent Dashboard"
         title="Full Control, Beautiful Insights"
-        subtitle="Monitor spending, approve transactions, and track your children's financial growth."
+        subtitle="Monitor spending, approve transactions, and track your children's financial growth. When you approve spending, the deduction is made from your parent wallet."
       />
 
       <motion.div

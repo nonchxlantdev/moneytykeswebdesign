@@ -13,7 +13,7 @@ export const termsSections: TermsSection[] = [
   },
   {
     title: 'Parental Consent and Control',
-    body: 'Parents stay in control. All spending limits, rewards, and vendor experiences must be approved or preset by the parent. Children never complete wallet actions without parent permission.',
+    body: 'Parents stay in control. All spending limits, rewards, and vendor experiences must be approved or preset by the parent. Children never complete wallet actions without parent permission. When spending is approved, the amount is deducted from the parent wallet.',
   },
   {
     title: 'Rewards and Coins',
@@ -21,7 +21,7 @@ export const termsSections: TermsSection[] = [
   },
   {
     title: 'Parent-Approved Rewards',
-    body: 'When a child wants to use earned coins toward a reward or partner vendor experience, the parent reviews and approves each request in the virtual wallet before it is completed.',
+    body: 'When a child wants to use earned coins toward a reward or partner vendor experience, the parent reviews and approves each request in the virtual wallet before it is completed. The approved amount is deducted from the parent wallet.',
   },
   {
     title: 'Subscriptions and Payments',

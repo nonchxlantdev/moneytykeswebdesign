@@ -5,7 +5,7 @@ import { useTheme } from '@/hooks/useTheme'
 import { useActiveSection } from '@/hooks/useActiveSection'
 import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { AudioControl } from '@/components/layout/AudioControl'
-import { getAppPage, homeSectionHref } from '@/data/links'
+import { getAppPage, homeSectionHref, PLANS_NAV_HREF, plansHref } from '@/data/links'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -16,6 +16,7 @@ const navLinks = [
   { label: 'Marketplace', href: '#marketplace' },
   { label: 'Vendors', href: '#vendors' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Plans', href: PLANS_NAV_HREF },
 ]
 
 export function Navbar() {
@@ -23,8 +24,16 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { theme, toggle } = useTheme()
   const page = getAppPage()
-  const activeHref = useActiveSection(navLinks.map((l) => l.href))
-  const resolveHref = (href: string) => (page === 'home' ? href : homeSectionHref(href))
+  const activeHref = useActiveSection(navLinks.map((l) => l.href).filter((h) => h !== PLANS_NAV_HREF))
+  const resolveHref = (href: string) => {
+    if (href === PLANS_NAV_HREF) return plansHref()
+    return page === 'home' ? href : homeSectionHref(href)
+  }
+
+  const isNavActive = (href: string) => {
+    if (href === PLANS_NAV_HREF) return page === 'plans'
+    return activeHref === href
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -59,7 +68,7 @@ export function Navbar() {
 
         <div className="hidden lg:flex items-center justify-evenly w-full min-w-0 px-2 xl:px-6">
           {navLinks.map((link) => {
-            const isActive = activeHref === link.href
+            const isActive = isNavActive(link.href)
             return (
               <a
                 key={link.href}
@@ -120,7 +129,7 @@ export function Navbar() {
             exit={{ opacity: 0, y: -20 }}
           >
             {navLinks.map((link) => {
-              const isActive = activeHref === link.href
+              const isActive = isNavActive(link.href)
               return (
                 <a
                   key={link.href}

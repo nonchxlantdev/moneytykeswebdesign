@@ -29,5 +29,5 @@ export const journeySteps = [
   { id: 'earn', label: 'Coins Earned', icon: '🪙', description: 'Virtual coins are awarded' },
   { id: 'approve', label: 'Parent Approves', icon: '👍', description: 'Parent confirms completion' },
   { id: 'wallet', label: 'Wallet Updates', icon: '💳', description: 'Balance reflects earnings' },
-  { id: 'purchase', label: 'Reward Approved', icon: '🛍️', description: 'Parent-approved vendor rewards' },
+  { id: 'purchase', label: 'Reward Approved', icon: '🛍️', description: 'Parent approves; parent wallet is deducted' },
 ]

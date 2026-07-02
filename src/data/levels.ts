@@ -31,7 +31,7 @@ export const learningLevels: LearningLevel[] = [
     id: 'pathfinders',
     name: 'Pathfinders',
     ageRange: '11–13',
-    description: 'Advanced savings, parent-approved vendor rewards, and financial challenges.',
+    description: 'Advanced savings, parent-approved vendor rewards, and financial challenges. Approved spending is deducted from the parent wallet.',
     skills: ['Vendor rewards', 'Challenges', 'Interest concepts'],
     color: 'from-purple-500 to-violet-400',
     icon: '🗺️',

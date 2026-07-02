@@ -33,8 +33,3 @@ export const sponsorTiers: SponsorTier[] = [
     icon: '🥉',
   },
 ]
-
-export const sponsorLogos = [
-  'Belize Bank', 'Heritage Bank', 'BTL', 'Belize Tourism', 'Smart Belize',
-  'Atlantic Bank', 'Belize Energy', 'Citrus Products', 'Belize Agro', 'Caribbean Dev',
-]

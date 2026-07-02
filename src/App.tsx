@@ -10,6 +10,7 @@ import { ErrorBoundary } from '@/components/ui/ErrorBoundary'
 import { Home } from '@/pages/Home'
 import { Terms } from '@/pages/Terms'
 import { Privacy } from '@/pages/Privacy'
+import { Plans } from '@/pages/Plans'
 import { getAppPage, type AppPage } from '@/data/links'
 
 export default function App() {
@@ -55,7 +56,15 @@ export default function App() {
               </>
             )}
             <ErrorBoundary>
-              {page === 'terms' ? <Terms /> : page === 'privacy' ? <Privacy /> : <Home />}
+              {page === 'terms' ? (
+                <Terms />
+              ) : page === 'privacy' ? (
+                <Privacy />
+              ) : page === 'plans' ? (
+                <Plans />
+              ) : (
+                <Home />
+              )}
             </ErrorBoundary>
           </motion.div>
         )}

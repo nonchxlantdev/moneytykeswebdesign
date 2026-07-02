@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { AnimatedSection, SectionHeading } from '@/components/ui/SectionHeading'
 import { GlowCard } from '@/components/ui/GlowCard'
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter'
-import { sponsorTiers, sponsorLogos } from '@/data/sponsors'
+import { sponsorTiers } from '@/data/sponsors'
 import { staggerContainer, fadeInUp } from '@/animations/variants'
 
 export function Sponsors() {
@@ -58,23 +58,6 @@ export function Sponsors() {
           </motion.div>
         ))}
       </motion.div>
-
-      <div className="overflow-hidden py-6">
-        <motion.div
-          className="flex gap-12"
-          animate={{ x: [0, -1200] }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-        >
-          {[...sponsorLogos, ...sponsorLogos].map((name, i) => (
-            <div
-              key={i}
-              className="flex-shrink-0 px-8 py-4 rounded-xl glass text-ink-subtle font-semibold text-lg whitespace-nowrap"
-            >
-              {name}
-            </div>
-          ))}
-        </motion.div>
-      </div>
     </AnimatedSection>
   )
 }
