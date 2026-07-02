@@ -8,7 +8,7 @@ export interface Stat {
 
 export const stats: Stat[] = [
   { id: 'kids', value: 10000, suffix: '+', label: 'Kids Learning' },
-  { id: 'vendors', value: 500, suffix: '+', label: 'Vendor Partners' },
+  { id: 'vendors', value: 20, suffix: '+', label: 'Vendor Partners' },
   { id: 'sponsors', value: 100, suffix: '+', label: 'Sponsors' },
   { id: 'coins', value: 5, suffix: 'M+', label: 'Coins Earned', prefix: '' },
 ]
@@ -29,5 +29,5 @@ export const journeySteps = [
   { id: 'earn', label: 'Coins Earned', icon: '🪙', description: 'Virtual coins are awarded' },
   { id: 'approve', label: 'Parent Approves', icon: '👍', description: 'Parent confirms completion' },
   { id: 'wallet', label: 'Wallet Updates', icon: '💳', description: 'Balance reflects earnings' },
-  { id: 'purchase', label: 'Purchase Approved', icon: '🛍️', description: 'Spending at partner vendors' },
+  { id: 'purchase', label: 'Reward Approved', icon: '🛍️', description: 'Parent-approved vendor rewards' },
 ]

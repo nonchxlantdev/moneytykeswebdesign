@@ -244,7 +244,7 @@ export function KidsDashboard() {
       <SectionHeading
         badge="Kids Dashboard"
         title="Where Learning Meets Fun"
-        subtitle="A gamified dashboard that keeps kids engaged while building real financial skills."
+        subtitle="A gamified dashboard that keeps kids engaged while building practical financial skills."
       />
 
       <motion.a

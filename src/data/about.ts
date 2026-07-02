@@ -16,7 +16,7 @@ export const differentiatorItems = [
   'Earning rewards',
   'Participating in family activities',
   'Building healthy financial habits',
-  'Applying knowledge in real-world situations',
+  'Applying knowledge in everyday situations',
 ]
 
 export const differentiatorClosing =
@@ -43,7 +43,7 @@ export const ecosystemMembers: EcosystemMember[] = [
     emoji: '🧒',
     title: 'Children & Teens (Ages 5–17)',
     description:
-      'Building confidence through interactive lessons, financial challenges, savings goals, entrepreneurship, and real-world financial decision-making.',
+      'Building confidence through interactive lessons, financial challenges, savings goals, entrepreneurship, and parent-guided financial decision-making.',
   },
   {
     id: 'schools',
@@ -65,7 +65,7 @@ export const ecosystemMembers: EcosystemMember[] = [
     emoji: '🛍️',
     title: 'Merchants',
     description:
-      'Connecting families with parent-approved educational promotions and future youth-focused spending experiences.',
+      'Connecting families with parent-approved educational promotions and future youth-focused reward experiences.',
   },
   {
     id: 'financial',

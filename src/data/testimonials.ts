@@ -22,7 +22,7 @@ export const testimonials: Testimonial[] = [
     role: 'Father of 3, San Pedro',
     avatar: 'JT',
     rating: 5,
-    quote: 'The approval system gives me peace of mind while teaching my teenagers real financial responsibility.',
+    quote: 'The approval system gives me peace of mind while teaching my teenagers lasting financial responsibility.',
   },
   {
     id: '3',

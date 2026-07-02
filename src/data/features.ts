@@ -29,7 +29,7 @@ export const features: Feature[] = [
   {
     id: 'virtual-wallet',
     title: 'Virtual Wallet',
-    description: 'Kids manage their own digital coins at partner vendors.',
+    description: 'Kids manage virtual coins in a parent-supervised digital wallet.',
     icon: FiCreditCard,
     gradient: 'from-blue-500 to-purple-500',
   },
@@ -71,7 +71,7 @@ export const features: Feature[] = [
   {
     id: 'approval-system',
     title: 'Approval System',
-    description: 'Every purchase and withdrawal requires parent approval.',
+    description: 'Every reward request and in-app transaction requires parent approval.',
     icon: FiCheckCircle,
     gradient: 'from-green-500 to-primary',
   },

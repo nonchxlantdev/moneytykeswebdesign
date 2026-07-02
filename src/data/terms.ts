@@ -13,15 +13,15 @@ export const termsSections: TermsSection[] = [
   },
   {
     title: 'Parental Consent and Control',
-    body: 'Parents stay in control. All spending limits, rewards, or vendor transactions must be approved or preset by the parent. Children never access or transfer real funds directly without permission.',
+    body: 'Parents stay in control. All spending limits, rewards, and vendor experiences must be approved or preset by the parent. Children never complete wallet actions without parent permission.',
   },
   {
     title: 'Rewards and Coins',
-    body: 'Kids earn coins by completing chores, challenges, or games. These coins may represent a real-value equivalent in Belize dollars only through approved partners. Coins are not cash and have no standalone monetary value outside the MoneyTykes ecosystem.',
+    body: 'Kids earn virtual coins by completing chores, challenges, or games. Coins exist only inside the MoneyTykes ecosystem and are used for learning, savings goals, and parent-approved rewards.',
   },
   {
-    title: 'Rewards to Purchase',
-    body: 'Parents are responsible for maintaining sufficient funds in their account to cover approved purchases when a child requests a transaction or chooses to redeem virtual coins for real-world purchases through the wallet.',
+    title: 'Parent-Approved Rewards',
+    body: 'When a child wants to use earned coins toward a reward or partner vendor experience, the parent reviews and approves each request in the virtual wallet before it is completed.',
   },
   {
     title: 'Subscriptions and Payments',

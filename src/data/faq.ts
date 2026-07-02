@@ -8,7 +8,7 @@ export const faqItems: FAQItem[] = [
   {
     id: '1',
     question: 'What is MoneyTykes?',
-    answer: 'MoneyTykes is a Belizean fintech platform that helps parents teach children financial responsibility through chores, virtual wallets, savings goals, challenges, and supervised spending at local partner vendors.',
+    answer: 'MoneyTykes is a Belizean fintech platform that helps parents teach children financial responsibility through chores, virtual wallets, savings goals, challenges, and parent-guided experiences with local partner vendors.',
   },
   {
     id: '2',
@@ -23,7 +23,7 @@ export const faqItems: FAQItem[] = [
   {
     id: '4',
     question: 'How does the virtual wallet work?',
-    answer: 'Kids earn virtual coins by completing chores and challenges. Parents approve all transactions. Coins can be saved toward goals or spent at verified Belizean vendor partners.',
+    answer: 'Kids earn virtual coins by completing chores and challenges. Parents approve every wallet action. Coins can be saved toward goals or used for parent-approved rewards with verified partner vendors.',
   },
   {
     id: '5',
@@ -33,6 +33,6 @@ export const faqItems: FAQItem[] = [
   {
     id: '6',
     question: 'How do vendor partnerships work?',
-    answer: 'Local businesses join our marketplace as verified partners. Kids can redeem earned coins for goods and services, with every purchase requiring parent approval.',
+    answer: 'Local businesses join our marketplace as verified partners. Kids can use earned virtual coins toward parent-approved rewards, with every request reviewed by a parent first.',
   },
 ]

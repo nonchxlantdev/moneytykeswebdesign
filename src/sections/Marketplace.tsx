@@ -15,7 +15,7 @@ const spendingExperiences = [
     badgeClass:
       'bg-accent/25 text-accent-text border border-accent/50 dark:bg-accent/20 dark:text-accent dark:border-accent/40',
     description:
-      "Kids can use their earned rewards through DigiWallet, Belize's trusted digital wallet, so every transaction requires parent approval before it goes through.",
+      "With parent approval, families can connect earned virtual rewards to DigiWallet, Belize's trusted digital wallet. Every step stays under parent control before anything is completed.",
     logo: digiWalletLogo,
     logoAlt: 'DigiWallet',
     cta: {
@@ -30,7 +30,7 @@ const spendingExperiences = [
     badgeClass:
       'bg-transparent text-ink-subtle border border-navy/15 dark:border-white/20 opacity-90',
     description:
-      'With parent approval, children will be able to browse and pre-order from youth-focused vendors directly inside the app, so they get a safe, guided first experience with real purchasing decisions.',
+      'With parent approval, children will be able to browse and pre-order from youth-focused vendors directly inside the app, building safe, guided spending habits in their virtual wallet.',
     icon: FiShoppingBag,
     gradient: 'from-teal-500 to-primary',
   },
@@ -41,8 +41,8 @@ export function Marketplace() {
     <AnimatedSection id="marketplace">
       <SectionHeading
         badge="Spending & Rewards"
-        title="Real-World Financial Experiences"
-        subtitle="Parent-approved ways for kids to put their earned rewards into practice."
+        title="Parent-Guided Financial Experiences"
+        subtitle="Parent-approved ways for kids to practice earning, saving, and using their virtual wallet."
       />
 
       <motion.div

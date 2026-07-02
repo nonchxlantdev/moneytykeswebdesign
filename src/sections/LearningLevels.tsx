@@ -12,7 +12,7 @@ export function LearningLevels() {
       <SectionHeading
         badge="Learning Levels"
         title="Age-Perfect Financial Education"
-        subtitle="Four progressive levels that grow with your child, from first coins to real-world finance."
+        subtitle="Four progressive levels that grow with your child, from first coins to practical finance skills."
       />
 
       <motion.div

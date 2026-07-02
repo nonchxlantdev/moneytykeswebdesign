@@ -70,8 +70,8 @@ export function Hero() {
             transition={{ delay: 0.8 }}
           >
             {[
-              { value: '10K+', label: 'Families' },
-              { value: '500+', label: 'Vendors' },
+              { value: '300', label: 'Families' },
+              { value: '20+', label: 'Vendors' },
               { value: '4.9★', label: 'Rating' },
             ].map((stat) => (
               <div key={stat.label}>
