@@ -5,6 +5,8 @@ import { GlowingOrbs, FloatingParticles } from '@/components/ui/BackgroundEffect
 import { slideInLeft, slideInRight } from '@/animations/variants'
 import { isTouchDevice } from '@/hooks/useDevice'
 import { logo } from '@/img'
+import { PARENT_APP_URL } from '@/data/links'
+import { WalletFillScene } from '@/components/easterEgg/WalletFillScene'
 
 const touchMotion = isTouchDevice() ? 'visible' : 'hidden'
 
@@ -37,8 +39,14 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3">
-            <Button size="md" className="group shrink-0 !px-4 sm:!px-5 !py-3 !text-sm sm:!text-base min-h-[44px]">
-              Start Now
+            <Button
+              href={PARENT_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              size="md"
+              className="group shrink-0 !px-4 sm:!px-5 !py-3 !text-sm sm:!text-base min-h-[44px]"
+            >
+              Parent Sign Up
               <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button
@@ -81,15 +89,20 @@ export function Hero() {
           animate="visible"
           className="flex items-center justify-center min-h-[220px] sm:min-h-[300px] lg:min-h-[420px] mt-8 sm:mt-10 lg:mt-0 w-full"
         >
-          <div className="w-full min-h-[220px] h-[240px] sm:h-[340px] lg:h-[480px] rounded-2xl sm:rounded-3xl border-2 border-dashed border-navy/12 dark:border-white/15 bg-surface-secondary/60 dark:bg-white/5 flex flex-col items-center justify-center gap-3 sm:gap-5 px-4 sm:px-8 pt-10 sm:pt-16 pb-6 sm:pb-10 text-center">
-            <img
-              src={logo}
-              alt="MoneyTykes"
-              className="max-h-32 sm:max-h-40 lg:max-h-[15rem] w-auto max-w-[94%] object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="space-y-1">
+          <div className="w-full min-h-[220px] h-[240px] sm:h-[340px] lg:h-[480px] rounded-2xl sm:rounded-3xl border-2 border-dashed border-navy/12 dark:border-white/15 bg-surface-secondary/60 dark:bg-white/5 flex flex-col overflow-hidden">
+            <WalletFillScene>
+              <img
+                id="mt-logo"
+                src={logo}
+                alt="MoneyTykes"
+                className="max-h-32 sm:max-h-40 lg:max-h-[15rem] w-auto max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+              />
+            </WalletFillScene>
+            {/* Spain teaser — remove `hidden` to restore */}
+            <div className="space-y-1 hidden">
               <p className="text-base sm:text-lg md:text-xl font-bold text-ink leading-snug max-w-sm">
                 Spain: Boss I got an idea just wait...
               </p>

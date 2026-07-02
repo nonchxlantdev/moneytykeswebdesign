@@ -1,26 +1,19 @@
 import { motion } from 'framer-motion'
-import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
-import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa'
+import { FiMail, FiMapPin } from 'react-icons/fi'
+import { FaFacebook, FaInstagram } from 'react-icons/fa'
+import { FACEBOOK_URL, INSTAGRAM_URL, SUPPORT_EMAIL, privacyHref, termsHref } from '@/data/links'
 
 const quickLinks = [
   { label: 'Features', href: '#features' },
   { label: 'How It Works', href: '#journey' },
-  { label: 'Pricing', href: '#' },
   { label: 'FAQ', href: '#faq' },
 ]
 
-const partnerLinks = [
-  { label: 'Become a Vendor', href: '#' },
-  { label: 'Sponsor a Child', href: '#sponsors' },
-  { label: 'School Programs', href: '#' },
-  { label: 'API Access', href: '#' },
-]
+const partnerLinks = [{ label: 'Become a Vendor', href: '#' }]
 
 const socials = [
-  { icon: FaFacebook, href: '#', label: 'Facebook' },
-  { icon: FaInstagram, href: '#', label: 'Instagram' },
-  { icon: FaTwitter, href: '#', label: 'Twitter' },
-  { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
+  { icon: FaFacebook, href: FACEBOOK_URL, label: 'Facebook' },
+  { icon: FaInstagram, href: INSTAGRAM_URL, label: 'Instagram' },
 ]
 
 export function Footer() {
@@ -54,6 +47,8 @@ export function Footer() {
                 <motion.a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="w-10 h-10 rounded-full bg-navy/5 dark:bg-white/10 flex items-center justify-center hover:bg-primary/15 dark:hover:bg-primary/20 transition-colors"
                   whileHover={{ y: -3, scale: 1.1 }}
@@ -97,31 +92,42 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-ink dark:text-white mb-3">Newsletter</h4>
-            <p className="text-ink-muted dark:text-white/80 text-sm mb-3">
-              Get tips on teaching kids about money.
-            </p>
-            <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="flex-1 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-navy/12 dark:border-white/10 text-sm text-ink dark:text-white placeholder:text-ink-subtle dark:placeholder:text-white/30 focus:outline-none focus:border-primary"
-              />
-              <motion.button
-                type="submit"
-                className="px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FiMail />
-              </motion.button>
-            </form>
-            <div className="mt-5 space-y-2 text-sm text-ink-muted dark:text-white/75">
+            {/* Newsletter — hidden for now; remove `hidden` to restore */}
+            <div className="hidden">
+              <h4 className="font-semibold text-ink dark:text-white mb-3">Newsletter</h4>
+              <p className="text-ink-muted dark:text-white/80 text-sm mb-3">
+                Get tips on teaching kids about money.
+              </p>
+              <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  className="flex-1 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-navy/12 dark:border-white/10 text-sm text-ink dark:text-white placeholder:text-ink-subtle dark:placeholder:text-white/30 focus:outline-none focus:border-primary"
+                />
+                <motion.button
+                  type="submit"
+                  className="px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FiMail />
+                </motion.button>
+              </form>
+            </div>
+
+            <h4 className="font-semibold text-ink dark:text-white mb-3">Contact</h4>
+            <div className="space-y-2 text-sm text-ink-muted dark:text-white/75">
               <p className="flex items-center gap-2">
                 <FiMapPin className="text-primary-text dark:text-primary shrink-0" /> Belize City, Belize
               </p>
               <p className="flex items-center gap-2">
-                <FiPhone className="text-primary-text dark:text-primary shrink-0" /> +501 600-0000
+                <FiMail className="text-primary-text dark:text-primary shrink-0" />
+                <a
+                  href={`mailto:${SUPPORT_EMAIL}`}
+                  className="hover:text-primary-text dark:hover:text-primary transition-colors"
+                >
+                  {SUPPORT_EMAIL}
+                </a>
               </p>
             </div>
           </div>
@@ -130,8 +136,22 @@ export function Footer() {
         <div className="border-t border-navy/10 dark:border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-subtle dark:text-white/75">
           <p>&copy; {new Date().getFullYear()} MoneyTykes. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-ink dark:hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-ink dark:hover:text-white transition-colors">Terms</a>
+            <a
+              href={privacyHref()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-ink dark:hover:text-white transition-colors"
+            >
+              Privacy
+            </a>
+            <a
+              href={termsHref()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-ink dark:hover:text-white transition-colors"
+            >
+              Terms &amp; Conditions
+            </a>
             <a href="#" className="hover:text-ink dark:hover:text-white transition-colors">Cookies</a>
           </div>
         </div>

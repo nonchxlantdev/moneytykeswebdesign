@@ -2,7 +2,9 @@ import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { FiDownload, FiArrowRight } from 'react-icons/fi'
 import { Button } from '@/components/ui/Button'
+import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { fadeInUp } from '@/animations/variants'
+import { PARENT_APP_URL } from '@/data/links'
 
 function Confetti() {
   const particles = Array.from({ length: 50 }, (_, i) => ({
@@ -58,14 +60,21 @@ export function FinalCTA() {
           Join thousands of Belizean families teaching the next generation how to earn, save, and spend wisely.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button size="lg" onClick={handleClick} className="group">
+          <Button
+            href={PARENT_APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            size="lg"
+            onClick={handleClick}
+            className="group"
+          >
             Create Parent Account
             <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button variant="secondary" size="lg" className="group">
+          <DownloadAppButton size="lg" className="group">
             <FiDownload className="group-hover:scale-110 transition-transform" />
             Download App
-          </Button>
+          </DownloadAppButton>
         </div>
       </motion.div>
     </section>

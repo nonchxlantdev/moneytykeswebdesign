@@ -1,3 +1,44 @@
 export const OFFICIAL_MUSIC_VIDEO_URL = 'https://youtu.be/FcoHlbgjz5A'
 
 export const DIGIWALLET_LOCATIONS_URL = 'https://www.digiwallet.bz/agents-merchants-location/'
+
+export const PARENT_APP_URL = 'https://app.moneytykes.com/'
+
+export const APP_STORE_URL = 'https://apps.apple.com/us/app/moneytykes/id6757242686'
+
+export const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.moneytykes.moneytykes'
+
+export const SUPPORT_EMAIL = 'support@moneytykes.com'
+
+export const FACEBOOK_URL = 'https://www.facebook.com/p/MoneyTykes-Belize-61584534702964/'
+
+export const INSTAGRAM_URL = 'https://www.instagram.com/moneytykesbelize/'
+
+export type AppPage = 'home' | 'terms' | 'privacy'
+
+function basePath(): string {
+  return import.meta.env.BASE_URL.replace(/\/?$/, '/')
+}
+
+export function termsHref(): string {
+  return `${basePath()}terms`
+}
+
+export function privacyHref(): string {
+  return `${basePath()}privacy`
+}
+
+export function homeSectionHref(sectionHash = '#home'): string {
+  return `${basePath()}${sectionHash}`
+}
+
+export function getAppPage(pathname = window.location.pathname): AppPage {
+  const normalized = pathname.replace(/\/$/, '')
+  if (normalized.endsWith('/terms')) return 'terms'
+  if (normalized.endsWith('/privacy')) return 'privacy'
+  return 'home'
+}
+
+export function isTermsRoute(pathname = window.location.pathname): boolean {
+  return getAppPage(pathname) === 'terms'
+}

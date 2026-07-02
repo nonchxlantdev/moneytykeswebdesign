@@ -8,14 +8,30 @@ import { CustomCursor } from '@/components/layout/CustomCursor'
 import { MouseTrail } from '@/components/layout/MouseTrail'
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary'
 import { Home } from '@/pages/Home'
+import { Terms } from '@/pages/Terms'
+import { Privacy } from '@/pages/Privacy'
+import { getAppPage, type AppPage } from '@/data/links'
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false)
+  const [page, setPage] = useState<AppPage>(() => getAppPage())
+  const [loaded, setLoaded] = useState(page !== 'home')
   const [desktopFx, setDesktopFx] = useState(false)
-  useLenis(loaded)
+  useLenis(loaded && page === 'home')
 
   useEffect(() => {
     setDesktopFx(!isTouchDevice())
+  }, [])
+
+  useEffect(() => {
+    const syncPage = () => {
+      const nextPage = getAppPage()
+      setPage(nextPage)
+      if (nextPage !== 'home') {
+        setLoaded(true)
+      }
+    }
+    window.addEventListener('popstate', syncPage)
+    return () => window.removeEventListener('popstate', syncPage)
   }, [])
 
   const handleLoadComplete = useCallback(() => setLoaded(true), [])
@@ -39,7 +55,7 @@ export default function App() {
               </>
             )}
             <ErrorBoundary>
-              <Home />
+              {page === 'terms' ? <Terms /> : page === 'privacy' ? <Privacy /> : <Home />}
             </ErrorBoundary>
           </motion.div>
         )}

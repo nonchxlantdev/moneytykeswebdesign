@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi'
+import { FiMenu, FiX, FiSun, FiMoon, FiDownload } from 'react-icons/fi'
 import { useTheme } from '@/hooks/useTheme'
 import { useActiveSection } from '@/hooks/useActiveSection'
-import { Button } from '@/components/ui/Button'
+import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { AudioControl } from '@/components/layout/AudioControl'
+import { getAppPage, homeSectionHref } from '@/data/links'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -21,7 +22,9 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const { theme, toggle } = useTheme()
+  const page = getAppPage()
   const activeHref = useActiveSection(navLinks.map((l) => l.href))
+  const resolveHref = (href: string) => (page === 'home' ? href : homeSectionHref(href))
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -42,7 +45,7 @@ export function Navbar() {
         className="mx-3 sm:mx-4 md:mx-auto md:max-w-7xl rounded-2xl px-3 sm:px-5 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-8 transition-all duration-500 glass premium-shadow"
         aria-label="Main navigation"
       >
-        <a href="#home" className="flex items-center gap-2 group shrink-0 lg:mr-2" data-magnetic>
+        <a href={resolveHref('#home')} className="flex items-center gap-2 group shrink-0 lg:mr-2" data-magnetic>
           <motion.div
             className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center text-white font-bold text-sm"
             whileHover={{ rotate: 10, scale: 1.05 }}
@@ -60,7 +63,7 @@ export function Navbar() {
             return (
               <a
                 key={link.href}
-                href={link.href}
+                href={resolveHref(link.href)}
                 className={`relative px-2 xl:px-3 py-2 text-[13px] xl:text-sm font-semibold whitespace-nowrap transition-colors rounded-lg shrink-0 ${
                   isActive ? 'text-primary-text' : 'text-ink-muted hover:text-primary-text'
                 }`}
@@ -94,9 +97,10 @@ export function Navbar() {
           >
             {theme === 'light' ? <FiMoon className="text-ink" /> : <FiSun className="text-accent" />}
           </button>
-          <Button size="sm" className="hidden md:flex" data-magnetic>
-            Start Now
-          </Button>
+          <DownloadAppButton size="sm" variant="secondary" className="hidden md:flex shrink-0">
+            <FiDownload className="text-sm" />
+            Download App
+          </DownloadAppButton>
           <button
             className="lg:hidden w-9 h-9 flex items-center justify-center"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -120,7 +124,7 @@ export function Navbar() {
               return (
                 <a
                   key={link.href}
-                  href={link.href}
+                  href={resolveHref(link.href)}
                   className={`block py-3 font-medium border-b border-navy/5 dark:border-white/10 last:border-0 transition-colors ${
                     isActive ? 'text-primary-text' : 'text-ink'
                   }`}
@@ -131,7 +135,15 @@ export function Navbar() {
               )
             })}
             <div className="mt-4">
-              <Button className="w-full">Start Now</Button>
+              <DownloadAppButton
+                size="md"
+                variant="secondary"
+                className="w-full"
+                onOpen={() => setMobileOpen(false)}
+              >
+                <FiDownload />
+                Download App
+              </DownloadAppButton>
             </div>
           </motion.div>
         )}
