@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react'
 import { themeSong } from '@/audio'
+import { isTouchDevice } from '@/hooks/useDevice'
 
 const STORAGE_VOLUME = 'moneytykes-volume'
 const STORAGE_MUTED = 'moneytykes-muted'
@@ -22,6 +23,7 @@ interface SoundContextValue {
   toggleMute: () => void
   playClick: () => void
   ensureMusicPlaying: () => void
+  pauseMusic: () => void
 }
 
 const SoundContext = createContext<SoundContextValue>({
@@ -33,6 +35,7 @@ const SoundContext = createContext<SoundContextValue>({
   toggleMute: () => {},
   playClick: () => {},
   ensureMusicPlaying: () => {},
+  pauseMusic: () => {},
 })
 
 function readVolume(): number {
@@ -124,6 +127,13 @@ export function SoundProvider({
     }
   }, [])
 
+  const pauseMusic = useCallback(() => {
+    const audio = audioRef.current
+    if (!audio) return
+    audio.pause()
+    setMusicPlaying(false)
+  }, [])
+
   const ensureMusicPlaying = useCallback(() => {
     void tryPlay()
   }, [tryPlay])
@@ -131,6 +141,7 @@ export function SoundProvider({
   useEffect(() => {
     if (!ready) return
 
+    const touch = isTouchDevice()
     const audio = new Audio(themeSong)
     audio.loop = true
     audio.preload = 'auto'
@@ -140,6 +151,11 @@ export function SoundProvider({
     audio.setAttribute('webkit-playsinline', '')
     audioRef.current = audio
 
+    const onPlay = () => setMusicPlaying(true)
+    const onPause = () => setMusicPlaying(false)
+    audio.addEventListener('play', onPlay)
+    audio.addEventListener('pause', onPause)
+
     const onInteract = () => {
       void tryPlay()
     }
@@ -147,20 +163,23 @@ export function SoundProvider({
       void tryPlay()
     }
 
-    void tryPlay()
-
-    document.addEventListener('pointerdown', onInteract, { passive: true })
-    document.addEventListener('touchstart', onInteract, { passive: true })
-    document.addEventListener('keydown', onInteract)
-    audio.addEventListener('canplaythrough', onReady)
-    audio.addEventListener('loadeddata', onReady)
+    if (!touch) {
+      void tryPlay()
+      document.addEventListener('pointerdown', onInteract, { passive: true })
+      document.addEventListener('keydown', onInteract)
+      audio.addEventListener('canplaythrough', onReady)
+      audio.addEventListener('loadeddata', onReady)
+    }
 
     return () => {
-      document.removeEventListener('pointerdown', onInteract)
-      document.removeEventListener('touchstart', onInteract)
-      document.removeEventListener('keydown', onInteract)
-      audio.removeEventListener('canplaythrough', onReady)
-      audio.removeEventListener('loadeddata', onReady)
+      audio.removeEventListener('play', onPlay)
+      audio.removeEventListener('pause', onPause)
+      if (!touch) {
+        document.removeEventListener('pointerdown', onInteract)
+        document.removeEventListener('keydown', onInteract)
+        audio.removeEventListener('canplaythrough', onReady)
+        audio.removeEventListener('loadeddata', onReady)
+      }
       audio.pause()
       audio.src = ''
       audioRef.current = null
@@ -172,7 +191,7 @@ export function SoundProvider({
     const audio = audioRef.current
     if (!audio) return
     audio.volume = muted ? 0 : volume
-    if (!muted && volume > 0) {
+    if (!isTouchDevice() && !muted && volume > 0) {
       void tryPlay()
     }
   }, [volume, muted, tryPlay])
@@ -197,7 +216,7 @@ export function SoundProvider({
 
   return (
     <SoundContext.Provider
-      value={{ muted, volume, musicPlaying, setVolume, setMuted, toggleMute, playClick, ensureMusicPlaying }}
+      value={{ muted, volume, musicPlaying, setVolume, setMuted, toggleMute, playClick, ensureMusicPlaying, pauseMusic }}
     >
       {children}
     </SoundContext.Provider>

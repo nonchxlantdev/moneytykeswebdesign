@@ -1,26 +1,41 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiVolume2, FiVolumeX, FiVolume1 } from 'react-icons/fi'
+import { FiVolume2, FiVolumeX, FiVolume1, FiPlay, FiPause } from 'react-icons/fi'
 import { useSound } from '@/hooks/useSound'
 import { isTouchDevice } from '@/hooks/useDevice'
 
 function VolumePanel({
   displayVolume,
   muted,
+  musicPlaying,
   setVolume,
   toggleMute,
   ensureMusicPlaying,
+  pauseMusic,
+  touchUi,
   className,
   onClose,
 }: {
   displayVolume: number
   muted: boolean
+  musicPlaying: boolean
   setVolume: (v: number) => void
   toggleMute: () => void
   ensureMusicPlaying: () => void
+  pauseMusic: () => void
+  touchUi: boolean
   className?: string
   onClose?: () => void
 }) {
+  const handlePlayPause = () => {
+    if (musicPlaying) {
+      pauseMusic()
+      return
+    }
+    if (muted) toggleMute()
+    ensureMusicPlaying()
+  }
+
   return (
     <motion.div
       role="dialog"
@@ -38,6 +53,26 @@ function VolumePanel({
         </span>
       </div>
 
+      {touchUi ? (
+        <button
+          type="button"
+          onClick={handlePlayPause}
+          className="w-full min-h-[44px] py-2.5 mb-3 rounded-xl text-sm font-semibold transition-colors bg-primary text-white hover:bg-primary-dark touch-manipulation flex items-center justify-center gap-2"
+        >
+          {musicPlaying ? (
+            <>
+              <FiPause className="text-base" />
+              Pause Theme Song
+            </>
+          ) : (
+            <>
+              <FiPlay className="text-base ml-0.5" />
+              Play Theme Song
+            </>
+          )}
+        </button>
+      ) : null}
+
       <input
         type="range"
         min={0}
@@ -45,31 +80,38 @@ function VolumePanel({
         step={1}
         value={Math.round(displayVolume * 100)}
         onChange={(e) => {
-          ensureMusicPlaying()
-          setVolume(Number(e.target.value) / 100)
+          const next = Number(e.target.value) / 100
+          if (!touchUi) ensureMusicPlaying()
+          setVolume(next)
         }}
         style={{ '--fill': `${Math.round(displayVolume * 100)}%` } as React.CSSProperties}
         className="audio-slider w-full mb-3 touch-manipulation min-h-[44px]"
         aria-label="Theme song volume"
       />
 
-      <button
-        type="button"
-        onClick={() => {
-          ensureMusicPlaying()
-          toggleMute()
-          onClose?.()
-        }}
-        className="w-full min-h-[44px] py-2.5 rounded-xl text-sm font-semibold transition-colors bg-navy/5 dark:bg-white/10 text-ink hover:bg-primary/10 hover:text-primary-text touch-manipulation"
-      >
-        {muted ? 'Unmute' : 'Mute'}
-      </button>
+      {!touchUi ? (
+        <button
+          type="button"
+          onClick={() => {
+            ensureMusicPlaying()
+            toggleMute()
+            onClose?.()
+          }}
+          className="w-full min-h-[44px] py-2.5 rounded-xl text-sm font-semibold transition-colors bg-navy/5 dark:bg-white/10 text-ink hover:bg-primary/10 hover:text-primary-text touch-manipulation"
+        >
+          {muted ? 'Unmute' : 'Mute'}
+        </button>
+      ) : (
+        <p className="text-xs text-center text-ink-subtle leading-relaxed">
+          Music won&apos;t start until you tap play. Use the slider to lower or raise volume.
+        </p>
+      )}
     </motion.div>
   )
 }
 
 export function AudioControl() {
-  const { muted, volume, setVolume, toggleMute, ensureMusicPlaying } = useSound()
+  const { muted, volume, musicPlaying, setVolume, toggleMute, ensureMusicPlaying, pauseMusic } = useSound()
   const [open, setOpen] = useState(false)
   const [touchUi, setTouchUi] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -108,17 +150,23 @@ export function AudioControl() {
   }, [clearCloseTimer, touchUi])
 
   const handleToggle = useCallback(() => {
-    ensureMusicPlaying()
     if (touchUi) {
       setOpen((o) => !o)
       return
     }
+    ensureMusicPlaying()
     toggleMute()
   }, [touchUi, toggleMute, ensureMusicPlaying])
 
   const displayVolume = muted ? 0 : volume
   const VolumeIcon =
-    displayVolume === 0 ? FiVolumeX : displayVolume < 0.35 ? FiVolume1 : FiVolume2
+    displayVolume === 0 && !musicPlaying
+      ? FiVolumeX
+      : displayVolume === 0
+        ? FiVolumeX
+        : displayVolume < 0.35
+          ? FiVolume1
+          : FiVolume2
 
   return (
     <div
@@ -131,11 +179,11 @@ export function AudioControl() {
         type="button"
         onClick={handleToggle}
         className={`w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors touch-manipulation ${
-          open || !muted
+          open || musicPlaying || !muted
             ? 'bg-primary/10 text-primary-text'
             : 'hover:bg-navy/5 dark:hover:bg-white/10 text-ink-subtle'
         }`}
-        aria-label={muted ? 'Unmute theme song' : 'Mute theme song'}
+        aria-label={touchUi ? 'Theme song controls' : muted ? 'Unmute theme song' : 'Mute theme song'}
         aria-expanded={open}
         aria-haspopup="true"
       >
@@ -148,9 +196,12 @@ export function AudioControl() {
             <VolumePanel
               displayVolume={displayVolume}
               muted={muted}
+              musicPlaying={musicPlaying}
               setVolume={setVolume}
               toggleMute={toggleMute}
               ensureMusicPlaying={ensureMusicPlaying}
+              pauseMusic={pauseMusic}
+              touchUi
               onClose={() => setOpen(false)}
               className="fixed left-4 right-4 top-[calc(4.5rem+env(safe-area-inset-top))] max-w-sm mx-auto"
             />
@@ -158,9 +209,12 @@ export function AudioControl() {
             <VolumePanel
               displayVolume={displayVolume}
               muted={muted}
+              musicPlaying={musicPlaying}
               setVolume={setVolume}
               toggleMute={toggleMute}
               ensureMusicPlaying={ensureMusicPlaying}
+              pauseMusic={pauseMusic}
+              touchUi={false}
               className="absolute top-full right-0 mt-2 w-56"
             />
           )
