@@ -15,7 +15,6 @@ import { Marketplace } from '@/sections/Marketplace'
 import { VendorMap } from '@/sections/VendorMap'
 import { Sponsors } from '@/sections/Sponsors'
 import { Testimonials } from '@/sections/Testimonials'
-import { FAQ } from '@/sections/FAQ'
 import { FinalCTA } from '@/sections/FinalCTA'
 
 const Navbar = lazy(() => import('@/components/layout/Navbar').then((m) => ({ default: m.Navbar })))
@@ -45,7 +44,6 @@ export function Home() {
       <VendorMap />
       <Sponsors />
       <Testimonials />
-      <FAQ />
       <FinalCTA />
       <Suspense fallback={null}>
         <Footer />

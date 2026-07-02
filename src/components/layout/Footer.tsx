@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
 import { FiMail, FiMapPin } from 'react-icons/fi'
 import { FaFacebook, FaInstagram } from 'react-icons/fa'
-import { FACEBOOK_URL, INSTAGRAM_URL, SUPPORT_EMAIL, privacyHref, termsHref } from '@/data/links'
+import { FACEBOOK_URL, INSTAGRAM_URL, SUPPORT_EMAIL, faqHref, getAppPage, homeSectionHref, privacyHref, termsHref } from '@/data/links'
 
 const quickLinks = [
   { label: 'Features', href: '#features' },
   { label: 'How It Works', href: '#journey' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'FAQ', href: '__faq_page__' },
 ]
 
 const partnerLinks = [{ label: 'Become a Vendor', href: '#' }]
@@ -17,6 +17,12 @@ const socials = [
 ]
 
 export function Footer() {
+  const page = getAppPage()
+  const resolveHref = (href: string) => {
+    if (href === '__faq_page__') return faqHref()
+    return page === 'home' ? href : homeSectionHref(href)
+  }
+
   return (
     <footer className="relative bg-surface-secondary text-ink border-t border-navy/10 dark:bg-navy dark:text-white dark:border-white/10 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-16 opacity-[0.06] dark:opacity-10 text-ink dark:text-white pointer-events-none">
@@ -65,7 +71,7 @@ export function Footer() {
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <a
-                    href={link.href}
+                    href={resolveHref(link.href)}
                     className="text-ink-muted dark:text-white/85 hover:text-primary-text dark:hover:text-primary text-sm transition-colors"
                   >
                     {link.label}
@@ -134,7 +140,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-navy/10 dark:border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-subtle dark:text-white/75">
-          <p>&copy; {new Date().getFullYear()} MoneyTykes. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} MoneyTykes Ltd. All rights reserved.</p>
           <div className="flex gap-6">
             <a
               href={privacyHref()}

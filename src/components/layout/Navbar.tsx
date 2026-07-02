@@ -5,7 +5,7 @@ import { useTheme } from '@/hooks/useTheme'
 import { useActiveSection } from '@/hooks/useActiveSection'
 import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { AudioControl } from '@/components/layout/AudioControl'
-import { getAppPage, homeSectionHref, PLANS_NAV_HREF, plansHref } from '@/data/links'
+import { getAppPage, homeSectionHref, PLANS_NAV_HREF, FAQ_NAV_HREF, plansHref, faqHref } from '@/data/links'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -15,7 +15,7 @@ const navLinks = [
   { label: 'Levels', href: '#levels' },
   { label: 'Marketplace', href: '#marketplace' },
   { label: 'Vendors', href: '#vendors' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'FAQ', href: FAQ_NAV_HREF },
   { label: 'Plans', href: PLANS_NAV_HREF },
 ]
 
@@ -24,14 +24,18 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { theme, toggle } = useTheme()
   const page = getAppPage()
-  const activeHref = useActiveSection(navLinks.map((l) => l.href).filter((h) => h !== PLANS_NAV_HREF))
+  const activeHref = useActiveSection(
+    navLinks.map((l) => l.href).filter((h) => h !== PLANS_NAV_HREF && h !== FAQ_NAV_HREF),
+  )
   const resolveHref = (href: string) => {
     if (href === PLANS_NAV_HREF) return plansHref()
+    if (href === FAQ_NAV_HREF) return faqHref()
     return page === 'home' ? href : homeSectionHref(href)
   }
 
   const isNavActive = (href: string) => {
     if (href === PLANS_NAV_HREF) return page === 'plans'
+    if (href === FAQ_NAV_HREF) return page === 'faq'
     return activeHref === href
   }
 

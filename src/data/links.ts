@@ -14,16 +14,21 @@ export const FACEBOOK_URL = 'https://www.facebook.com/p/MoneyTykes-Belize-615845
 
 export const INSTAGRAM_URL = 'https://www.instagram.com/moneytykesbelize/'
 
-export type AppPage = 'home' | 'terms' | 'privacy' | 'plans'
+export type AppPage = 'home' | 'terms' | 'privacy' | 'plans' | 'faq'
 
 function basePath(): string {
   return import.meta.env.BASE_URL.replace(/\/?$/, '/')
 }
 
 export const PLANS_NAV_HREF = '__plans__'
+export const FAQ_NAV_HREF = '__faq__'
 
 export function plansHref(): string {
   return `${basePath()}plans`
+}
+
+export function faqHref(): string {
+  return `${basePath()}faq`
 }
 
 export function termsHref(): string {
@@ -43,6 +48,7 @@ export function getAppPage(pathname = window.location.pathname): AppPage {
   if (normalized.endsWith('/terms')) return 'terms'
   if (normalized.endsWith('/privacy')) return 'privacy'
   if (normalized.endsWith('/plans')) return 'plans'
+  if (normalized.endsWith('/faq')) return 'faq'
   return 'home'
 }
 
