@@ -35,7 +35,7 @@ export function Hero() {
           </h1>
 
           <p className="text-lg md:text-xl text-ink-muted leading-relaxed mb-6 max-w-xl">
-            MoneyTykes helps parents teach financial responsibility using chores, rewards, savings goals, and financial games.
+            Money Tykes empowers children to build lifelong financial literacy skills through interactive learning, rewards, savings goals, and parent-guided financial experiences.
           </p>
 
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3">

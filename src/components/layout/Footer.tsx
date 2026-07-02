@@ -152,7 +152,6 @@ export function Footer() {
             >
               Terms &amp; Conditions
             </a>
-            <a href="#" className="hover:text-ink dark:hover:text-white transition-colors">Cookies</a>
           </div>
         </div>
       </div>
