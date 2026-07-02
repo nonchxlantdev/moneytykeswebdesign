@@ -1,16 +1,18 @@
 export interface Stat {
   id: string
-  value: number
-  suffix: string
   label: string
+  value?: number
+  suffix?: string
   prefix?: string
+  display?: string
 }
 
 export const stats: Stat[] = [
-  { id: 'kids', value: 10000, suffix: '+', label: 'Kids Learning' },
+  { id: 'families', value: 200, suffix: '+', label: 'Families' },
+  { id: 'kids', value: 200, suffix: '+', label: 'Kids Learning' },
   { id: 'vendors', value: 20, suffix: '+', label: 'Vendor Partners' },
-  { id: 'sponsors', value: 100, suffix: '+', label: 'Sponsors' },
-  { id: 'coins', value: 5, suffix: 'M+', label: 'Coins Earned', prefix: '' },
+  { id: 'coins', value: 2, suffix: 'K+', label: 'Coins Earned' },
+  { id: 'rating', label: 'Rating', display: '4.9★' },
 ]
 
 export const phoneScreens = [

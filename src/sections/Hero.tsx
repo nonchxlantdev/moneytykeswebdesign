@@ -62,24 +62,6 @@ export function Hero() {
               </span>
             </Button>
           </div>
-
-          <motion.div
-            className="flex items-center gap-8 mt-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            {[
-              { value: '300', label: 'Families' },
-              { value: '20+', label: 'Vendors' },
-              { value: '4.9★', label: 'Rating' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="text-2xl font-bold text-ink">{stat.value}</p>
-                <p className="text-sm font-medium text-ink-subtle">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
 
         {/* App preview placeholder — visible on tablet & mobile too (iPad is below lg) */}
