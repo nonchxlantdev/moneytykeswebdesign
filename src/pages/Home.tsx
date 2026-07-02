@@ -2,6 +2,10 @@ import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { pageTransition } from '@/animations/variants'
 import { Hero } from '@/sections/Hero'
+import { Statistics } from '@/sections/Statistics'
+import { WhoWeAre } from '@/sections/WhoWeAre'
+import { WhatMakesDifferent } from '@/sections/WhatMakesDifferent'
+import { Ecosystem } from '@/sections/Ecosystem'
 import { FamilyJourney } from '@/sections/FamilyJourney'
 import { Features } from '@/sections/Features'
 import { KidsDashboard } from '@/sections/KidsDashboard'
@@ -10,7 +14,6 @@ import { LearningLevels } from '@/sections/LearningLevels'
 import { Marketplace } from '@/sections/Marketplace'
 import { VendorMap } from '@/sections/VendorMap'
 import { Sponsors } from '@/sections/Sponsors'
-import { Statistics } from '@/sections/Statistics'
 import { Testimonials } from '@/sections/Testimonials'
 import { FAQ } from '@/sections/FAQ'
 import { FinalCTA } from '@/sections/FinalCTA'
@@ -30,6 +33,9 @@ export function Home() {
       </Suspense>
       <Hero />
       <Statistics />
+      <WhoWeAre />
+      <WhatMakesDifferent />
+      <Ecosystem />
       <FamilyJourney />
       <Features />
       <KidsDashboard />

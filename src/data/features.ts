@@ -6,7 +6,6 @@ import {
   FiTarget,
   FiAward,
   FiGift,
-  FiShoppingBag,
   FiStar,
   FiCheckCircle,
 } from 'react-icons/fi'
@@ -61,13 +60,6 @@ export const features: Feature[] = [
     description: 'Custom reward systems tailored to your family values.',
     icon: FiGift,
     gradient: 'from-pink-500 to-rose-400',
-  },
-  {
-    id: 'vendor-marketplace',
-    title: 'Vendor Marketplace',
-    description: 'Spend earned coins at trusted Belizean partner businesses.',
-    icon: FiShoppingBag,
-    gradient: 'from-teal-500 to-primary',
   },
   {
     id: 'sponsor-programs',
