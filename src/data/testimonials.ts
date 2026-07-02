@@ -5,9 +5,20 @@ export interface Testimonial {
   avatar: string
   rating: number
   quote: string
+  featured?: boolean
 }
 
 export const testimonials: Testimonial[] = [
+  {
+    id: 'danielle-r',
+    name: 'Danielle R',
+    role: 'Parent, Belize',
+    avatar: 'DR',
+    rating: 5,
+    featured: true,
+    quote:
+      'I\'m thrilled my daughters finally have practical tools to understand money, something many of us never received growing up. MoneyTykes makes financial learning fun and interactive, helps me connect chores to rewards, and teaches goal setting, budgeting, and responsibility through real experience. Watching them calculate how many tasks they need before cashing out has been incredible. Our family loves it, and I highly recommend it to every parent.',
+  },
   {
     id: '1',
     name: 'Maria Gonzalez',

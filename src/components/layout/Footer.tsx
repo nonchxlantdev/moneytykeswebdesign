@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { FiMail, FiMapPin } from 'react-icons/fi'
 import { FaFacebook, FaInstagram } from 'react-icons/fa'
 import { FACEBOOK_URL, INSTAGRAM_URL, SUPPORT_EMAIL, faqHref, getAppPage, homeSectionHref, privacyHref, termsHref } from '@/data/links'
+import { BrandLogo } from '@/components/ui/BrandLogo'
 
 const quickLinks = [
   { label: 'Features', href: '#features' },
@@ -37,13 +38,8 @@ export function Footer() {
       <div className="relative max-w-7xl mx-auto px-4 md:px-8 pt-14 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center text-white font-bold text-sm">
-                MT
-              </div>
-              <span className="text-xl font-bold text-ink dark:text-white">
-                Money<span className="text-primary-text">Tykes</span>
-              </span>
+            <div className="mb-2">
+              <BrandLogo variant="web" />
             </div>
             <p className="text-ink-muted dark:text-white/80 text-sm leading-relaxed mb-6">
               Belize&apos;s premier family fintech platform teaching kids smart money habits through chores, rewards, and savings goals.

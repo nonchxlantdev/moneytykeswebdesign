@@ -406,6 +406,19 @@ html.dark {
   }
 }
 
+@keyframes testimonial-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-testimonial-marquee {
+  animation: testimonial-marquee 45s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   #mt-scene .mt-shake,
   #mt-scene .mt-falling,
@@ -421,5 +434,9 @@ html.dark {
 
   #mt-fill-bg {
     transition: none !important;
+  }
+
+  .animate-testimonial-marquee {
+    animation: none !important;
   }
 }

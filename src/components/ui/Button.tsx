@@ -45,7 +45,7 @@ export function Button({
 }: ButtonProps) {
   const magneticRef = useMagnetic<HTMLButtonElement>(0.25)
   const { playClick } = useSound()
-  const classes = `relative overflow-hidden rounded-full font-semibold transition-all duration-300 ${variants[variant]} ${sizes[size]} ${className}`
+  const classes = `relative inline-flex items-center justify-center overflow-hidden rounded-full font-semibold transition-all duration-300 ${variants[variant]} ${sizes[size]} ${className}`
   const content = (
     <>
       <span className="relative z-10 flex items-center justify-center gap-2">{children}</span>
@@ -70,7 +70,7 @@ export function Button({
         href={href}
         target={target ?? '_blank'}
         rel={rel ?? 'noopener noreferrer'}
-        className={`inline-flex ${classes}`}
+        className={classes}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
         onClick={handleClick}
