@@ -224,7 +224,7 @@ export function AudioControl() {
       <button
         type="button"
         onClick={handleToggle}
-        className={`w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors touch-manipulation ${
+        className={`w-9 h-9 min-w-9 min-h-9 flex items-center justify-center rounded-full transition-colors touch-manipulation ${
           open || musicPlaying || !muted
             ? 'bg-primary/10 text-primary-text'
             : 'hover:bg-navy/5 dark:hover:bg-white/10 text-ink-subtle'

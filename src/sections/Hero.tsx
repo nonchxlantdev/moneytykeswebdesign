@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { FiPlay, FiArrowRight } from 'react-icons/fi'
+import { FiPlay, FiArrowRight, FiDownload } from 'react-icons/fi'
 import { Button } from '@/components/ui/Button'
+import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { GlowingOrbs, FloatingParticles } from '@/components/ui/BackgroundEffects'
 import { slideInLeft, slideInRight } from '@/animations/variants'
 import { isTouchDevice } from '@/hooks/useDevice'
@@ -31,21 +32,33 @@ export function Hero() {
             Money Tykes empowers children to build lifelong financial literacy skills through interactive learning, rewards, savings goals, and parent-guided financial experiences.
           </p>
 
-          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3">
-            <Button
-              href={PARENT_APP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              size="md"
-              className="group shrink-0 !px-4 sm:!px-5 !py-3 !text-sm sm:!text-base min-h-[44px]"
-            >
-              Parent Sign Up
-              <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </Button>
+          <div className="flex flex-col gap-2 sm:gap-3">
+            <div className="flex flex-wrap items-stretch gap-2 sm:gap-3">
+              <Button
+                href={PARENT_APP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="md"
+                className="group shrink-0 !px-4 sm:!px-5 !py-3 !text-sm sm:!text-base min-h-[44px] flex-1 sm:flex-none"
+                magnetic={false}
+              >
+                Parent Sign Up
+                <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <DownloadAppButton
+                size="md"
+                variant="secondary"
+                magnetic={false}
+                className="lg:hidden shrink-0 !px-3 sm:!px-4 !py-3 !text-sm min-h-[44px] flex-1 sm:flex-none justify-center"
+              >
+                <FiDownload className="text-sm shrink-0" />
+                Download App
+              </DownloadAppButton>
+            </div>
             <Button
               variant="secondary"
               size="md"
-              className="group relative shrink-0 !px-3 sm:!px-4 !py-3 !text-xs sm:!text-sm min-h-[44px] ring-2 ring-accent/60 shadow-[0_0_20px_rgba(255,213,74,0.4)] hover:shadow-[0_0_28px_rgba(255,213,74,0.55)]"
+              className="group relative shrink-0 w-full sm:w-auto !px-3 sm:!px-4 !py-3 !text-xs sm:!text-sm min-h-[44px] ring-2 ring-accent/60 shadow-[0_0_20px_rgba(255,213,74,0.4)] hover:shadow-[0_0_28px_rgba(255,213,74,0.55)]"
               magnetic={false}
             >
               <FiPlay className="group-hover:scale-110 transition-transform shrink-0 text-sm" />

@@ -21,7 +21,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'danielle-r',
-    name: 'Danielle R',
+    name: 'Danielle R.',
     role: 'Parent, Belize',
     avatar: 'DR',
     rating: 5,

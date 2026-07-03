@@ -135,20 +135,19 @@ export function Navbar() {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)] py-4"
-      initial={{ y: -100 }}
+      className="fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)] py-2 sm:py-4"
+      initial={false}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, delay: 0.5 }}
     >
       <nav
-        className={`mx-3 sm:mx-4 md:mx-auto md:max-w-7xl rounded-2xl px-3 sm:px-5 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6 xl:gap-8 glass premium-shadow transition-[box-shadow,background-color] duration-300 ${
+        className={`mx-2 sm:mx-4 md:mx-auto md:max-w-7xl rounded-xl sm:rounded-2xl px-2 sm:px-5 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-2 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6 xl:gap-8 glass glass-mobile premium-shadow transition-[box-shadow,background-color] duration-300 ${
           scrolled
             ? 'shadow-[0_4px_20px_rgba(7,26,45,0.14)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.45)]'
             : ''
         }`}
         aria-label="Main navigation"
       >
-        <a href={resolveHref('#home')} className="flex items-center shrink-0 lg:mr-2 group" data-magnetic>
+        <a href={resolveHref('#home')} className="flex items-center shrink-0 min-w-0 lg:mr-2 group" data-magnetic>
           <motion.div
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 400, damping: 24 }}
@@ -174,21 +173,21 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 xl:gap-3 shrink-0 lg:justify-self-end">
+        <div className="flex items-center gap-1 sm:gap-2 xl:gap-3 shrink-0 lg:justify-self-end">
           <AudioControl />
           <button
             onClick={toggle}
-            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-navy/5 dark:hover:bg-white/10 transition-colors"
+            className="w-9 h-9 min-w-9 min-h-9 flex items-center justify-center rounded-full hover:bg-navy/5 dark:hover:bg-white/10 transition-colors touch-manipulation"
             aria-label="Toggle dark mode"
           >
             {theme === 'light' ? <FiMoon className="text-ink" /> : <FiSun className="text-accent" />}
           </button>
-          <DownloadAppButton size="sm" variant="secondary" className="hidden md:flex shrink-0">
+          <DownloadAppButton size="sm" variant="secondary" className="hidden lg:flex shrink-0" magnetic={false}>
             <FiDownload className="text-sm" />
             Download App
           </DownloadAppButton>
           <button
-            className="lg:hidden w-9 h-9 flex items-center justify-center"
+            className="lg:hidden w-9 h-9 min-w-9 min-h-9 flex items-center justify-center touch-manipulation"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -235,17 +234,6 @@ export function Navbar() {
               ))}
             </div>
 
-            <div className="mt-4">
-              <DownloadAppButton
-                size="md"
-                variant="secondary"
-                className="w-full"
-                onOpen={() => setMobileOpen(false)}
-              >
-                <FiDownload />
-                Download App
-              </DownloadAppButton>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
