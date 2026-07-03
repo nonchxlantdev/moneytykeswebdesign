@@ -7,6 +7,7 @@ import { isTouchDevice } from '@/hooks/useDevice'
 import { logo } from '@/img'
 import { PARENT_APP_URL } from '@/data/links'
 import { WalletFillScene } from '@/components/easterEgg/WalletFillScene'
+import { BelizeHeroBadge } from '@/components/ui/BelizeHeroBadge'
 
 const touchMotion = isTouchDevice() ? 'visible' : 'hidden'
 
@@ -18,15 +19,7 @@ export function Hero() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-28 pb-16 grid lg:grid-cols-2 gap-10 items-center relative z-10">
         <motion.div variants={slideInLeft} initial={touchMotion} animate="visible">
-          <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-semibold text-primary-text mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            Belize&apos;s #1 Family Fintech Platform
-          </motion.div>
+          <BelizeHeroBadge />
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-ink leading-[1.1] mb-4">
             Teaching Kids{' '}

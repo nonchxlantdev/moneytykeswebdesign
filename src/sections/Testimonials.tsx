@@ -93,7 +93,7 @@ export function Testimonials() {
 
       {featuredTestimonials.length > 0 && (
         <motion.div
-          className="max-w-3xl mx-auto px-4 md:px-8 mb-10 md:mb-12"
+          className="max-w-6xl mx-auto px-4 md:px-8 mb-10 md:mb-12 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8"
           variants={fadeInUp}
           initial="hidden"
           whileInView="visible"

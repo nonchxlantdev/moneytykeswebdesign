@@ -10,6 +10,16 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
+    id: 'melissa-g',
+    name: 'Melissa G.',
+    role: 'Parent, Belize',
+    avatar: 'Mel',
+    rating: 5,
+    featured: true,
+    quote:
+      'MoneyTykes has been engaging and educational for my family. My 14-year-old struggled with saving habits, but since using the app he is motivated to earn, set goals, and work toward them in ways he never had before. It is simple, innovative, and effective. I believe MoneyTykes is on the right path to teaching Belizean children the value of earning, saving, and making wise financial decisions.',
+  },
+  {
     id: 'danielle-r',
     name: 'Danielle R',
     role: 'Parent, Belize',
