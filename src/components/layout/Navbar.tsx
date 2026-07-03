@@ -182,7 +182,12 @@ export function Navbar() {
           >
             {theme === 'light' ? <FiMoon className="text-ink" /> : <FiSun className="text-accent" />}
           </button>
-          <DownloadAppButton size="sm" variant="secondary" className="hidden lg:flex shrink-0" magnetic={false}>
+          <DownloadAppButton
+            size="sm"
+            variant="secondary"
+            className="!hidden lg:!inline-flex shrink-0"
+            magnetic={false}
+          >
             <FiDownload className="text-sm" />
             Download App
           </DownloadAppButton>
