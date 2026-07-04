@@ -462,6 +462,36 @@ html.dark {
   }
 }
 
+/* MoneyTykes logo coin — octagon clip removes baked-in square PNG matte */
+.moneytykes-coin {
+  display: block;
+  object-fit: contain;
+  background: transparent;
+  clip-path: polygon(
+    30% 0%,
+    70% 0%,
+    100% 30%,
+    100% 70%,
+    70% 100%,
+    30% 100%,
+    0% 70%,
+    0% 30%
+  );
+}
+
+@keyframes moneytykes-coin-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.moneytykes-coin--spin {
+  animation: moneytykes-coin-spin 1.75s linear infinite;
+}
+
 /* Wallet Fill easter egg */
 @keyframes mt-shake {
   0%,

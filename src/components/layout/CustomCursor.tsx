@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { coinIcon } from '@/img'
+import { CoinImage } from '@/components/ui/CoinImage'
 
 export function CustomCursor() {
   const [pos, setPos] = useState({ x: 0, y: 0 })
@@ -50,16 +50,12 @@ export function CustomCursor() {
       }}
       transition={{ type: 'spring', stiffness: 420, damping: 28, mass: 0.45 }}
     >
-      <motion.img
-        src={coinIcon}
-        alt=""
-        draggable={false}
-        width={size}
-        height={size}
+      <motion.div
         animate={{ scale: hovering ? 1.12 : 1 }}
         transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-        className="object-contain drop-shadow-[0_2px_10px_rgba(245,185,66,0.5)] select-none"
-      />
+      >
+        <CoinImage size={size} />
+      </motion.div>
     </motion.div>
   )
 }

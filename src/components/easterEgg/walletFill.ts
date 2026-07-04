@@ -1,4 +1,25 @@
+import coinIcon from '@/img/coinicon.png'
+
 const MT_WIN_TARGET = 60
+
+function createCoinElement(size: number, className: string, zIndex: number): HTMLImageElement {
+  const img = document.createElement('img')
+  img.src = coinIcon
+  img.alt = ''
+  img.draggable = false
+  img.className = `moneytykes-coin ${className}`.trim()
+  img.style.cssText = [
+    'position:absolute',
+    `width:${size}px`,
+    `height:${size}px`,
+    'object-fit:contain',
+    'pointer-events:none',
+    `z-index:${zIndex}`,
+    'will-change:transform',
+    'display:block',
+  ].join(';')
+  return img
+}
 
 export interface WalletFillOptions {
   touch?: boolean
@@ -112,8 +133,22 @@ export function createWalletFill(
       winCardEl.style.opacity = '1'
     })
 
-    const emojis = ['💰', '🪙', '💵', '✨', '🎉']
+    const emojis = ['💰', '💵', '✨', '🎉']
     for (let i = 0; i < winEmojiCount; i++) {
+      const useCoin = Math.random() < 0.28
+      const left = `${8 + Math.random() * 84}%`
+      const top = `${10 + Math.random() * 70}%`
+
+      if (useCoin) {
+        const img = createCoinElement(22, '', 25)
+        img.style.left = left
+        img.style.top = top
+        img.style.animation = 'mt-float-up 1.2s ease forwards'
+        clayerEl.appendChild(img)
+        setTimeout(() => img.remove(), 1300)
+        continue
+      }
+
       const el = document.createElement('div')
       el.textContent = emojis[Math.floor(Math.random() * emojis.length)]
       el.style.cssText = [
@@ -121,8 +156,8 @@ export function createWalletFill(
         'pointer-events:none',
         'font-size:22px',
         'z-index:25',
-        `left:${8 + Math.random() * 84}%`,
-        `top:${10 + Math.random() * 70}%`,
+        `left:${left}`,
+        `top:${top}`,
         'animation:mt-float-up 1.2s ease forwards',
       ].join(';')
       clayerEl.appendChild(el)
@@ -151,30 +186,8 @@ export function createWalletFill(
 
   function spawnCoin(sceneRect: DOMRect, cx: number, cy: number) {
     const size = isTouch ? 22 + Math.random() * 14 : 24 + Math.random() * 18
-    const gold = Math.random() < 0.5
-    const label = gold ? '$' : '¢'
 
-    const settledEl = document.createElement('div')
-    settledEl.className = 'mt-settled'
-    settledEl.textContent = label
-    settledEl.style.cssText = [
-      'position:absolute',
-      `width:${size}px`,
-      `height:${size}px`,
-      'border-radius:50%',
-      `background:${gold ? '#F7C400' : '#E55C0A'}`,
-      `border:2px solid ${gold ? '#C9970A' : '#A33B00'}`,
-      `color:${gold ? '#7a5200' : '#fff'}`,
-      'display:flex',
-      'align-items:center',
-      'justify-content:center',
-      'font-weight:900',
-      'font-size:11px',
-      'font-family:Arial,sans-serif',
-      'pointer-events:none',
-      'z-index:6',
-      'will-change:transform',
-    ].join(';')
+    const settledEl = createCoinElement(size, 'mt-settled', 6)
 
     const dy = 50 + Math.random() * Math.max(80, sceneRect.height * 0.72)
     const dx = (Math.random() - 0.5) * Math.max(120, sceneRect.width * 0.85)
@@ -187,10 +200,7 @@ export function createWalletFill(
       return
     }
 
-    const el = document.createElement('div')
-    el.className = 'mt-falling'
-    el.textContent = label
-    el.style.cssText = settledEl.style.cssText.replace('mt-settled', 'mt-falling').replace('z-index:6', 'z-index:5')
+    const el = createCoinElement(size, 'mt-falling', 5)
 
     const spin = (Math.random() - 0.5) * 540
     const duration = 0.7 + Math.random() * 0.4

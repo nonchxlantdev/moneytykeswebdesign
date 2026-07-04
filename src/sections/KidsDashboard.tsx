@@ -5,6 +5,7 @@ import { isTouchDevice } from '@/hooks/useDevice'
 import { AnimatedSection, SectionHeading } from '@/components/ui/SectionHeading'
 import { GlowCard } from '@/components/ui/GlowCard'
 import { ProgressRing } from '@/components/ui/ProgressRing'
+import { CoinImage } from '@/components/ui/CoinImage'
 import { fadeInUp } from '@/animations/variants'
 import { OFFICIAL_MUSIC_VIDEO_URL } from '@/data/links'
 
@@ -290,8 +291,9 @@ export function KidsDashboard() {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-sm text-ink-subtle">Coin Balance</p>
-                <p className="text-4xl font-bold text-ink">
-                  🪙 {balance.toLocaleString()}
+                <p className="text-4xl font-bold text-ink flex items-center gap-2">
+                  <CoinImage size={36} className="shrink-0" />
+                  {balance.toLocaleString()}
                 </p>
               </div>
               <div className="flex gap-2">

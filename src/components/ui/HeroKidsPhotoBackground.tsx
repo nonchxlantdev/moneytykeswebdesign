@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion, useMotionTemplate, type MotionValue } from 'framer-motion'
-import { kidsLearningTogether, coinIcon } from '@/img'
+import { kidsLearningTogether } from '@/img'
+import { CoinImage } from '@/components/ui/CoinImage'
 
 interface HeroKidsPhotoBackgroundProps {
   sectionRef: React.RefObject<HTMLElement | null>
@@ -144,13 +145,9 @@ export function HeroKidsPhotoMobile() {
 
       <div className="hero-photo-mobile relative" aria-hidden>
         <HeroPhotoImage className="hero-photo-img hero-photo-mobile-img" />
-        <img
-          src={coinIcon}
-          alt=""
-          draggable={false}
-          className="hero-photo-mobile-coin absolute bottom-2.5 right-2.5 z-10 w-10 h-10 object-contain select-none pointer-events-none"
+        <CoinImage
+          className="hero-photo-mobile-coin absolute bottom-2.5 right-2.5 z-10 w-10 h-10 pointer-events-none"
           loading="lazy"
-          decoding="async"
         />
       </div>
     </div>

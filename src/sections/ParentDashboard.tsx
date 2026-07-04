@@ -3,6 +3,7 @@ import { AnimatedSection, SectionHeading } from '@/components/ui/SectionHeading'
 import { GlowCard } from '@/components/ui/GlowCard'
 import { FiBell, FiCheck, FiClock, FiTrendingUp } from 'react-icons/fi'
 import { staggerContainer, fadeInUp } from '@/animations/variants'
+import { CoinImage } from '@/components/ui/CoinImage'
 import { isTouchDevice } from '@/hooks/useDevice'
 
 const approvals = [
@@ -88,8 +89,9 @@ export function ParentDashboard() {
                     <p className="text-xs text-ink-subtle dark:text-white/75">{item.action}</p>
                   </div>
                   <div className="text-right">
-                    <p className={`font-bold text-sm ${item.coins > 0 ? 'text-primary' : 'text-red-400'}`}>
-                      {item.coins > 0 ? '+' : ''}{item.coins} 🪙
+                    <p className={`font-bold text-sm flex items-center justify-end gap-1 ${item.coins > 0 ? 'text-primary' : 'text-red-400'}`}>
+                      {item.coins > 0 ? '+' : ''}{item.coins}
+                      <CoinImage size={16} className="shrink-0" />
                     </p>
                     <p className="text-xs text-ink-subtle">{item.time}</p>
                   </div>
@@ -140,7 +142,8 @@ export function ParentDashboard() {
                   <p className="text-xs text-ink-subtle">{chore.child}</p>
                 </div>
                 <span className="text-sm font-bold text-primary flex items-center gap-1">
-                  <FiCheck className="text-xs" /> {chore.reward}🪙
+                  <FiCheck className="text-xs" /> {chore.reward}
+                  <CoinImage size={16} className="shrink-0" />
                 </span>
               </div>
             ))}

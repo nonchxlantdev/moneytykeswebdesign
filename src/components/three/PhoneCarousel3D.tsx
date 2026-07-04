@@ -1,8 +1,9 @@
 import { useRef, useMemo, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Float } from '@react-three/drei'
+import { Float, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { phoneScreens } from '@/data/stats'
+import coinIcon from '@/img/coinicon.png'
 
 function Phone({
   position,
@@ -47,6 +48,7 @@ function Phone({
 
 function FloatingCoin({ position }: { position: [number, number, number] }) {
   const ref = useRef<THREE.Mesh>(null)
+  const texture = useTexture(coinIcon)
 
   useFrame((state) => {
     if (ref.current) {
@@ -57,14 +59,8 @@ function FloatingCoin({ position }: { position: [number, number, number] }) {
 
   return (
     <mesh ref={ref} position={position}>
-      <cylinderGeometry args={[0.12, 0.12, 0.03, 32]} />
-      <meshStandardMaterial
-        color="#FFD54A"
-        metalness={0.9}
-        roughness={0.1}
-        emissive="#FFD54A"
-        emissiveIntensity={0.2}
-      />
+      <circleGeometry args={[0.15, 32]} />
+      <meshBasicMaterial map={texture} transparent side={THREE.DoubleSide} depthWrite={false} />
     </mesh>
   )
 }

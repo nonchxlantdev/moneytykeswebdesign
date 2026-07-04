@@ -1,8 +1,17 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AnimatedSection, SectionHeading } from '@/components/ui/SectionHeading'
+import { CoinImage } from '@/components/ui/CoinImage'
 import { journeySteps } from '@/data/stats'
 import { staggerContainer, fadeInUp } from '@/animations/variants'
+
+function JourneyStepIcon({ stepId, size, className = '' }: { stepId: string; size: number; className?: string }) {
+  if (stepId === 'earn') {
+    return <CoinImage size={size} className={`inline-block ${className}`.trim()} />
+  }
+  const step = journeySteps.find((s) => s.id === stepId)
+  return <span className={className}>{step?.icon}</span>
+}
 
 export function FamilyJourney() {
   const [activeStep, setActiveStep] = useState(0)
@@ -35,11 +44,11 @@ export function FamilyJourney() {
               onClick={() => setActiveStep(i)}
             >
               <motion.span
-                className="text-3xl"
+                className="inline-flex items-center justify-center w-9 h-9 shrink-0"
                 animate={activeStep === i ? { scale: [1, 1.2, 1], rotate: [0, 10, 0] } : {}}
                 transition={{ duration: 0.5 }}
               >
-                {step.icon}
+                <JourneyStepIcon stepId={step.id} size={30} className="text-3xl" />
               </motion.span>
               <div>
                 <p className="font-semibold text-ink">{step.label}</p>
@@ -96,7 +105,7 @@ export function FamilyJourney() {
                   onClick={() => setActiveStep(i)}
                   whileHover={{ scale: 1.15 }}
                 >
-                  {step.icon}
+                  <JourneyStepIcon stepId={step.id} size={28} />
                 </motion.button>
               )
             })}
@@ -111,7 +120,9 @@ export function FamilyJourney() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="text-center p-6 rounded-3xl card-light premium-shadow max-w-[200px]">
-                  <p className="text-4xl mb-2">{journeySteps[activeStep].icon}</p>
+                  <div className="flex justify-center mb-2">
+                    <JourneyStepIcon stepId={journeySteps[activeStep].id} size={40} />
+                  </div>
                   <p className="font-bold text-ink">{journeySteps[activeStep].label}</p>
                   <p className="text-xs text-ink-muted mt-1">{journeySteps[activeStep].description}</p>
                 </div>

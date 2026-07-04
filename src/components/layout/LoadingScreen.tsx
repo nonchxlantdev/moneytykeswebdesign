@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { coinIcon } from '@/img'
+import { CoinImage } from '@/components/ui/CoinImage'
 
 export function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0)
@@ -53,14 +53,10 @@ export function LoadingScreen({ onComplete }: { onComplete: () => void }) {
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-accent/25 blur-2xl pointer-events-none"
           aria-hidden
         />
-        <img
-          src={coinIcon}
-          alt=""
-          draggable={false}
-          className="relative z-10 w-[4.5rem] h-[4.5rem] sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain select-none mix-blend-multiply dark:mix-blend-normal"
+        <CoinImage
+          className="relative z-10 w-[4.5rem] h-[4.5rem] sm:w-24 sm:h-24 md:w-28 md:h-28"
           loading="eager"
           fetchPriority="high"
-          decoding="async"
         />
       </motion.div>
 

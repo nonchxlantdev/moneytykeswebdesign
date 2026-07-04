@@ -28,7 +28,7 @@ export const phoneScreens = [
 export const journeySteps = [
   { id: 'assign', label: 'Assign Chore', icon: '📋', description: 'Parent creates a task' },
   { id: 'complete', label: 'Kid Completes', icon: '✅', description: 'Child finishes the chore' },
-  { id: 'earn', label: 'Coins Earned', icon: '🪙', description: 'Virtual coins are awarded' },
+  { id: 'earn', label: 'Coins Earned', icon: '', description: 'Virtual coins are awarded' },
   { id: 'approve', label: 'Parent Approves', icon: '👍', description: 'Parent confirms completion' },
   { id: 'wallet', label: 'Wallet Updates', icon: '💳', description: 'Balance reflects earnings' },
   { id: 'purchase', label: 'Reward Approved', icon: '🛍️', description: 'Parent approves; parent wallet is deducted' },
