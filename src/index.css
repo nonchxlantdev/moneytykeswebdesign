@@ -214,15 +214,15 @@ html.dark {
     }
   }
 
-  /* Hero photo — match reference: all 3 kids + tablet, right kid fully visible */
+  /* Hero photo — all 3 kids + tablet; bias crop to show more of right (red-shirt) kid */
   .hero-photo-panel {
     --hero-panel-left: clamp(6%, 10vw, 12%);
     --hero-panel-top: clamp(-17%, -21vw, -25%);
     --hero-panel-height: clamp(120%, 128vw, 134%);
     --hero-y-rest: clamp(-17%, -21vw, -25%);
-    --hero-x-shift: 0%;
-    --hero-scale: clamp(0.62, 0.58 + 0.4vw, 0.68);
-    --hero-object-x: clamp(16%, 14% + 1vw, 20%);
+    --hero-x-shift: 20%;
+    --hero-scale: clamp(0.56, 0.52 + 0.4vw, 0.62);
+    --hero-object-x: clamp(24%, 22% + 1vw, 30%);
     --hero-object-y: clamp(52%, 48% + 0.5vw, 56%);
 
     position: absolute;
@@ -233,7 +233,7 @@ html.dark {
     margin-top: var(--hero-panel-top);
     min-width: min(100%, 280px);
     transform: translate(var(--hero-x-shift), var(--hero-y-rest)) scale(var(--hero-scale));
-    transform-origin: 40% 48%;
+    transform-origin: 48% 48%;
     will-change: transform;
   }
 
@@ -281,12 +281,12 @@ html.dark {
       --hero-panel-left: clamp(2%, 6vw, 8%);
       --hero-panel-top: clamp(-15%, -19vw, -21%);
       --hero-y-rest: clamp(-15%, -19vw, -21%);
-      --hero-x-shift: 0%;
+      --hero-x-shift: 20%;
       --hero-panel-height: clamp(118%, 126vw, 132%);
-      --hero-scale: clamp(0.58, 0.54 + 0.45vw, 0.64);
-      --hero-object-x: clamp(16%, 14% + 2vw, 22%);
+      --hero-scale: clamp(0.52, 0.48 + 0.45vw, 0.58);
+      --hero-object-x: clamp(24%, 22% + 2vw, 32%);
       --hero-object-y: clamp(50%, 46% + 0.8vw, 54%);
-      transform-origin: 40% 46%;
+      transform-origin: 48% 46%;
     }
 
     .hero-scrim-text {
@@ -307,11 +307,11 @@ html.dark {
       --hero-panel-top: 46%;
       --hero-panel-height: 58%;
       --hero-y-rest: 0%;
-      --hero-x-shift: 0%;
-      --hero-scale: clamp(0.78, 0.74 + 1vw, 0.84);
-      --hero-object-x: 22%;
+      --hero-x-shift: 20%;
+      --hero-scale: clamp(0.7, 0.66 + 1vw, 0.76);
+      --hero-object-x: 30%;
       --hero-object-y: 52%;
-      transform-origin: 42% 46%;
+      transform-origin: 50% 46%;
     }
 
     .hero-scrim-text {
@@ -346,9 +346,9 @@ html.dark {
   @media (min-width: 1536px) {
     .hero-photo-panel {
       --hero-panel-left: 12%;
-      --hero-x-shift: 0%;
-      --hero-scale: clamp(0.64, 0.6 + 0.35vw, 0.68);
-      --hero-object-x: clamp(16%, 14% + 1vw, 18%);
+      --hero-x-shift: 20%;
+      --hero-scale: clamp(0.58, 0.54 + 0.35vw, 0.62);
+      --hero-object-x: clamp(24%, 22% + 1vw, 28%);
       --hero-object-y: clamp(50%, 46% + 0.4vw, 54%);
     }
   }

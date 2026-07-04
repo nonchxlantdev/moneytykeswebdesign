@@ -37,13 +37,12 @@ export function Hero() {
           <BelizeHeroBadge />
 
           <h1 className="text-[1.85rem] leading-[1.12] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-ink mb-3 sm:mb-4">
-            Teaching Kids{' '}
-            <span className="text-gradient">Smart Money</span>{' '}
-            Habits.
+            Financial Literacy Starts Young.{' '}
+            <span className="text-gradient">Confidence</span> Lasts a Lifetime.
           </h1>
 
           <p className="text-[0.95rem] sm:text-lg md:text-xl text-ink leading-relaxed mb-6 sm:mb-7 max-lg:hero-readable-muted">
-            Money Tykes empowers children to build lifelong financial literacy skills through interactive learning, rewards, savings goals, and parent-guided financial experiences.
+            Money Tykes® is Belize&apos;s financial literacy platform for children ages 5–17, helping families and schools build lifelong financial knowledge, confidence, and responsible money habits through engaging, parent-guided learning experiences.
           </p>
 
           <div className="lg:hidden flex flex-col gap-2.5">

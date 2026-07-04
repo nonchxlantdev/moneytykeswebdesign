@@ -9,7 +9,7 @@ interface BrandLogoProps {
 const sizes = {
   nav: 'h-10 md:h-11 w-auto',
   web: 'h-16 sm:h-[4.75rem] md:h-[5.5rem] w-auto',
-  'web-nav': 'h-8 sm:h-10 md:h-11 lg:h-[3.25rem] w-auto max-w-[7.5rem] sm:max-w-none',
+  'web-nav': 'h-8 sm:h-10 md:h-11 xl:h-[3.25rem] w-auto max-w-[7.5rem] sm:max-w-[9rem] xl:max-w-none',
   hero: 'h-28 md:h-36 w-auto',
   footer: 'h-14 w-auto',
   loading: 'h-36 md:h-44 w-auto',

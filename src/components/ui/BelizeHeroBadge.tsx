@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { belizeFlag, belizeFlagWave } from '@/img'
+import { belizeFlag } from '@/img'
 import { isTouchDevice } from '@/hooks/useDevice'
 import { Fireworks, createFireworkBursts, type FireworkBurst } from '@/components/ui/Fireworks'
 
@@ -53,15 +53,7 @@ export function BelizeHeroBadge() {
             src={belizeFlag}
             alt=""
             draggable={false}
-            className="lg:hidden h-9 sm:h-10 w-auto object-contain select-none"
-          />
-          <motion.img
-            src={belizeFlagWave}
-            alt=""
-            draggable={false}
-            className="hidden lg:block h-12 w-auto object-contain mix-blend-screen dark:mix-blend-normal drop-shadow-[0_6px_16px_rgba(0,63,135,0.45)] select-none"
-            whileHover={touchUi ? undefined : { scale: 1.08 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+            className="h-9 sm:h-10 w-auto object-contain select-none"
           />
           <span className="absolute -inset-2 rounded-full bg-accent/25 blur-lg opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none hidden sm:block" />
         </motion.div>

@@ -140,14 +140,14 @@ export function Navbar() {
       animate={{ y: 0 }}
     >
       <nav
-        className={`mx-2 sm:mx-4 md:mx-auto md:max-w-7xl rounded-xl sm:rounded-2xl px-2 sm:px-5 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-2 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6 xl:gap-8 glass glass-mobile premium-shadow transition-[box-shadow,background-color] duration-300 ${
+        className={`mx-2 sm:mx-4 md:mx-auto md:max-w-7xl rounded-xl sm:rounded-2xl px-2 sm:px-5 lg:px-8 py-2 sm:py-3 flex items-center gap-2 xl:grid xl:grid-cols-[auto_1fr_auto] xl:gap-6 2xl:gap-8 glass glass-mobile premium-shadow transition-[box-shadow,background-color] duration-300 ${
           scrolled
             ? 'shadow-[0_4px_20px_rgba(7,26,45,0.14)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.45)]'
             : ''
         }`}
         aria-label="Main navigation"
       >
-        <a href={resolveHref('#home')} className="flex items-center shrink-0 min-w-0 lg:mr-2 group" data-magnetic>
+        <a href={resolveHref('#home')} className="flex items-center shrink-0 min-w-0 xl:mr-2 group" data-magnetic>
           <motion.div
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 400, damping: 24 }}
@@ -156,8 +156,8 @@ export function Navbar() {
           </motion.div>
         </a>
 
-        <div className="hidden lg:flex items-center justify-center w-full min-w-0">
-          <div className="flex items-center gap-1 xl:gap-1.5">
+        <div className="hidden xl:flex items-center justify-center w-full min-w-0 overflow-hidden">
+          <div className="flex items-center gap-1 2xl:gap-1.5 min-w-0">
             {sectionNavLinks.map((link) => (
               <NavItem key={link.href} link={link} isActive={isNavActive(link)} resolveHref={resolveHref} />
             ))}
@@ -173,26 +173,30 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className="flex items-center gap-1 sm:gap-2 xl:gap-3 shrink-0 lg:justify-self-end">
-          <AudioControl />
+        <div className="flex-1 min-w-3 xl:hidden" aria-hidden="true" />
+
+        <div className="flex items-center shrink-0 xl:justify-self-end">
+          <div className="flex items-center gap-0.5 sm:gap-1.5">
+            <AudioControl />
+            <button
+              onClick={toggle}
+              className="w-9 h-9 min-w-9 min-h-9 flex items-center justify-center rounded-full hover:bg-navy/5 dark:hover:bg-white/10 transition-colors touch-manipulation"
+              aria-label="Toggle dark mode"
+            >
+              {theme === 'light' ? <FiMoon className="text-ink" /> : <FiSun className="text-accent" />}
+            </button>
+            <DownloadAppButton
+              size="sm"
+              variant="secondary"
+              className="!hidden xl:!inline-flex shrink-0"
+              magnetic={false}
+            >
+              <FiDownload className="text-sm" />
+              Download App
+            </DownloadAppButton>
+          </div>
           <button
-            onClick={toggle}
-            className="w-9 h-9 min-w-9 min-h-9 flex items-center justify-center rounded-full hover:bg-navy/5 dark:hover:bg-white/10 transition-colors touch-manipulation"
-            aria-label="Toggle dark mode"
-          >
-            {theme === 'light' ? <FiMoon className="text-ink" /> : <FiSun className="text-accent" />}
-          </button>
-          <DownloadAppButton
-            size="sm"
-            variant="secondary"
-            className="!hidden lg:!inline-flex shrink-0"
-            magnetic={false}
-          >
-            <FiDownload className="text-sm" />
-            Download App
-          </DownloadAppButton>
-          <button
-            className="lg:hidden w-9 h-9 min-w-9 min-h-9 flex items-center justify-center touch-manipulation"
+            className="xl:hidden w-9 h-9 min-w-9 min-h-9 flex items-center justify-center touch-manipulation ml-1 sm:ml-1.5 pl-1 sm:pl-1.5 border-l border-navy/10 dark:border-white/10"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -204,7 +208,7 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="lg:hidden mx-4 mt-2 rounded-2xl glass premium-shadow p-6"
+            className="xl:hidden mx-4 mt-2 rounded-2xl glass premium-shadow p-6"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
