@@ -4,7 +4,7 @@ import { FiPlay, FiArrowRight, FiDownload } from 'react-icons/fi'
 import { Button } from '@/components/ui/Button'
 import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { GlowingOrbs, FloatingParticles } from '@/components/ui/BackgroundEffects'
-import { HeroKidsPhotoBackground } from '@/components/ui/HeroKidsPhotoBackground'
+import { HeroKidsPhotoBackground, HeroKidsPhotoMobile } from '@/components/ui/HeroKidsPhotoBackground'
 import { slideInLeft } from '@/animations/variants'
 import { isTouchDevice } from '@/hooks/useDevice'
 import { PARENT_APP_URL } from '@/data/links'
@@ -19,7 +19,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-[100dvh] min-h-screen flex items-start lg:items-center overflow-hidden gradient-mesh"
+      className="relative max-sm:min-h-0 sm:min-h-[100dvh] sm:min-h-screen flex items-start lg:items-center overflow-hidden gradient-mesh"
     >
       <HeroKidsPhotoBackground sectionRef={sectionRef} />
       <div className="hidden sm:block absolute inset-0 pointer-events-none">
@@ -27,7 +27,7 @@ export function Hero() {
         <FloatingParticles />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-[5.5rem] sm:pt-28 pb-12 sm:pb-16 relative z-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-[5.5rem] sm:pt-28 pb-8 sm:pb-16 relative z-10 w-full flex flex-col">
         <motion.div
           variants={slideInLeft}
           initial={touchMotion}
@@ -78,6 +78,8 @@ export function Hero() {
                 <span className="text-[11px] sm:text-xs font-bold tracking-wide opacity-90">#comingsoon</span>
               </span>
             </Button>
+
+            <HeroKidsPhotoMobile />
           </div>
 
           <div className="hidden lg:flex flex-wrap items-center gap-3">

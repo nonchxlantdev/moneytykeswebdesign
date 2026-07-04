@@ -300,46 +300,21 @@ html.dark {
     }
   }
 
-  /* Phone (iPhone, Android) */
+  /* Phone (iPhone, Android) — in-flow photo below copy; background panel hidden */
   @media (max-width: 639px) {
     .hero-photo-panel {
-      --hero-panel-left: 0%;
-      --hero-panel-top: 46%;
-      --hero-panel-height: 58%;
-      --hero-y-rest: 0%;
-      --hero-x-shift: 20%;
-      --hero-scale: clamp(0.7, 0.66 + 1vw, 0.76);
+      display: none;
+    }
+
+    .hero-photo-mobile {
       --hero-object-x: 30%;
-      --hero-object-y: 52%;
-      transform-origin: 50% 46%;
-    }
-
-    .hero-scrim-text {
-      background: linear-gradient(
-        to bottom,
-        var(--surface-base) 0%,
-        var(--surface-base) 42%,
-        color-mix(in srgb, var(--surface-base) 92%, transparent) 52%,
-        color-mix(in srgb, var(--surface-base) 55%, transparent) 62%,
-        transparent 80%
-      );
-    }
-
-    .hero-scrim-radial {
-      background: radial-gradient(ellipse 100% 48% at 50% 12%, var(--surface-base) 0%, transparent 70%);
-    }
-
-    .hero-scrim-desc {
-      background: radial-gradient(
-        ellipse 100% 38% at 50% 16%,
-        color-mix(in srgb, var(--surface-base) 94%, transparent) 0%,
-        transparent 68%
-      );
-    }
-
-    .hero-scrim-bottom {
-      background:
-        linear-gradient(to bottom, transparent 0%, transparent 78%, color-mix(in srgb, var(--surface-base) 20%, transparent) 92%, color-mix(in srgb, var(--surface-base) 50%, transparent) 100%);
+      --hero-object-y: 48%;
+      aspect-ratio: 16 / 9;
+      height: clamp(9.5rem, 34vw, 11.5rem);
+      max-height: 11.5rem;
+      box-shadow:
+        0 6px 24px color-mix(in srgb, var(--text-primary) 8%, transparent),
+        inset 0 0 0 1px color-mix(in srgb, var(--text-primary) 5%, transparent);
     }
   }
 
