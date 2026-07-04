@@ -331,44 +331,56 @@ html.dark {
       display: none;
     }
 
+    .hero-photo-mobile-quote blockquote {
+      text-wrap: balance;
+    }
+
     .hero-photo-mobile {
-      --hero-object-x: 26%;
-      --hero-object-y: 50%;
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      height: clamp(13rem, 48vw, 17.5rem);
+      --hero-object-x: 28%;
+      --hero-object-y: 42%;
+      width: calc(100vw - 1.5rem);
+      margin-left: calc(50% - 50vw + 0.75rem);
+      height: clamp(11rem, 40vw, 14.5rem);
       overflow: hidden;
-      border-radius: 0;
+      border-radius: 1.25rem;
     }
 
-    .hero-photo-mobile-blur {
-      position: absolute;
-      inset: -10%;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .hero-photo-mobile-blur-img {
+    .hero-photo-mobile-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: var(--hero-object-x) var(--hero-object-y);
-      filter: blur(20px) saturate(1.15) brightness(1.08);
-      transform: scale(1.2);
+      transform: scale(1.38);
+      transform-origin: center 42%;
     }
 
-    .hero-photo-mobile-focus {
-      position: relative;
+    .hero-photo-mobile-edges {
+      position: absolute;
+      inset: 0;
       z-index: 1;
-      width: 100%;
-      height: 100%;
+      border-radius: inherit;
+      background:
+        linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0.72) 6%, transparent 18%),
+        linear-gradient(to left, #ffffff 0%, rgba(255, 255, 255, 0.72) 6%, transparent 18%),
+        linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0.65) 8%, transparent 20%),
+        linear-gradient(to top, #ffffff 0%, rgba(255, 255, 255, 0.55) 6%, transparent 16%);
     }
 
-    .hero-photo-mobile-focus-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center center;
+    .dark .hero-photo-mobile-edges {
+      background:
+        linear-gradient(to right, var(--surface-base) 0%, color-mix(in srgb, var(--surface-base) 72%, transparent) 6%, transparent 18%),
+        linear-gradient(to left, var(--surface-base) 0%, color-mix(in srgb, var(--surface-base) 72%, transparent) 6%, transparent 18%),
+        linear-gradient(to bottom, var(--surface-base) 0%, color-mix(in srgb, var(--surface-base) 65%, transparent) 8%, transparent 20%),
+        linear-gradient(to top, var(--surface-base) 0%, color-mix(in srgb, var(--surface-base) 55%, transparent) 6%, transparent 16%);
+    }
+
+    .hero-photo-mobile-coin {
+      z-index: 2;
+      filter: drop-shadow(0 2px 6px rgba(7, 26, 45, 0.12));
+    }
+
+    .dark .hero-photo-mobile-coin {
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
     }
   }
 

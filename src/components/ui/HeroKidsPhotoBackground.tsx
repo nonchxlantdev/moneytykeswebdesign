@@ -1,5 +1,6 @@
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
-import { kidsLearningTogether } from '@/img'
+import { useEffect, useState } from 'react'
+import { motion, useScroll, useTransform, useReducedMotion, useMotionTemplate, type MotionValue } from 'framer-motion'
+import { kidsLearningTogether, coinIcon } from '@/img'
 
 interface HeroKidsPhotoBackgroundProps {
   sectionRef: React.RefObject<HTMLElement | null>
@@ -29,12 +30,22 @@ const photoImgStyle = {
 
 /** Parallax drift — kept subtle so CSS fluid scale/position stays primary */
 const PHOTO_Y_SCROLL_END = '6%'
-/** Tablet portrait: pan photo toward viewer's left on scroll to reveal red-shirt kid */
-const TABLET_PORTRAIT_PAN_END = '-18%'
+/** Tablet portrait: pan object-position on scroll to reveal red-shirt kid (photo stays filled) */
+const TABLET_PORTRAIT_OBJECT_X_START = 14
+const TABLET_PORTRAIT_OBJECT_X_END = 40
 
-function isTabletPortrait(): boolean {
-  if (typeof window === 'undefined') return false
-  return window.matchMedia('(min-width: 640px) and (max-width: 1023px) and (orientation: portrait)').matches
+function useTabletPortrait() {
+  const [matches, setMatches] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 640px) and (max-width: 1023px) and (orientation: portrait)')
+    const update = () => setMatches(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  return matches
 }
 
 function smoothScrollProgress(progress: number): number {
@@ -82,7 +93,7 @@ function PhotoScrim() {
   )
 }
 
-function PhotoFrame() {
+function StaticPhotoFrame() {
   return (
     <div className="w-full h-full overflow-hidden" style={photoMaskStyle}>
       <HeroPhotoImage className="hero-photo-img absolute inset-0 w-full h-full object-cover" />
@@ -90,15 +101,90 @@ function PhotoFrame() {
   )
 }
 
-/** In-flow kids photo for phone — edge to edge below Dance Challenge */
-export function HeroKidsPhotoMobile() {
+function ScrollPanPhotoFrame({ scrollObjectX }: { scrollObjectX: MotionValue<number> }) {
+  const objectPosition = useMotionTemplate`${scrollObjectX}% 50%`
+
   return (
-    <div className="hero-photo-mobile sm:hidden relative mt-4" aria-hidden>
-      <div className="hero-photo-mobile-blur">
-        <HeroPhotoImage enhanced={false} className="hero-photo-mobile-blur-img" />
-      </div>
-      <div className="hero-photo-mobile-focus">
-        <HeroPhotoImage className="hero-photo-img hero-photo-mobile-focus-img" />
+    <div className="w-full h-full overflow-hidden" style={photoMaskStyle}>
+      <HeroPhotoSharpenFilter />
+      <motion.img
+        src={kidsLearningTogether}
+        alt=""
+        draggable={false}
+        className="hero-photo-img absolute inset-0 w-full h-full object-cover"
+        style={{ objectPosition, ...photoImgStyle }}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+      />
+    </div>
+  )
+}
+
+function PhotoFrame({ scrollObjectX }: { scrollObjectX?: MotionValue<number> }) {
+  if (scrollObjectX) {
+    return <ScrollPanPhotoFrame scrollObjectX={scrollObjectX} />
+  }
+
+  return <StaticPhotoFrame />
+}
+
+/** In-flow kids photo for phone — quote + edge-to-edge cover below Dance Challenge */
+export function HeroKidsPhotoMobile() {
+  const reducedMotion = useReducedMotion()
+
+  return (
+    <div className="sm:hidden mt-4">
+      <figure className="hero-photo-mobile-quote px-1 mb-3.5">
+        <blockquote className="text-[0.82rem] leading-snug text-ink font-medium text-center whitespace-nowrap">
+          &ldquo;Learning about money starts at home.&rdquo;{' '}
+          <cite className="text-xs font-semibold text-ink-muted not-italic tracking-wide">
+            — S. Young
+          </cite>
+        </blockquote>
+      </figure>
+
+      <div className="[perspective:1000px]">
+        <motion.div
+          className="hero-photo-mobile relative"
+          aria-hidden
+          style={{ transformOrigin: 'center bottom' }}
+          initial={
+            reducedMotion
+              ? false
+              : {
+                  opacity: 0,
+                  rotateX: 16,
+                  y: 32,
+                  scale: 0.92,
+                  boxShadow: '0 6px 18px rgba(7, 26, 45, 0.12)',
+                }
+          }
+          whileInView={
+            reducedMotion
+              ? undefined
+              : {
+                  opacity: 1,
+                  rotateX: 0,
+                  y: 0,
+                  scale: 1,
+                  boxShadow: '0 24px 52px rgba(7, 26, 45, 0.24)',
+                }
+          }
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+        >
+          <HeroPhotoImage className="hero-photo-img hero-photo-mobile-img" />
+          <div className="hero-photo-mobile-edges pointer-events-none" aria-hidden />
+          <img
+            src={coinIcon}
+            alt=""
+            draggable={false}
+            className="hero-photo-mobile-coin absolute bottom-3 right-3 z-10 w-12 h-12 object-contain select-none pointer-events-none"
+            loading="lazy"
+            decoding="async"
+          />
+        </motion.div>
       </div>
     </div>
   )
@@ -106,6 +192,7 @@ export function HeroKidsPhotoMobile() {
 
 export function HeroKidsPhotoBackground({ sectionRef }: HeroKidsPhotoBackgroundProps) {
   const reducedMotion = useReducedMotion()
+  const tabletPortrait = useTabletPortrait()
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -114,11 +201,10 @@ export function HeroKidsPhotoBackground({ sectionRef }: HeroKidsPhotoBackgroundP
 
   const layerOpacity = useTransform(scrollYProgress, [0, 0.45, 0.82, 1], [1, 0.9, 0.35, 0])
   const photoParallaxY = useTransform(scrollYProgress, [0, 1], ['0%', PHOTO_Y_SCROLL_END])
-  const photoPanX = useTransform(scrollYProgress, (progress) => {
-    if (!isTabletPortrait()) return '0%'
+  const photoObjectX = useTransform(scrollYProgress, (progress) => {
     const eased = smoothScrollProgress(progress)
-    const end = parseFloat(TABLET_PORTRAIT_PAN_END)
-    return `${eased * end}%`
+    const span = TABLET_PORTRAIT_OBJECT_X_END - TABLET_PORTRAIT_OBJECT_X_START
+    return TABLET_PORTRAIT_OBJECT_X_START + eased * span
   })
 
   const photoPanel = (
@@ -126,8 +212,8 @@ export function HeroKidsPhotoBackground({ sectionRef }: HeroKidsPhotoBackgroundP
       {reducedMotion ? (
         <PhotoFrame />
       ) : (
-        <motion.div className="w-full h-full" style={{ x: photoPanX, y: photoParallaxY }}>
-          <PhotoFrame />
+        <motion.div className="w-full h-full" style={{ y: photoParallaxY }}>
+          <PhotoFrame scrollObjectX={tabletPortrait ? photoObjectX : undefined} />
         </motion.div>
       )}
     </div>
