@@ -1,25 +1,37 @@
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { FiPlay, FiArrowRight, FiDownload } from 'react-icons/fi'
 import { Button } from '@/components/ui/Button'
 import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { GlowingOrbs, FloatingParticles } from '@/components/ui/BackgroundEffects'
-import { slideInLeft, slideInRight } from '@/animations/variants'
+import { HeroKidsPhotoBackground } from '@/components/ui/HeroKidsPhotoBackground'
+import { slideInLeft } from '@/animations/variants'
 import { isTouchDevice } from '@/hooks/useDevice'
-import { logo } from '@/img'
 import { PARENT_APP_URL } from '@/data/links'
-import { WalletFillScene } from '@/components/easterEgg/WalletFillScene'
 import { BelizeHeroBadge } from '@/components/ui/BelizeHeroBadge'
 
 const touchMotion = isTouchDevice() ? 'visible' : 'hidden'
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null)
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden gradient-mesh">
+    <section
+      ref={sectionRef}
+      id="home"
+      className="relative min-h-[100dvh] min-h-screen flex items-start lg:items-center overflow-hidden gradient-mesh"
+    >
+      <HeroKidsPhotoBackground sectionRef={sectionRef} />
       <GlowingOrbs />
       <FloatingParticles />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-28 pb-16 grid lg:grid-cols-2 gap-10 items-center relative z-10">
-        <motion.div variants={slideInLeft} initial={touchMotion} animate="visible">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-24 sm:pt-28 pb-10 sm:pb-16 relative z-10 w-full">
+        <motion.div
+          variants={slideInLeft}
+          initial={touchMotion}
+          animate="visible"
+          className="max-w-md sm:max-w-lg lg:max-w-[27rem] xl:max-w-[29rem] max-lg:hero-copy-panel max-lg:rounded-2xl max-lg:px-4 max-lg:py-5 sm:max-lg:px-5 sm:max-lg:py-6 lg:hero-copy-panel lg:rounded-3xl lg:px-7 lg:py-8 xl:px-8 xl:py-9"
+        >
           <BelizeHeroBadge />
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-ink leading-[1.1] mb-4">
@@ -28,11 +40,10 @@ export function Hero() {
             Habits.
           </h1>
 
-          <p className="text-lg md:text-xl text-ink-muted leading-relaxed mb-6 max-w-xl">
+          <p className="text-lg md:text-xl text-ink lg:text-ink leading-relaxed mb-6 hero-readable-muted">
             Money Tykes empowers children to build lifelong financial literacy skills through interactive learning, rewards, savings goals, and parent-guided financial experiences.
           </p>
 
-          {/* Mobile & tablet: Parent Sign Up + Download App side by side */}
           <div className="lg:hidden flex flex-col gap-2">
             <div className="grid grid-cols-2 gap-2">
               <Button
@@ -70,7 +81,6 @@ export function Hero() {
             </Button>
           </div>
 
-          {/* Desktop: original button row (Download stays in navbar) */}
           <div className="hidden lg:flex flex-wrap items-center gap-3">
             <Button
               href={PARENT_APP_URL}
@@ -97,39 +107,10 @@ export function Hero() {
             </Button>
           </div>
         </motion.div>
-
-        {/* App preview placeholder — visible on tablet & mobile too (iPad is below lg) */}
-        <motion.div
-          variants={slideInRight}
-          initial={touchMotion}
-          animate="visible"
-          className="flex items-center justify-center min-h-[220px] sm:min-h-[300px] lg:min-h-[420px] mt-8 sm:mt-10 lg:mt-0 w-full"
-        >
-          <div className="w-full min-h-[220px] h-[240px] sm:h-[340px] lg:h-[480px] rounded-2xl sm:rounded-3xl border-2 border-dashed border-navy/12 dark:border-white/15 bg-surface-secondary/60 dark:bg-white/5 flex flex-col overflow-hidden">
-            <WalletFillScene>
-              <img
-                id="mt-logo"
-                src={logo}
-                alt="MoneyTykes"
-                className="max-h-32 sm:max-h-40 lg:max-h-[15rem] w-auto max-w-full object-contain"
-                loading="lazy"
-                decoding="async"
-                draggable={false}
-              />
-            </WalletFillScene>
-            {/* Spain teaser — remove `hidden` to restore */}
-            <div className="space-y-1 hidden">
-              <p className="text-base sm:text-lg md:text-xl font-bold text-ink leading-snug max-w-sm">
-                Spain: Boss I got an idea just wait...
-              </p>
-              <p className="text-ink-muted text-xs sm:text-sm">App preview launching shortly.</p>
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
