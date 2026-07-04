@@ -78,8 +78,6 @@ export function Hero() {
                 <span className="text-[11px] sm:text-xs font-bold tracking-wide opacity-90">#comingsoon</span>
               </span>
             </Button>
-
-            <HeroKidsPhotoMobile />
           </div>
 
           <div className="hidden lg:flex flex-wrap items-center gap-3">
@@ -108,6 +106,8 @@ export function Hero() {
             </Button>
           </div>
         </motion.div>
+
+        <HeroKidsPhotoMobile />
       </div>
 
       <motion.div

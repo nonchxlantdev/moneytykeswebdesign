@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from 'framer-motion'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { kidsLearningTogether } from '@/img'
 
 interface HeroKidsPhotoBackgroundProps {
@@ -29,6 +29,17 @@ const photoImgStyle = {
 
 /** Parallax drift — kept subtle so CSS fluid scale/position stays primary */
 const PHOTO_Y_SCROLL_END = '6%'
+/** Tablet portrait: pan photo toward viewer's left on scroll to reveal red-shirt kid */
+const TABLET_PORTRAIT_PAN_END = '-18%'
+
+function isTabletPortrait(): boolean {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia('(min-width: 640px) and (max-width: 1023px) and (orientation: portrait)').matches
+}
+
+function smoothScrollProgress(progress: number): number {
+  return progress * progress * (3 - 2 * progress)
+}
 
 function HeroPhotoSharpenFilter() {
   return (
@@ -42,16 +53,16 @@ function HeroPhotoSharpenFilter() {
   )
 }
 
-function HeroPhotoImage({ className }: { className: string }) {
+function HeroPhotoImage({ className, enhanced = true }: { className: string; enhanced?: boolean }) {
   return (
     <>
-      <HeroPhotoSharpenFilter />
+      {enhanced ? <HeroPhotoSharpenFilter /> : null}
       <img
         src={kidsLearningTogether}
         alt=""
         draggable={false}
         className={className}
-        style={photoImgStyle}
+        style={enhanced ? photoImgStyle : undefined}
         loading="eager"
         fetchPriority="high"
         decoding="async"
@@ -71,29 +82,24 @@ function PhotoScrim() {
   )
 }
 
-function PhotoFrame({ parallaxY }: { parallaxY?: MotionValue<string> }) {
-  const inner = (
+function PhotoFrame() {
+  return (
     <div className="w-full h-full overflow-hidden" style={photoMaskStyle}>
       <HeroPhotoImage className="hero-photo-img absolute inset-0 w-full h-full object-cover" />
     </div>
   )
-
-  if (parallaxY !== undefined) {
-    return (
-      <motion.div className="w-full h-full" style={{ y: parallaxY }}>
-        {inner}
-      </motion.div>
-    )
-  }
-
-  return inner
 }
 
-/** In-flow kids photo for phone — sits below Dance Challenge */
+/** In-flow kids photo for phone — edge to edge below Dance Challenge */
 export function HeroKidsPhotoMobile() {
   return (
-    <div className="hero-photo-mobile sm:hidden relative w-full overflow-hidden rounded-xl mt-3" aria-hidden>
-      <HeroPhotoImage className="hero-photo-img w-full h-full object-cover" />
+    <div className="hero-photo-mobile sm:hidden relative mt-4" aria-hidden>
+      <div className="hero-photo-mobile-blur">
+        <HeroPhotoImage enhanced={false} className="hero-photo-mobile-blur-img" />
+      </div>
+      <div className="hero-photo-mobile-focus">
+        <HeroPhotoImage className="hero-photo-img hero-photo-mobile-focus-img" />
+      </div>
     </div>
   )
 }
@@ -108,13 +114,29 @@ export function HeroKidsPhotoBackground({ sectionRef }: HeroKidsPhotoBackgroundP
 
   const layerOpacity = useTransform(scrollYProgress, [0, 0.45, 0.82, 1], [1, 0.9, 0.35, 0])
   const photoParallaxY = useTransform(scrollYProgress, [0, 1], ['0%', PHOTO_Y_SCROLL_END])
+  const photoPanX = useTransform(scrollYProgress, (progress) => {
+    if (!isTabletPortrait()) return '0%'
+    const eased = smoothScrollProgress(progress)
+    const end = parseFloat(TABLET_PORTRAIT_PAN_END)
+    return `${eased * end}%`
+  })
+
+  const photoPanel = (
+    <div className="hero-photo-panel">
+      {reducedMotion ? (
+        <PhotoFrame />
+      ) : (
+        <motion.div className="w-full h-full" style={{ x: photoPanX, y: photoParallaxY }}>
+          <PhotoFrame />
+        </motion.div>
+      )}
+    </div>
+  )
 
   if (reducedMotion) {
     return (
       <div className="absolute inset-0 pointer-events-none overflow-hidden hidden sm:block" aria-hidden>
-        <div className="hero-photo-panel">
-          <PhotoFrame />
-        </div>
+        {photoPanel}
         <PhotoScrim />
       </div>
     )
@@ -126,9 +148,7 @@ export function HeroKidsPhotoBackground({ sectionRef }: HeroKidsPhotoBackgroundP
       style={{ opacity: layerOpacity }}
       aria-hidden
     >
-      <div className="hero-photo-panel">
-        <PhotoFrame parallaxY={photoParallaxY} />
-      </div>
+      {photoPanel}
       <PhotoScrim />
     </motion.div>
   )
