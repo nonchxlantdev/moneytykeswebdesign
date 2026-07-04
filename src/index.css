@@ -331,56 +331,42 @@ html.dark {
       display: none;
     }
 
+    .hero-photo-mobile-block {
+      width: 100%;
+    }
+
     .hero-photo-mobile-quote blockquote {
       text-wrap: balance;
     }
 
     .hero-photo-mobile {
-      --hero-object-x: 28%;
-      --hero-object-y: 42%;
-      width: calc(100vw - 1.5rem);
-      margin-left: calc(50% - 50vw + 0.75rem);
-      height: clamp(11rem, 40vw, 14.5rem);
+      --hero-object-x: 32%;
+      --hero-object-y: 48%;
+      width: 100%;
+      aspect-ratio: 5 / 4;
+      padding: 2px;
+      background: #ffffff;
       overflow: hidden;
-      border-radius: 1.25rem;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .hero-photo-mobile-img {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: var(--hero-object-x) var(--hero-object-y);
-      transform: scale(1.38);
-      transform-origin: center 42%;
-    }
-
-    .hero-photo-mobile-edges {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      border-radius: inherit;
-      background:
-        linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0.72) 6%, transparent 18%),
-        linear-gradient(to left, #ffffff 0%, rgba(255, 255, 255, 0.72) 6%, transparent 18%),
-        linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0.65) 8%, transparent 20%),
-        linear-gradient(to top, #ffffff 0%, rgba(255, 255, 255, 0.55) 6%, transparent 16%);
-    }
-
-    .dark .hero-photo-mobile-edges {
-      background:
-        linear-gradient(to right, var(--surface-base) 0%, color-mix(in srgb, var(--surface-base) 72%, transparent) 6%, transparent 18%),
-        linear-gradient(to left, var(--surface-base) 0%, color-mix(in srgb, var(--surface-base) 72%, transparent) 6%, transparent 18%),
-        linear-gradient(to bottom, var(--surface-base) 0%, color-mix(in srgb, var(--surface-base) 65%, transparent) 8%, transparent 20%),
-        linear-gradient(to top, var(--surface-base) 0%, color-mix(in srgb, var(--surface-base) 55%, transparent) 6%, transparent 16%);
+      transform: scale(1.18);
+      transform-origin: center 48%;
     }
 
     .hero-photo-mobile-coin {
       z-index: 2;
-      filter: drop-shadow(0 2px 6px rgba(7, 26, 45, 0.12));
     }
 
-    .dark .hero-photo-mobile-coin {
-      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+    .dark .hero-photo-mobile {
+      background: #ffffff;
     }
   }
 

@@ -129,14 +129,12 @@ function PhotoFrame({ scrollObjectX }: { scrollObjectX?: MotionValue<number> }) 
   return <StaticPhotoFrame />
 }
 
-/** In-flow kids photo for phone — quote + edge-to-edge cover below Dance Challenge */
+/** In-flow kids photo for phone — quote + framed photo below Dance Challenge */
 export function HeroKidsPhotoMobile() {
-  const reducedMotion = useReducedMotion()
-
   return (
-    <div className="sm:hidden mt-4">
-      <figure className="hero-photo-mobile-quote px-1 mb-3.5">
-        <blockquote className="text-[0.82rem] leading-snug text-ink font-medium text-center whitespace-nowrap">
+    <div className="hero-photo-mobile-block sm:hidden mt-4 w-full">
+      <figure className="hero-photo-mobile-quote mb-4">
+        <blockquote className="text-[0.875rem] leading-snug text-ink font-medium text-center whitespace-nowrap">
           &ldquo;Learning about money starts at home.&rdquo;{' '}
           <cite className="text-xs font-semibold text-ink-muted not-italic tracking-wide">
             — S. Young
@@ -144,47 +142,16 @@ export function HeroKidsPhotoMobile() {
         </blockquote>
       </figure>
 
-      <div className="[perspective:1000px]">
-        <motion.div
-          className="hero-photo-mobile relative"
-          aria-hidden
-          style={{ transformOrigin: 'center bottom' }}
-          initial={
-            reducedMotion
-              ? false
-              : {
-                  opacity: 0,
-                  rotateX: 16,
-                  y: 32,
-                  scale: 0.92,
-                  boxShadow: '0 6px 18px rgba(7, 26, 45, 0.12)',
-                }
-          }
-          whileInView={
-            reducedMotion
-              ? undefined
-              : {
-                  opacity: 1,
-                  rotateX: 0,
-                  y: 0,
-                  scale: 1,
-                  boxShadow: '0 24px 52px rgba(7, 26, 45, 0.24)',
-                }
-          }
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-        >
-          <HeroPhotoImage className="hero-photo-img hero-photo-mobile-img" />
-          <div className="hero-photo-mobile-edges pointer-events-none" aria-hidden />
-          <img
-            src={coinIcon}
-            alt=""
-            draggable={false}
-            className="hero-photo-mobile-coin absolute bottom-3 right-3 z-10 w-12 h-12 object-contain select-none pointer-events-none"
-            loading="lazy"
-            decoding="async"
-          />
-        </motion.div>
+      <div className="hero-photo-mobile relative" aria-hidden>
+        <HeroPhotoImage className="hero-photo-img hero-photo-mobile-img" />
+        <img
+          src={coinIcon}
+          alt=""
+          draggable={false}
+          className="hero-photo-mobile-coin absolute bottom-2.5 right-2.5 z-10 w-10 h-10 object-contain select-none pointer-events-none"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   )
