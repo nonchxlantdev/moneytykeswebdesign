@@ -41,7 +41,7 @@ export function LoadingScreen({ onComplete }: { onComplete: () => void }) {
       aria-label="Loading MoneyTykes"
     >
       <motion.div
-        className="relative mb-6 sm:mb-8 loading-coin-glow"
+        className="relative mb-6 sm:mb-8 isolate"
         animate={reducedMotion ? { scale: [1, 1.04, 1] } : { rotate: 360 }}
         transition={
           reducedMotion
@@ -49,20 +49,21 @@ export function LoadingScreen({ onComplete }: { onComplete: () => void }) {
             : { duration: 1.75, repeat: Infinity, ease: 'linear' }
         }
       >
+        <span
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-accent/25 blur-2xl pointer-events-none"
+          aria-hidden
+        />
         <img
           src={coinIcon}
           alt=""
           draggable={false}
-          className="w-[4.5rem] h-[4.5rem] sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain select-none"
+          className="relative z-10 w-[4.5rem] h-[4.5rem] sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain select-none mix-blend-multiply dark:mix-blend-normal"
           loading="eager"
           fetchPriority="high"
           decoding="async"
         />
       </motion.div>
 
-      <h1 className="text-2xl sm:text-3xl font-bold text-ink dark:text-white mb-2">
-        Money<span className="text-primary-text">Tykes</span>
-      </h1>
       <p className="text-ink-muted dark:text-white/80 text-sm mb-8">Loading financial wisdom...</p>
 
       <div className="w-44 sm:w-48 h-1 bg-navy/10 dark:bg-white/10 rounded-full overflow-hidden">
