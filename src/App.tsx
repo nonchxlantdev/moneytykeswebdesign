@@ -17,7 +17,7 @@ import { getAppPage, type AppPage } from '@/data/links'
 
 export default function App() {
   const [page, setPage] = useState<AppPage>(() => getAppPage())
-  const [loaded, setLoaded] = useState(page !== 'home')
+  const [loaded, setLoaded] = useState(false)
   const [desktopFx, setDesktopFx] = useState(false)
   useLenis(loaded && page === 'home')
 
@@ -26,13 +26,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const syncPage = () => {
-      const nextPage = getAppPage()
-      setPage(nextPage)
-      if (nextPage !== 'home') {
-        setLoaded(true)
-      }
-    }
+    const syncPage = () => setPage(getAppPage())
     window.addEventListener('popstate', syncPage)
     return () => window.removeEventListener('popstate', syncPage)
   }, [])

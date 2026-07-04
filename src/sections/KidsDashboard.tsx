@@ -7,8 +7,6 @@ import { GlowCard } from '@/components/ui/GlowCard'
 import { ProgressRing } from '@/components/ui/ProgressRing'
 import { fadeInUp } from '@/animations/variants'
 import { OFFICIAL_MUSIC_VIDEO_URL } from '@/data/links'
-import { logo } from '@/img'
-import { WalletFillScene } from '@/components/easterEgg/WalletFillScene'
 
 const mockData = {
   balance: 1250,
@@ -248,36 +246,6 @@ export function KidsDashboard() {
         title="Where Learning Meets Fun"
         subtitle="A gamified dashboard that keeps kids engaged while building practical financial skills."
       />
-
-      <motion.div
-        className="mb-8 lg:mb-10 grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-5 lg:gap-6 items-stretch"
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <div className="flex flex-col justify-center order-2 lg:order-1">
-          <span className="section-badge w-fit mb-3">Try It</span>
-          <h3 className="text-xl md:text-2xl font-bold text-ink mb-2">Tap to Fill Your Wallet</h3>
-          <p className="text-sm md:text-base text-ink-muted leading-relaxed max-w-md">
-            A playful preview of how kids earn and collect coins in MoneyTykes. Tap the logo and watch the wallet fill with gold.
-          </p>
-        </div>
-
-        <div className="order-1 lg:order-2 rounded-2xl sm:rounded-3xl border-2 border-dashed border-primary/25 dark:border-primary/35 bg-surface/80 dark:bg-white/[0.04] overflow-hidden min-h-[220px] sm:min-h-[260px] lg:min-h-[280px] premium-shadow">
-          <WalletFillScene>
-            <img
-              id="mt-logo"
-              src={logo}
-              alt="MoneyTykes"
-              className="max-h-28 sm:max-h-36 w-auto max-w-full object-contain"
-              loading="lazy"
-              decoding="async"
-              draggable={false}
-            />
-          </WalletFillScene>
-        </div>
-      </motion.div>
 
       <motion.a
         href={OFFICIAL_MUSIC_VIDEO_URL}

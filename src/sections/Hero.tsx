@@ -22,10 +22,12 @@ export function Hero() {
       className="relative min-h-[100dvh] min-h-screen flex items-start lg:items-center overflow-hidden gradient-mesh"
     >
       <HeroKidsPhotoBackground sectionRef={sectionRef} />
-      <GlowingOrbs />
-      <FloatingParticles />
+      <div className="hidden sm:block absolute inset-0 pointer-events-none">
+        <GlowingOrbs />
+        <FloatingParticles />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-24 sm:pt-28 pb-10 sm:pb-16 relative z-10 w-full">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-[5.5rem] sm:pt-28 pb-12 sm:pb-16 relative z-10 w-full">
         <motion.div
           variants={slideInLeft}
           initial={touchMotion}
@@ -34,43 +36,41 @@ export function Hero() {
         >
           <BelizeHeroBadge />
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-ink leading-[1.1] mb-4">
+          <h1 className="text-[1.85rem] leading-[1.12] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-ink mb-3 sm:mb-4">
             Teaching Kids{' '}
             <span className="text-gradient">Smart Money</span>{' '}
             Habits.
           </h1>
 
-          <p className="text-lg md:text-xl text-ink lg:text-ink leading-relaxed mb-6 hero-readable-muted">
+          <p className="text-[0.95rem] sm:text-lg md:text-xl text-ink leading-relaxed mb-6 sm:mb-7 max-lg:hero-readable-muted">
             Money Tykes empowers children to build lifelong financial literacy skills through interactive learning, rewards, savings goals, and parent-guided financial experiences.
           </p>
 
-          <div className="lg:hidden flex flex-col gap-2">
-            <div className="grid grid-cols-2 gap-2">
-              <Button
-                href={PARENT_APP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="md"
-                className="group !px-3 !py-3 !text-xs sm:!text-sm min-h-[44px] w-full"
-                magnetic={false}
-              >
-                <span className="truncate">Parent Sign Up</span>
-                <FiArrowRight className="group-hover:translate-x-1 transition-transform shrink-0" />
-              </Button>
-              <DownloadAppButton
-                size="md"
-                variant="secondary"
-                magnetic={false}
-                className="!px-2 sm:!px-3 !py-3 !text-xs sm:!text-sm min-h-[44px] w-full justify-center"
-              >
-                <FiDownload className="text-sm shrink-0" />
-                <span className="truncate">Download App</span>
-              </DownloadAppButton>
-            </div>
+          <div className="lg:hidden flex flex-col gap-2.5">
+            <Button
+              href={PARENT_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              size="md"
+              className="group w-full !px-4 !py-3.5 !text-sm min-h-[48px]"
+              magnetic={false}
+            >
+              Parent Sign Up
+              <FiArrowRight className="group-hover:translate-x-1 transition-transform shrink-0" />
+            </Button>
+            <DownloadAppButton
+              size="md"
+              variant="secondary"
+              magnetic={false}
+              className="w-full !px-4 !py-3.5 !text-sm min-h-[48px] justify-center"
+            >
+              <FiDownload className="text-base shrink-0" />
+              Download App
+            </DownloadAppButton>
             <Button
               variant="secondary"
               size="md"
-              className="group relative w-full !px-3 !py-3 !text-xs sm:!text-sm min-h-[44px] ring-2 ring-accent/60 shadow-[0_0_20px_rgba(255,213,74,0.4)]"
+              className="group relative w-full !px-4 !py-3.5 !text-sm min-h-[48px] ring-2 ring-accent/60 shadow-[0_0_20px_rgba(255,213,74,0.4)]"
               magnetic={false}
             >
               <FiPlay className="group-hover:scale-110 transition-transform shrink-0 text-sm" />
@@ -110,7 +110,7 @@ export function Hero() {
       </div>
 
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:block"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >

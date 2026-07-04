@@ -7,6 +7,8 @@ import { PricingCard } from '@/components/plans/PricingCard'
 import { PlansFAQ } from '@/components/plans/PlansFAQ'
 import { pricingPlans, plansTrustItems } from '@/data/plans'
 import { PARENT_APP_URL } from '@/data/links'
+import { logo } from '@/img'
+import { WalletFillScene } from '@/components/easterEgg/WalletFillScene'
 
 const Navbar = lazy(() => import('@/components/layout/Navbar').then((m) => ({ default: m.Navbar })))
 const Footer = lazy(() => import('@/components/layout/Footer').then((m) => ({ default: m.Footer })))
@@ -65,6 +67,41 @@ export function Plans() {
             <PricingCard key={plan.id} plan={plan} index={index} />
           ))}
         </div>
+      </section>
+
+      {/* Wallet preview — ties Coins & Points on every plan to a quick try-before-you-subscribe moment */}
+      <section className="pb-12 md:pb-16 px-4 md:px-8">
+        <motion.div
+          className="max-w-5xl mx-auto grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-6 lg:gap-8 items-stretch"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <div className="flex flex-col justify-center order-2 lg:order-1">
+            <span className="section-badge w-fit mb-3">Try It Free</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mb-3">Tap to Fill Your Wallet</h2>
+            <p className="text-sm md:text-base text-ink-muted leading-relaxed max-w-md">
+              Every plan includes coins and points kids can earn. Tap{' '}
+              <span className="font-semibold text-ink">Charge Wallet</span> and watch it fill with
+              gold before you pick a plan.
+            </p>
+          </div>
+
+          <div className="order-1 lg:order-2 rounded-2xl sm:rounded-3xl border-2 border-dashed border-primary/25 dark:border-primary/35 bg-surface/80 dark:bg-white/[0.04] overflow-hidden min-h-[240px] sm:min-h-[280px] lg:min-h-[300px] premium-shadow">
+            <WalletFillScene>
+              <img
+                id="mt-logo"
+                src={logo}
+                alt="MoneyTykes"
+                className="max-h-28 sm:max-h-36 w-auto max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+              />
+            </WalletFillScene>
+          </div>
+        </motion.div>
       </section>
 
       {/* Trust strip */}
