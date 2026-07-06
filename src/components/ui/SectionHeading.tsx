@@ -14,7 +14,7 @@ interface SectionHeadingProps {
 export function SectionHeading({ badge, title, subtitle, align = 'center', dark }: SectionHeadingProps) {
   return (
     <motion.div
-      className={`mb-8 md:mb-10 ${align === 'center' ? 'text-center mx-auto max-w-3xl' : 'max-w-2xl'}`}
+      className={`mb-8 md:mb-10 lg:mb-6 ${align === 'center' ? 'text-center mx-auto max-w-3xl' : 'max-w-2xl'}`}
       variants={fadeInUp}
       initial="hidden"
       whileInView="visible"
@@ -22,7 +22,7 @@ export function SectionHeading({ badge, title, subtitle, align = 'center', dark 
     >
       {badge && <span className="section-badge">{badge}</span>}
       <h2
-        className={`text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-2 md:mb-3 ${
+        className={`text-3xl md:text-4xl lg:text-4xl font-bold tracking-tight mb-2 md:mb-3 lg:mb-2 ${
           dark ? 'text-white' : 'text-ink'
         }`}
       >
@@ -30,7 +30,7 @@ export function SectionHeading({ badge, title, subtitle, align = 'center', dark 
       </h2>
       {subtitle && (
         <p
-          className={`text-base md:text-lg leading-relaxed ${
+          className={`text-base md:text-lg lg:text-base leading-relaxed ${
             dark ? 'text-white/90' : 'text-ink-muted'
           }`}
         >
@@ -57,7 +57,9 @@ export function AnimatedSection({
   compact = false,
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLElement>(null)
-  const padding = compact ? 'py-10 md:py-12' : 'py-14 md:py-16'
+  const padding = compact
+    ? 'py-10 md:py-12 lg:py-8'
+    : 'py-14 md:py-16 lg:py-10 xl:py-12'
 
   return (
     <section

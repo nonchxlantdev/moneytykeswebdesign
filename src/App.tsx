@@ -13,6 +13,7 @@ import { Terms } from '@/pages/Terms'
 import { Privacy } from '@/pages/Privacy'
 import { Plans } from '@/pages/Plans'
 import { FaqPage } from '@/pages/FaqPage'
+import { OurStory } from '@/pages/OurStory'
 import { getAppPage, type AppPage } from '@/data/links'
 
 export default function App() {
@@ -61,6 +62,8 @@ export default function App() {
                 <Plans />
               ) : page === 'faq' ? (
                 <FaqPage />
+              ) : page === 'story' ? (
+                <OurStory />
               ) : (
                 <Home />
               )}

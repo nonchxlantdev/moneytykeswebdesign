@@ -1,11 +1,8 @@
-export const whoWeAreCopy =
-  "Money Tykes is more than an app. We are Belize's first integrated youth financial literacy ecosystem, designed to help children ages 5–17 develop lifelong financial habits while giving parents, educators, businesses, and financial institutions the tools to support them.\n\nThrough interactive lessons, challenges, rewards, parent engagement, and future financial partnerships, Money Tykes transforms financial education into real-life experiences that prepare young people for adulthood."
-
-export const missionCopy =
-  'To empower every child in Belize with the financial knowledge, confidence, and practical skills needed to make informed financial decisions throughout life.'
-
-export const visionCopy =
-  "To become Belize's leading youth financial literacy ecosystem by connecting families, schools, businesses, merchants, and financial institutions through innovative educational technology and responsible financial experiences."
+export {
+  homeAboutTeaser as whoWeAreCopy,
+  missionCopy,
+  visionCopy,
+} from './story'
 
 export const differentiatorIntro =
   'Instead of teaching children about money, we help them experience it.'
@@ -27,6 +24,7 @@ export interface EcosystemMember {
   emoji: string
   title: string
   description: string
+  shortDescription: string
   comingSoon?: boolean
 }
 
@@ -35,6 +33,7 @@ export const ecosystemMembers: EcosystemMember[] = [
     id: 'families',
     emoji: '👨‍👩‍👧',
     title: 'Families',
+    shortDescription: 'Parents teach, guide, and reward everyday money habits at home.',
     description:
       "Empowering parents to teach, guide, reward, and monitor their children's financial development through meaningful everyday experiences.",
   },
@@ -42,6 +41,7 @@ export const ecosystemMembers: EcosystemMember[] = [
     id: 'children',
     emoji: '🧒',
     title: 'Children & Teens (Ages 5–17)',
+    shortDescription: 'Interactive lessons, challenges, and parent-guided decisions.',
     description:
       'Building confidence through interactive lessons, financial challenges, savings goals, entrepreneurship, and parent-guided financial decision-making.',
   },
@@ -49,6 +49,7 @@ export const ecosystemMembers: EcosystemMember[] = [
     id: 'schools',
     emoji: '🏫',
     title: 'Schools',
+    shortDescription: 'Classroom tools, progress tracking, and parent connectivity.',
     description:
       'Supporting teachers with engaging classroom lessons, digital learning tools, competitions, progress tracking, and parent connectivity through the Money Tykes platform.',
     comingSoon: true,
@@ -57,6 +58,7 @@ export const ecosystemMembers: EcosystemMember[] = [
     id: 'businesses',
     emoji: '🏢',
     title: 'Businesses & Community Partners',
+    shortDescription: 'Campaigns and initiatives that invest in Belize’s youth.',
     description:
       "Creating meaningful educational campaigns, supporting youth financial literacy initiatives, and investing in Belize's future workforce.",
   },
@@ -64,6 +66,7 @@ export const ecosystemMembers: EcosystemMember[] = [
     id: 'merchants',
     emoji: '🛍️',
     title: 'Merchants',
+    shortDescription: 'Parent-approved promotions and reward experiences.',
     description:
       'Connecting families with parent-approved educational promotions and future youth-focused reward experiences. When spending is approved, the deduction is made from the parent wallet.',
   },
@@ -71,6 +74,7 @@ export const ecosystemMembers: EcosystemMember[] = [
     id: 'financial',
     emoji: '🏦',
     title: 'Financial Institutions',
+    shortDescription: 'Secure, regulated learning with parental oversight.',
     description:
       'Partnering with regulated financial institutions to expand responsible financial learning experiences while maintaining secure banking infrastructure and parental oversight.',
   },

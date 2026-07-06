@@ -19,7 +19,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative max-sm:min-h-0 sm:min-h-[100dvh] sm:min-h-screen flex items-start lg:items-center overflow-hidden gradient-mesh"
+      className="relative max-sm:min-h-0 sm:min-h-[100dvh] sm:min-h-screen lg:min-h-0 flex items-start lg:items-center overflow-hidden gradient-mesh"
     >
       <HeroKidsPhotoBackground sectionRef={sectionRef} />
       <div className="hidden sm:block absolute inset-0 pointer-events-none">
@@ -27,21 +27,21 @@ export function Hero() {
         <FloatingParticles />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-[5.5rem] sm:pt-28 pb-8 sm:pb-16 relative z-10 w-full flex flex-col">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-[5.5rem] sm:pt-28 pb-8 sm:pb-16 lg:pt-24 lg:pb-10 relative z-10 w-full flex flex-col">
         <motion.div
           variants={slideInLeft}
           initial={touchMotion}
           animate="visible"
-          className="max-w-md sm:max-w-lg lg:max-w-[27rem] xl:max-w-[29rem] max-lg:hero-copy-panel max-lg:rounded-2xl max-lg:px-4 max-lg:py-5 sm:max-lg:px-5 sm:max-lg:py-6 lg:hero-copy-panel lg:rounded-3xl lg:px-7 lg:py-8 xl:px-8 xl:py-9"
+          className="max-w-md sm:max-w-lg lg:max-w-[27rem] xl:max-w-[29rem] max-lg:hero-copy-panel max-lg:rounded-2xl max-lg:px-4 max-lg:py-5 sm:max-lg:px-5 sm:max-lg:py-6 lg:hero-copy-panel lg:rounded-3xl lg:px-6 lg:py-6 xl:px-7 xl:py-7"
         >
           <BelizeHeroBadge />
 
-          <h1 className="text-[1.85rem] leading-[1.12] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-ink mb-3 sm:mb-4">
+          <h1 className="text-[1.85rem] leading-[1.12] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-ink mb-3 sm:mb-4 lg:mb-3">
             Financial Literacy Starts Young.{' '}
             <span className="text-gradient">Confidence</span> Lasts a Lifetime.
           </h1>
 
-          <p className="text-[0.95rem] sm:text-lg md:text-xl text-ink leading-relaxed mb-6 sm:mb-7 max-lg:hero-readable-muted">
+          <p className="text-[0.95rem] sm:text-lg md:text-xl lg:text-lg text-ink leading-relaxed mb-6 sm:mb-7 lg:mb-5 max-lg:hero-readable-muted">
             Money Tykes® is Belize&apos;s financial literacy platform for children ages 5–17, helping families and schools build lifelong financial knowledge, confidence, and responsible money habits through engaging, parent-guided learning experiences.
           </p>
 

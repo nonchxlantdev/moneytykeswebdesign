@@ -6,7 +6,7 @@ import { useActiveSection } from '@/hooks/useActiveSection'
 import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { AudioControl } from '@/components/layout/AudioControl'
 import { BrandLogo } from '@/components/ui/BrandLogo'
-import { getAppPage, homeSectionHref, PLANS_NAV_HREF, FAQ_NAV_HREF, plansHref, faqHref } from '@/data/links'
+import { getAppPage, homeSectionHref, PLANS_NAV_HREF, FAQ_NAV_HREF, STORY_NAV_HREF, plansHref, faqHref, storyHref } from '@/data/links'
 
 type NavLinkType = 'section' | 'page' | 'plans'
 
@@ -18,15 +18,15 @@ interface NavLink {
 
 const sectionNavLinks: NavLink[] = [
   { label: 'Home', href: '#home', type: 'section' },
-  { label: 'About Us', href: '#who-we-are', type: 'section' },
   { label: 'Features', href: '#features', type: 'section' },
   { label: 'Dashboard', href: '#dashboard', type: 'section' },
   { label: 'Marketplace', href: '#marketplace', type: 'section' },
 ]
 
 const pageNavLinks: NavLink[] = [
-  { label: 'FAQ', href: FAQ_NAV_HREF, type: 'page' },
+  { label: 'Our Story', href: STORY_NAV_HREF, type: 'page' },
   { label: 'Plans & Subscription', href: PLANS_NAV_HREF, type: 'plans' },
+  { label: 'FAQs', href: FAQ_NAV_HREF, type: 'page' },
 ]
 
 function NavItem({
@@ -94,12 +94,14 @@ export function Navbar() {
   const resolveHref = (href: string) => {
     if (href === PLANS_NAV_HREF) return plansHref()
     if (href === FAQ_NAV_HREF) return faqHref()
+    if (href === STORY_NAV_HREF) return storyHref()
     return page === 'home' ? href : homeSectionHref(href)
   }
 
   const isNavActive = (link: NavLink) => {
     if (link.href === PLANS_NAV_HREF) return page === 'plans'
     if (link.href === FAQ_NAV_HREF) return page === 'faq'
+    if (link.href === STORY_NAV_HREF) return page === 'story'
     return activeHref === link.href
   }
 
@@ -230,7 +232,6 @@ export function Navbar() {
             })}
 
             <div className="my-3 border-t border-navy/8 dark:border-white/10 pt-3">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-ink-subtle mb-2 px-1">Pages</p>
               {pageNavLinks.map((link) => (
                 <NavItem
                   key={link.href}

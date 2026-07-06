@@ -2,7 +2,6 @@ import { useState, useEffect, useId, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { FiPlay, FiExternalLink } from 'react-icons/fi'
 import { isTouchDevice } from '@/hooks/useDevice'
-import { AnimatedSection, SectionHeading } from '@/components/ui/SectionHeading'
 import { GlowCard } from '@/components/ui/GlowCard'
 import { ProgressRing } from '@/components/ui/ProgressRing'
 import { CoinImage } from '@/components/ui/CoinImage'
@@ -230,7 +229,7 @@ function EarnedSpentBarChart() {
   )
 }
 
-export function KidsDashboard() {
+export function KidsDashboardPanel() {
   const [balance, setBalance] = useState(0)
 
   useEffect(() => {
@@ -241,13 +240,7 @@ export function KidsDashboard() {
   }, [])
 
   return (
-    <AnimatedSection id="dashboard" className="bg-surface-secondary dark:bg-navy-light/30">
-      <SectionHeading
-        badge="Kids Dashboard"
-        title="Where Learning Meets Fun"
-        subtitle="A gamified dashboard that keeps kids engaged while building practical financial skills."
-      />
-
+    <>
       <motion.a
         href={OFFICIAL_MUSIC_VIDEO_URL}
         target="_blank"
@@ -352,6 +345,6 @@ export function KidsDashboard() {
           </GlowCard>
         </motion.div>
       </motion.div>
-    </AnimatedSection>
+    </>
   )
 }

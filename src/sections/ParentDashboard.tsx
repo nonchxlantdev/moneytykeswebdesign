@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { AnimatedSection, SectionHeading } from '@/components/ui/SectionHeading'
 import { GlowCard } from '@/components/ui/GlowCard'
 import { FiBell, FiCheck, FiClock, FiTrendingUp } from 'react-icons/fi'
 import { staggerContainer, fadeInUp } from '@/animations/variants'
@@ -18,7 +17,7 @@ const pendingChores = [
   { task: 'Wash dishes', child: 'Marcus', reward: 40 },
 ]
 
-export function ParentDashboard() {
+export function ParentDashboardPanel() {
   const touch = isTouchDevice()
   const pieSegments = [
     { percent: 40, color: '#0FAF9C', label: 'Savings' },
@@ -43,20 +42,13 @@ export function ParentDashboard() {
   })
 
   return (
-    <AnimatedSection id="parent-dashboard">
-      <SectionHeading
-        badge="Parent Dashboard"
-        title="Full Control, Beautiful Insights"
-        subtitle="Monitor spending, approve transactions, and track your children's financial growth. When you approve spending, the deduction is made from your parent wallet."
-      />
-
-      <motion.div
-        className="grid lg:grid-cols-3 gap-6"
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
+    <motion.div
+      className="grid lg:grid-cols-3 gap-6"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
         <motion.div variants={fadeInUp} className="lg:col-span-2 space-y-4">
           <div className="grid sm:grid-cols-3 gap-4">
             {[
@@ -150,6 +142,5 @@ export function ParentDashboard() {
           </GlowCard>
         </motion.div>
       </motion.div>
-    </AnimatedSection>
   )
 }

@@ -39,7 +39,7 @@ export function FinalCTA() {
   }, [])
 
   return (
-    <section className="relative min-h-[60vh] flex items-center justify-center bg-surface dark:bg-navy border-t border-navy/8 dark:border-white/10 overflow-hidden py-16 md:py-20">
+    <section className="relative min-h-[60vh] lg:min-h-0 flex items-center justify-center bg-surface dark:bg-navy border-t border-navy/8 dark:border-white/10 overflow-hidden py-16 md:py-20 lg:py-14 xl:py-16">
       <div className="absolute inset-0 gradient-mesh" />
 
       {showConfetti && <Confetti />}
@@ -51,12 +51,12 @@ export function FinalCTA() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-ink dark:text-white mb-4 leading-tight">
+        <h2 className="text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-extrabold text-ink dark:text-white mb-4 lg:mb-3 leading-tight">
           Start Building{' '}
           <span className="text-gradient dark:text-gradient-light">Financially Smart</span>{' '}
           Kids Today.
         </h2>
-        <p className="text-lg text-ink-muted dark:text-white/90 mb-8 max-w-xl mx-auto">
+        <p className="text-lg lg:text-base text-ink-muted dark:text-white/90 mb-8 lg:mb-6 max-w-xl mx-auto">
           Join thousands of Belizean families teaching the next generation how to earn, save, and spend wisely.
         </p>
         <div className="flex flex-wrap justify-center gap-4">

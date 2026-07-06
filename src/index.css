@@ -492,6 +492,25 @@ html.dark {
   animation: moneytykes-coin-spin 1.75s linear infinite;
 }
 
+.story-sidebar-nav {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  align-self: start;
+}
+
+.story-sidebar-link:hover,
+.story-sidebar-link:focus-visible {
+  border-left-color: var(--color-primary, #0faf9c);
+}
+
+@media (max-width: 1023px) {
+  .story-sidebar-nav {
+    position: static;
+    transform: none;
+  }
+}
+
 /* Wallet Fill easter egg */
 @keyframes mt-shake {
   0%,

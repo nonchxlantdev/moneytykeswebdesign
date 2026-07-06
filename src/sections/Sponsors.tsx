@@ -15,7 +15,7 @@ export function Sponsors() {
       />
 
       <motion.div
-        className="grid md:grid-cols-3 gap-6 mb-10"
+        className="grid md:grid-cols-3 gap-6 mb-10 lg:mb-6"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"

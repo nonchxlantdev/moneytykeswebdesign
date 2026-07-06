@@ -3,13 +3,11 @@ import { motion } from 'framer-motion'
 import { pageTransition } from '@/animations/variants'
 import { Hero } from '@/sections/Hero'
 import { Statistics } from '@/sections/Statistics'
-import { WhoWeAre } from '@/sections/WhoWeAre'
-import { WhatMakesDifferent } from '@/sections/WhatMakesDifferent'
+import { AboutCluster } from '@/sections/AboutCluster'
 import { Ecosystem } from '@/sections/Ecosystem'
 import { FamilyJourney } from '@/sections/FamilyJourney'
 import { Features } from '@/sections/Features'
-import { KidsDashboard } from '@/sections/KidsDashboard'
-import { ParentDashboard } from '@/sections/ParentDashboard'
+import { DashboardPreview } from '@/sections/DashboardPreview'
 import { LearningLevels } from '@/sections/LearningLevels'
 import { Marketplace } from '@/sections/Marketplace'
 import { VendorMap } from '@/sections/VendorMap'
@@ -32,13 +30,11 @@ export function Home() {
       </Suspense>
       <Hero />
       <Statistics />
-      <WhoWeAre />
-      <WhatMakesDifferent />
+      <AboutCluster />
       <Ecosystem />
       <FamilyJourney />
       <Features />
-      <KidsDashboard />
-      <ParentDashboard />
+      <DashboardPreview />
       <LearningLevels />
       <Marketplace />
       <VendorMap />
