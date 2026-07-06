@@ -370,11 +370,23 @@ html.dark {
     }
   }
 
+  /* Desktop — compact photo panel without changing layout */
+  @media (min-width: 1024px) {
+    .hero-photo-panel {
+      --hero-panel-left: clamp(8%, 11vw, 14%);
+      --hero-panel-top: clamp(-12%, -16vw, -18%);
+      --hero-y-rest: clamp(-12%, -16vw, -18%);
+      --hero-panel-height: clamp(108%, 114vw, 118%);
+      --hero-scale: clamp(0.48, 0.44 + 0.32vw, 0.54);
+      --hero-x-shift: 18%;
+    }
+  }
+
   @media (min-width: 1536px) {
     .hero-photo-panel {
       --hero-panel-left: 12%;
-      --hero-x-shift: 20%;
-      --hero-scale: clamp(0.58, 0.54 + 0.35vw, 0.62);
+      --hero-x-shift: 18%;
+      --hero-scale: clamp(0.5, 0.46 + 0.3vw, 0.56);
       --hero-object-x: clamp(24%, 22% + 1vw, 28%);
       --hero-object-y: clamp(50%, 46% + 0.4vw, 54%);
     }

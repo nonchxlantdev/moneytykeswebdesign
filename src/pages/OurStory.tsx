@@ -151,7 +151,7 @@ export function OurStory() {
                       />
                       <img
                         src={founderSham}
-                        alt="Shamira Young, Founder and CEO of Money Tykes"
+                        alt="Shamira Young, Founder of Money Tykes"
                         className="w-full aspect-[3/4] object-cover object-[center_18%]"
                         loading="eager"
                         fetchPriority="high"

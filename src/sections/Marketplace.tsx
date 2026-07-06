@@ -38,9 +38,9 @@ const spendingExperiences = [
 
 export function Marketplace() {
   return (
-    <AnimatedSection id="marketplace">
+    <AnimatedSection id="digiwallet">
       <SectionHeading
-        badge="Spending & Rewards"
+        badge="DigiWallet"
         title="Parent-Guided Financial Experiences"
         subtitle="Parent-approved ways for kids to practice earning, saving, and using their virtual wallet. Approved spending is deducted from the parent wallet."
       />

@@ -59,7 +59,7 @@ export function BelizeHeroBadge() {
         </motion.div>
 
         <span className="relative z-10 text-left leading-snug">
-          Belize&apos;s #1 Family Fintech Platform
+          Belize&apos;s 1st Financial Literacy Ecosystem
         </span>
 
         <span className="relative z-10 hidden sm:inline text-[10px] font-extrabold uppercase tracking-wider text-accent-text opacity-0 group-hover:opacity-100 transition-opacity">

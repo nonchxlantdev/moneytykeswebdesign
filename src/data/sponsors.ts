@@ -1,35 +1,57 @@
-export interface SponsorTier {
-  id: string
-  name: string
-  amount: string
-  benefits: string[]
-  color: string
-  icon: string
+import type { IconType } from 'react-icons'
+import { FiBookOpen, FiCreditCard, FiShield, FiStar, FiMonitor, FiUsers, FiAward, FiBarChart2 } from 'react-icons/fi'
+import { kidsLearningTogether, kidsUsingAppHero } from '@/img'
+
+export interface SponsorProgramBenefit {
+  icon: IconType
+  label: string
 }
 
-export const sponsorTiers: SponsorTier[] = [
+export interface SponsorProgram {
+  id: string
+  tag: string
+  tagIcon: string
+  title: string
+  description: string
+  image: string
+  imageAlt: string
+  accent: 'family' | 'classroom'
+  benefits: SponsorProgramBenefit[]
+}
+
+export const sponsorPrograms: SponsorProgram[] = [
   {
-    id: 'gold',
-    name: 'Gold',
-    amount: '$5,000+',
-    benefits: ['Logo on homepage', 'Featured in app', 'Quarterly reports', 'VIP events access'],
-    color: 'from-yellow-400 via-accent to-amber-500',
-    icon: '🥇',
+    id: 'family',
+    tag: 'Sponsor a Family',
+    tagIcon: '💛',
+    title: 'Empower a Family',
+    description:
+      'Give a Belizean family access to Money Tykes and help children learn, earn, save, and grow with confidence — at home.',
+    image: kidsLearningTogether,
+    imageAlt: 'Belizean family learning about money together on a tablet',
+    accent: 'family',
+    benefits: [
+      { icon: FiBookOpen, label: 'Access to financial literacy lessons' },
+      { icon: FiCreditCard, label: 'Virtual wallet & rewards' },
+      { icon: FiShield, label: 'Parent controls & approvals' },
+      { icon: FiStar, label: 'Fun challenges & activities' },
+    ],
   },
   {
-    id: 'silver',
-    name: 'Silver',
-    amount: '$2,500+',
-    benefits: ['Logo in sponsor section', 'App recognition', 'Bi-annual reports', 'Community events'],
-    color: 'from-slate-500 via-slate-400 to-zinc-600',
-    icon: '🥈',
-  },
-  {
-    id: 'bronze',
-    name: 'Bronze',
-    amount: '$1,000+',
-    benefits: ['Name listing', 'Newsletter mention', 'Annual report', 'Social media shoutout'],
-    color: 'from-amber-600 via-orange-500 to-amber-700',
-    icon: '🥉',
+    id: 'classroom',
+    tag: 'Sponsor a Classroom',
+    tagIcon: '🏫',
+    title: 'Transform a Classroom',
+    description:
+      'Equip a classroom with the tools, content, and technology to deliver engaging financial literacy lessons all year long.',
+    image: kidsUsingAppHero,
+    imageAlt: 'Teacher presenting Money Tykes to students in a classroom',
+    accent: 'classroom',
+    benefits: [
+      { icon: FiMonitor, label: 'Digital classroom access' },
+      { icon: FiUsers, label: 'Teacher training & dashboard' },
+      { icon: FiAward, label: 'Student activities & challenges' },
+      { icon: FiBarChart2, label: 'Real-time insights & reporting' },
+    ],
   },
 ]

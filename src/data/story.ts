@@ -93,7 +93,7 @@ export const founderClosing = [
 ]
 
 export const founderName = 'Shamira Young'
-export const founderTitle = 'Founder & CEO'
+export const founderTitle = 'Founder'
 export const founderOrg = 'Money Tykes®'
 
 export const founderPullQuote =

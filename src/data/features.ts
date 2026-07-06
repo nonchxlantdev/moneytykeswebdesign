@@ -8,6 +8,7 @@ import {
   FiGift,
   FiStar,
   FiCheckCircle,
+  FiEye,
 } from 'react-icons/fi'
 
 export interface Feature {
@@ -21,7 +22,7 @@ export interface Feature {
 export const features: Feature[] = [
   {
     id: 'parent-control',
-    title: 'Parent Control',
+    title: 'Parental Control',
     description: 'Full oversight of chores, spending limits, and approvals — you stay in charge.',
     icon: FiShield,
     gradient: 'from-primary to-blue-500',
@@ -74,5 +75,13 @@ export const features: Feature[] = [
     description: 'Every reward request and in-app transaction requires parent approval. Approved spending is deducted from the parent wallet.',
     icon: FiCheckCircle,
     gradient: 'from-green-500 to-primary',
+  },
+  {
+    id: 'parental-oversight',
+    title: 'Parental Oversight',
+    description:
+      'Parents and children can review in-app statements and activity together, making it easy to monitor progress, spending, and learning in one transparent place.',
+    icon: FiEye,
+    gradient: 'from-blue-600 to-indigo-500',
   },
 ]

@@ -19,8 +19,7 @@ interface NavLink {
 const sectionNavLinks: NavLink[] = [
   { label: 'Home', href: '#home', type: 'section' },
   { label: 'Features', href: '#features', type: 'section' },
-  { label: 'Dashboard', href: '#dashboard', type: 'section' },
-  { label: 'Marketplace', href: '#marketplace', type: 'section' },
+  { label: 'DigiWallet', href: '#digiwallet', type: 'section' },
 ]
 
 const pageNavLinks: NavLink[] = [
