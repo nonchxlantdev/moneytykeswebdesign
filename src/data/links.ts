@@ -10,6 +10,9 @@ export const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=co
 
 export const SUPPORT_EMAIL = 'support@moneytykes.com'
 
+export const SPONSOR_WHATSAPP_URL =
+  'https://wa.me/5016139219?text=Hello%2C%20I%20would%20like%20to%20learn%20more%20about%20sponsoring%20with%20Money%20Tykes.'
+
 export const FACEBOOK_URL = 'https://www.facebook.com/p/MoneyTykes-Belize-61584534702964/'
 
 export const INSTAGRAM_URL = 'https://www.instagram.com/moneytykesbelize/'

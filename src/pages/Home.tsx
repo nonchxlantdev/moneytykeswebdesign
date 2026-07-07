@@ -7,8 +7,8 @@ import { AboutCluster } from '@/sections/AboutCluster'
 import { Ecosystem } from '@/sections/Ecosystem'
 import { FamilyJourney } from '@/sections/FamilyJourney'
 import { Features } from '@/sections/Features'
-import { LearningLevels } from '@/sections/LearningLevels'
 import { Marketplace } from '@/sections/Marketplace'
+import { LearningLevels } from '@/sections/LearningLevels'
 import { Sponsors } from '@/sections/Sponsors'
 import { Testimonials } from '@/sections/Testimonials'
 import { FinalCTA } from '@/sections/FinalCTA'
@@ -32,8 +32,8 @@ export function Home() {
       <Ecosystem />
       <FamilyJourney />
       <Features />
-      <LearningLevels />
       <Marketplace />
+      <LearningLevels />
       <Sponsors />
       <Testimonials />
       <FinalCTA />

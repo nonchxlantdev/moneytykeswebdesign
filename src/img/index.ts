@@ -9,6 +9,8 @@ import bossAndTyker from './bossntyker.png'
 import tykerKid from './tykerkid.png'
 import digiWalletLogo from './digiwallettext.png'
 import founderSham from './FounderSham.jpeg'
+import sponsorClassroom from './classroom.png'
+import sponsorFamily from './family.png'
 
 export const images = {
   logo,
@@ -22,6 +24,8 @@ export const images = {
   tykerKid,
   digiWalletLogo,
   founderSham,
+  sponsorClassroom,
+  sponsorFamily,
 } as const
 
 export {
@@ -36,4 +40,6 @@ export {
   tykerKid,
   digiWalletLogo,
   founderSham,
+  sponsorClassroom,
+  sponsorFamily,
 }

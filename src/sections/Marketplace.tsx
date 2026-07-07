@@ -19,7 +19,7 @@ const spendingExperiences = [
     logo: digiWalletLogo,
     logoAlt: 'DigiWallet',
     cta: {
-      label: 'Find DigiWallet Locations →',
+      label: 'View Participating Merchants →',
       href: DIGIWALLET_LOCATIONS_URL,
     },
   },
@@ -38,9 +38,9 @@ const spendingExperiences = [
 
 export function Marketplace() {
   return (
-    <AnimatedSection id="digiwallet">
+    <AnimatedSection id="approved-spending">
       <SectionHeading
-        badge="DigiWallet"
+        badge="Spending & Rewards"
         title="Parent-Guided Financial Experiences"
         subtitle="Parent-approved ways for kids to practice earning, saving, and using their virtual wallet. Approved spending is deducted from the parent wallet."
       />

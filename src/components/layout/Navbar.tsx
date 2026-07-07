@@ -18,13 +18,15 @@ interface NavLink {
 
 const sectionNavLinks: NavLink[] = [
   { label: 'Home', href: '#home', type: 'section' },
+  { label: 'Who We Are', href: '#who-we-are', type: 'section' },
+  { label: 'Ecosystem', href: '#ecosystem', type: 'section' },
   { label: 'Features', href: '#features', type: 'section' },
-  { label: 'DigiWallet', href: '#digiwallet', type: 'section' },
+  { label: 'Be A Sponsor', href: '#sponsors', type: 'section' },
 ]
 
 const pageNavLinks: NavLink[] = [
   { label: 'Our Story', href: STORY_NAV_HREF, type: 'page' },
-  { label: 'Plans & Subscription', href: PLANS_NAV_HREF, type: 'plans' },
+  { label: 'Plans', href: PLANS_NAV_HREF, type: 'plans' },
   { label: 'FAQs', href: FAQ_NAV_HREF, type: 'page' },
 ]
 

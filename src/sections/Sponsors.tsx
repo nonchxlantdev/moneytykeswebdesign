@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
+import { FaWhatsapp } from 'react-icons/fa'
 import { AnimatedSection, SectionHeading } from '@/components/ui/SectionHeading'
 import { GlowCard } from '@/components/ui/GlowCard'
+import { Button } from '@/components/ui/Button'
 import { sponsorPrograms } from '@/data/sponsors'
+import { SPONSOR_WHATSAPP_URL } from '@/data/links'
 import { staggerContainer, fadeInUp } from '@/animations/variants'
 
 const accentStyles = {
@@ -87,6 +90,28 @@ export function Sponsors() {
             </motion.div>
           )
         })}
+      </motion.div>
+
+      <motion.div
+        className="mt-10 max-w-2xl mx-auto text-center"
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <p className="text-sm text-ink-muted mb-4">
+          Ready to make a difference? Message us on WhatsApp to sponsor a family or classroom.
+        </p>
+        <Button
+          href={SPONSOR_WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          size="lg"
+          className="group gap-2.5"
+        >
+          <FaWhatsapp className="text-xl shrink-0" aria-hidden />
+          Contact Us To Be A Sponsor
+        </Button>
       </motion.div>
     </AnimatedSection>
   )

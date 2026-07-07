@@ -1,6 +1,6 @@
 import type { IconType } from 'react-icons'
 import { FiBookOpen, FiCreditCard, FiShield, FiStar, FiMonitor, FiUsers, FiAward, FiBarChart2 } from 'react-icons/fi'
-import { kidsLearningTogether, kidsUsingAppHero } from '@/img'
+import { sponsorFamily, sponsorClassroom } from '@/img'
 
 export interface SponsorProgramBenefit {
   icon: IconType
@@ -27,8 +27,8 @@ export const sponsorPrograms: SponsorProgram[] = [
     title: 'Empower a Family',
     description:
       'Give a Belizean family access to Money Tykes and help children learn, earn, save, and grow with confidence — at home.',
-    image: kidsLearningTogether,
-    imageAlt: 'Belizean family learning about money together on a tablet',
+    image: sponsorFamily,
+    imageAlt: 'Belizean family learning together at home',
     accent: 'family',
     benefits: [
       { icon: FiBookOpen, label: 'Access to financial literacy lessons' },
@@ -43,9 +43,9 @@ export const sponsorPrograms: SponsorProgram[] = [
     tagIcon: '🏫',
     title: 'Transform a Classroom',
     description:
-      'Equip a classroom with the tools, content, and technology to deliver engaging financial literacy lessons all year long.',
-    image: kidsUsingAppHero,
-    imageAlt: 'Teacher presenting Money Tykes to students in a classroom',
+      'Equip a Belizean classroom with technology that connects teachers, students and parents while delivering engaging financial literacy and digital learning experience all school year.',
+    image: sponsorClassroom,
+    imageAlt: 'Belizean classroom with students learning with Money Tykes',
     accent: 'classroom',
     benefits: [
       { icon: FiMonitor, label: 'Digital classroom access' },
