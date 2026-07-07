@@ -72,7 +72,7 @@ function NavItem({
     <a
       href={resolveHref(link.href)}
       onClick={onNavigate}
-      className={`relative px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-semibold whitespace-nowrap rounded-lg shrink-0 transition-[color,background-color,border-color,box-shadow] duration-200 ${textClass} ${shellClass} ${className}`}
+      className={`relative inline-flex items-center px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-semibold leading-normal whitespace-nowrap rounded-lg shrink-0 transition-[color,background-color,border-color,box-shadow] duration-200 ${textClass} ${shellClass} ${className}`}
     >
       <span className="relative z-10">{link.label}</span>
       {isActive && link.type === 'section' && (
@@ -159,18 +159,9 @@ export function Navbar() {
           </motion.div>
         </a>
 
-        <div className="hidden xl:flex items-center justify-center w-full min-w-0 overflow-hidden">
+        <div className="hidden xl:flex items-center justify-center w-full min-w-0">
           <div className="flex items-center gap-1 2xl:gap-1.5 min-w-0">
             {sectionNavLinks.map((link) => (
-              <NavItem key={link.href} link={link} isActive={isNavActive(link)} resolveHref={resolveHref} />
-            ))}
-
-            <div
-              className="w-px h-5 mx-1.5 xl:mx-2 bg-navy/12 dark:bg-white/12 shrink-0"
-              aria-hidden="true"
-            />
-
-            {pageNavLinks.map((link) => (
               <NavItem key={link.href} link={link} isActive={isNavActive(link)} resolveHref={resolveHref} />
             ))}
           </div>
@@ -178,7 +169,18 @@ export function Navbar() {
 
         <div className="flex-1 min-w-3 xl:hidden" aria-hidden="true" />
 
-        <div className="flex items-center shrink-0 xl:justify-self-end">
+        <div className="flex items-center shrink-0 xl:justify-self-end gap-1 2xl:gap-1.5">
+          <div className="hidden xl:flex items-center gap-1 2xl:gap-1.5 shrink-0">
+            {pageNavLinks.map((link) => (
+              <NavItem key={link.href} link={link} isActive={isNavActive(link)} resolveHref={resolveHref} />
+            ))}
+
+            <div
+              className="w-px h-5 mx-0.5 2xl:mx-1 bg-navy/12 dark:bg-white/12 shrink-0"
+              aria-hidden="true"
+            />
+          </div>
+
           <div className="flex items-center gap-0.5 sm:gap-1.5">
             <AudioControl />
             <button
