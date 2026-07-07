@@ -21,7 +21,6 @@ import {
   founderName,
   founderTitle,
   founderOrg,
-  founderPullQuote,
   promiseCopy,
   promiseClosing,
   storyTagline,
@@ -181,15 +180,6 @@ export function OurStory() {
                     {founderClosing.map((paragraph) => (
                       <p key={paragraph.slice(0, 48)}>{paragraph}</p>
                     ))}
-
-                    <blockquote className="relative pl-5 md:pl-6 border-l-4 border-primary pt-1">
-                      <p className="text-lg md:text-xl font-semibold text-ink italic leading-relaxed">
-                        &ldquo;{founderPullQuote}&rdquo;
-                      </p>
-                      <footer className="mt-4 text-sm text-ink-muted not-italic">
-                        — {founderName}, {founderTitle}
-                      </footer>
-                    </blockquote>
                   </div>
                 </div>
               </motion.section>

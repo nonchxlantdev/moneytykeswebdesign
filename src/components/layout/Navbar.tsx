@@ -164,23 +164,21 @@ export function Navbar() {
             {sectionNavLinks.map((link) => (
               <NavItem key={link.href} link={link} isActive={isNavActive(link)} resolveHref={resolveHref} />
             ))}
+
+            <div
+              className="w-px h-5 mx-1.5 xl:mx-2 bg-navy/12 dark:bg-white/12 shrink-0"
+              aria-hidden="true"
+            />
+
+            {pageNavLinks.map((link) => (
+              <NavItem key={link.href} link={link} isActive={isNavActive(link)} resolveHref={resolveHref} />
+            ))}
           </div>
         </div>
 
         <div className="flex-1 min-w-3 xl:hidden" aria-hidden="true" />
 
         <div className="flex items-center shrink-0 xl:justify-self-end gap-1 2xl:gap-1.5">
-          <div className="hidden xl:flex items-center gap-1 2xl:gap-1.5 shrink-0">
-            {pageNavLinks.map((link) => (
-              <NavItem key={link.href} link={link} isActive={isNavActive(link)} resolveHref={resolveHref} />
-            ))}
-
-            <div
-              className="w-px h-5 mx-0.5 2xl:mx-1 bg-navy/12 dark:bg-white/12 shrink-0"
-              aria-hidden="true"
-            />
-          </div>
-
           <div className="flex items-center gap-0.5 sm:gap-1.5">
             <AudioControl />
             <button

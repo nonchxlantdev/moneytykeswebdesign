@@ -96,9 +96,6 @@ export const founderName = 'Shamira Young'
 export const founderTitle = 'Founder'
 export const founderOrg = 'Money Tykes®'
 
-export const founderPullQuote =
-  'Because when we invest in our children, we invest in the future of Belize.'
-
 export const promiseCopy =
   'Money Tykes® was built in Belize, for Belize, with the belief that financial confidence isn’t inherited—it is learned, nurtured, and shared.'
 

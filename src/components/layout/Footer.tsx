@@ -11,7 +11,7 @@ const quickLinks = [
   { label: 'FAQ', href: '__faq_page__' },
 ]
 
-const partnerLinks = [{ label: 'Become a Vendor', href: '#' }]
+const partnerLinks = [{ label: 'Be A Sponsor', href: '#sponsors' }]
 
 const socials = [
   { icon: FaFacebook, href: FACEBOOK_URL, label: 'Facebook' },
@@ -85,7 +85,7 @@ export function Footer() {
               {partnerLinks.map((link) => (
                 <li key={link.label}>
                   <a
-                    href={link.href}
+                    href={resolveHref(link.href)}
                     className="text-ink-muted dark:text-white/85 hover:text-primary-text dark:hover:text-primary text-sm transition-colors"
                   >
                     {link.label}
