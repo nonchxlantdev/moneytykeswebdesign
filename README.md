@@ -8,7 +8,13 @@ A premium, interactive React website for MoneyTykes — Belize's family fintech 
 - TailwindCSS 4
 - Framer Motion + GSAP + Lenis
 - React Three Fiber (3D phone carousel)
-- SwiperJS, React CountUp, React Icons
+- React CountUp, React Icons
+
+## Repository
+
+Canonical repo: [github.com/moneytykes/website](https://github.com/moneytykes/website)
+
+Live site: [moneytykes.github.io/website](https://moneytykes.github.io/website/)
 
 ## Getting Started
 

@@ -18,7 +18,7 @@ export default defineConfig({
         manualChunks: {
           three: ['three', '@react-three/fiber', '@react-three/drei'],
           motion: ['framer-motion', 'gsap'],
-          vendor: ['react', 'react-dom', 'swiper', 'lenis'],
+          vendor: ['react', 'react-dom', 'lenis'],
         },
       },
     },
