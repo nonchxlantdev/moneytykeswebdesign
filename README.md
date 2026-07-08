@@ -14,7 +14,7 @@ A premium, interactive React website for MoneyTykes — Belize's family fintech 
 
 Canonical repo: [github.com/moneytykes/website](https://github.com/moneytykes/website)
 
-Live site: [moneytykes.github.io/website](https://moneytykes.github.io/website/)
+Live site: [moneytykes.com](https://moneytykes.com/) (hosted on Vercel)
 
 ## Getting Started
 
