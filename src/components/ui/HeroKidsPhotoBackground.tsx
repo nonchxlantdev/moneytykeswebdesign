@@ -135,8 +135,8 @@ export function HeroKidsPhotoMobile() {
   return (
     <div className="hero-photo-mobile-block sm:hidden mt-4 w-full">
       <figure className="hero-photo-mobile-quote mb-4">
-        <blockquote className="text-[0.875rem] leading-snug text-ink font-medium text-center whitespace-nowrap">
-          &ldquo;Learning about money starts at home.&rdquo;{' '}
+        <blockquote className="text-[0.875rem] leading-snug text-ink font-medium text-center text-balance">
+          &ldquo;Learning about money starts at home. Learning about finance and how to budget starts with MoneyTykes.&rdquo;{' '}
           <cite className="text-xs font-semibold text-ink-muted not-italic tracking-wide">
             — S. Young
           </cite>

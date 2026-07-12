@@ -21,10 +21,10 @@ export const storyClosing =
   'These moments may seem small, but together they create something much bigger—a financially confident generation and a stronger Belize.'
 
 export const missionCopy =
-  'To complement financial education through innovative technology that empowers children, supports families, strengthens schools, and inspires lifelong financial confidence.'
+  'To complement financial education that empowers children, supports families, strengthens schools, and inspires lifelong financial confidence.'
 
 export const visionCopy =
-  'A Belize where every child has the opportunity to develop the financial knowledge, confidence, and life skills needed to build a brighter future for themselves, their families, and their communities.'
+  'To become the region’s most trusted platform, empowering generations with the knowledge, skills, and digital tools to achieve lifelong financial success.'
 
 export interface StoryValue {
   id: string
