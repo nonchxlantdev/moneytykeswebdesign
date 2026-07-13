@@ -15,10 +15,27 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          three: ['three', '@react-three/fiber', '@react-three/drei'],
-          motion: ['framer-motion', 'gsap'],
-          vendor: ['react', 'react-dom', 'lenis'],
+        // Function form is required by Vite 8+/Rolldown; object form still works on Vite 6
+        manualChunks(id) {
+          if (
+            id.includes('node_modules/three') ||
+            id.includes('node_modules/@react-three/')
+          ) {
+            return 'three'
+          }
+          if (
+            id.includes('node_modules/framer-motion') ||
+            id.includes('node_modules/gsap')
+          ) {
+            return 'motion'
+          }
+          if (
+            id.includes('node_modules/react/') ||
+            id.includes('node_modules/react-dom/') ||
+            id.includes('node_modules/lenis')
+          ) {
+            return 'vendor'
+          }
         },
       },
     },
