@@ -3,49 +3,34 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { createPortal } from 'react-dom'
 import { FiMusic, FiPlay, FiX } from 'react-icons/fi'
 import { useSound } from '@/hooks/useSound'
-import { isTouchDevice } from '@/hooks/useDevice'
-
-const PROMPT_KEY = 'moneytykes-music-prompt-answered'
-
-function hasAnsweredPrompt(): boolean {
-  try {
-    return localStorage.getItem(PROMPT_KEY) === 'true'
-  } catch {
-    return false
-  }
-}
-
-function markPromptAnswered() {
-  try {
-    localStorage.setItem(PROMPT_KEY, 'true')
-  } catch {
-    /* ignore */
-  }
-}
+import { getAppPage } from '@/data/links'
+import { themeSong } from '@/audio'
+import { hasAnsweredMusicPrompt, markMusicPromptChoice } from '@/hooks/musicPrompt'
 
 export function ThemeSongPrompt() {
-  const { ensureMusicPlaying, setMuted } = useSound()
+  const { ensureMusicPlaying, setMuted, setMusicTrack } = useSound()
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    if (!isTouchDevice() || hasAnsweredPrompt()) return
+    if (getAppPage() !== 'home' || hasAnsweredMusicPrompt()) return
     const timer = window.setTimeout(() => setOpen(true), 900)
     return () => window.clearTimeout(timer)
   }, [])
 
-  const close = () => {
+  const close = (choice: 'play' | 'skip') => {
     setOpen(false)
-    markPromptAnswered()
+    markMusicPromptChoice(choice)
   }
 
   const handlePlay = () => {
+    setMusicTrack(themeSong, { loop: true })
     setMuted(false)
     ensureMusicPlaying()
-    close()
+    close('play')
   }
 
   const handleDecline = () => {
-    close()
+    close('skip')
   }
 
   useEffect(() => {

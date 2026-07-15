@@ -1,11 +1,25 @@
 import { motion } from 'framer-motion'
 import { FiMail, FiMapPin } from 'react-icons/fi'
-import { FaFacebook, FaInstagram } from 'react-icons/fa'
-import { FACEBOOK_URL, INSTAGRAM_URL, SUPPORT_EMAIL, faqHref, getAppPage, homeSectionHref, privacyHref, storyHref, termsHref } from '@/data/links'
+import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa'
+import {
+  FACEBOOK_URL,
+  INSTAGRAM_URL,
+  TIKTOK_URL,
+  YOUTUBE_URL,
+  SUPPORT_EMAIL,
+  danceChallengeHref,
+  faqHref,
+  getAppPage,
+  homeSectionHref,
+  privacyHref,
+  storyHref,
+  termsHref,
+} from '@/data/links'
 import { BrandLogo } from '@/components/ui/BrandLogo'
 
 const quickLinks = [
   { label: 'Our Story', href: '__story_page__' },
+  { label: 'Dance Challenge', href: '__dance_challenge_page__' },
   { label: 'Features', href: '#features' },
   { label: 'How It Works', href: '#journey' },
   { label: 'FAQ', href: '__faq_page__' },
@@ -16,6 +30,8 @@ const partnerLinks = [{ label: 'Be A Sponsor', href: '#sponsors' }]
 const socials = [
   { icon: FaFacebook, href: FACEBOOK_URL, label: 'Facebook' },
   { icon: FaInstagram, href: INSTAGRAM_URL, label: 'Instagram' },
+  { icon: FaTiktok, href: TIKTOK_URL, label: 'TikTok' },
+  { icon: FaYoutube, href: YOUTUBE_URL, label: 'YouTube' },
 ]
 
 export function Footer() {
@@ -23,6 +39,7 @@ export function Footer() {
   const resolveHref = (href: string) => {
     if (href === '__faq_page__') return faqHref()
     if (href === '__story_page__') return storyHref()
+    if (href === '__dance_challenge_page__') return danceChallengeHref()
     return page === 'home' ? href : homeSectionHref(href)
   }
 

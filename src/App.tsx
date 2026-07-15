@@ -14,6 +14,7 @@ import { Privacy } from '@/pages/Privacy'
 import { Plans } from '@/pages/Plans'
 import { FaqPage } from '@/pages/FaqPage'
 import { OurStory } from '@/pages/OurStory'
+import { DanceChallenge } from '@/pages/DanceChallenge'
 import { getAppPage, type AppPage } from '@/data/links'
 
 export default function App() {
@@ -64,6 +65,8 @@ export default function App() {
                 <FaqPage />
               ) : page === 'story' ? (
                 <OurStory />
+              ) : page === 'dance-challenge' ? (
+                <DanceChallenge />
               ) : (
                 <Home />
               )}
