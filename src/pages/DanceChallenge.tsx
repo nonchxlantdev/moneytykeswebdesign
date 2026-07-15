@@ -18,6 +18,7 @@ const Navbar = lazy(() => import('@/components/layout/Navbar').then((m) => ({ de
 const Footer = lazy(() => import('@/components/layout/Footer').then((m) => ({ default: m.Footer })))
 
 const YOUTUBE_EMBED_URL = 'https://www.youtube.com/embed/FcoHlbgjz5A?rel=0&modestbranding=1'
+const TYKER_LOGO_SRC = `${import.meta.env.BASE_URL}images/dance-challenge/tyker-logo.png`
 
 const stepIcons = [FiPlay, FiMusic, FiVideo, FiUpload] as const
 
@@ -97,7 +98,7 @@ export function DanceChallenge() {
         <Navbar />
       </Suspense>
 
-      <div className="relative flex-1 pt-[5.5rem] sm:pt-28 pb-10 md:pb-14 px-3 sm:px-5 md:px-8">
+      <div className="relative flex-1 pt-32 sm:pt-40 md:pt-44 pb-10 md:pb-14 px-3 sm:px-5 md:px-8">
         {/* Playful stage backdrop */}
         <div className="dc-stage-bg" aria-hidden />
         <div className="dc-confetti" aria-hidden />
@@ -142,7 +143,7 @@ export function DanceChallenge() {
                 Are You Ready?
               </div>
               <img
-                src="/images/dance-challenge/tyker-logo.png"
+                src={TYKER_LOGO_SRC}
                 alt="MoneyTykes tiger mascot giving a thumbs up"
                 className="dc-tyker-img drop-shadow-2xl"
                 loading="lazy"
