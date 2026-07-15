@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { themeSong } from '@/audio'
 import { isTouchDevice } from '@/hooks/useDevice'
+import { shouldAutoPlayThemeSong } from '@/hooks/musicPrompt'
 
 const STORAGE_VOLUME = 'moneytykes-volume'
 const STORAGE_MUTED = 'moneytykes-muted'
@@ -24,6 +25,7 @@ interface SoundContextValue {
   playClick: () => void
   ensureMusicPlaying: () => void
   pauseMusic: () => void
+  setMusicTrack: (src: string, options?: { loop?: boolean }) => void
 }
 
 const SoundContext = createContext<SoundContextValue>({
@@ -36,6 +38,7 @@ const SoundContext = createContext<SoundContextValue>({
   playClick: () => {},
   ensureMusicPlaying: () => {},
   pauseMusic: () => {},
+  setMusicTrack: () => {},
 })
 
 function readVolume(): number {
@@ -156,6 +159,12 @@ export function SoundProvider({
 
     applyAudioVolume(volumeRef.current, effectiveMuted)
 
+    // Replay from the start if the track already finished (non-looping pages)
+    if (audio.ended || (audio.duration > 0 && audio.currentTime >= audio.duration - 0.05 && audio.paused)) {
+      audio.currentTime = 0
+      startedRef.current = false
+    }
+
     if (startedRef.current && !audio.paused) {
       syncMusicPlaying()
       return
@@ -181,6 +190,35 @@ export function SoundProvider({
     void tryPlay({ unmute: true })
   }, [tryPlay])
 
+  const setMusicTrack = useCallback(
+    (src: string, options?: { loop?: boolean }) => {
+      const audio = audioRef.current
+      if (!audio) return
+      const loop = options?.loop ?? true
+      const absolute = new URL(src, window.location.href).href
+      const sameTrack = audio.src === absolute
+
+      if (sameTrack) {
+        audio.loop = loop
+        return
+      }
+
+      const shouldResume = !audio.paused || startedRef.current
+      audio.pause()
+      audio.src = src
+      audio.loop = loop
+      audio.load()
+      startedRef.current = false
+      setMusicPlaying(false)
+      applyAudioVolume()
+
+      if (shouldResume || !isTouchDevice()) {
+        void tryPlay()
+      }
+    },
+    [applyAudioVolume, tryPlay],
+  )
+
   useEffect(() => {
     if (!ready) return
 
@@ -204,13 +242,15 @@ export function SoundProvider({
     audio.addEventListener('ended', onEnded)
 
     const onInteract = () => {
+      if (!shouldAutoPlayThemeSong()) return
       void tryPlay()
     }
     const onReady = () => {
+      if (!shouldAutoPlayThemeSong()) return
       void tryPlay()
     }
 
-    if (!touch) {
+    if (!touch && shouldAutoPlayThemeSong()) {
       void tryPlay()
       document.addEventListener('pointerdown', onInteract, { passive: true })
       document.addEventListener('keydown', onInteract)
@@ -223,12 +263,10 @@ export function SoundProvider({
       audio.removeEventListener('pause', onPause)
       audio.removeEventListener('playing', onPlaying)
       audio.removeEventListener('ended', onEnded)
-      if (!touch) {
-        document.removeEventListener('pointerdown', onInteract)
-        document.removeEventListener('keydown', onInteract)
-        audio.removeEventListener('canplaythrough', onReady)
-        audio.removeEventListener('loadeddata', onReady)
-      }
+      document.removeEventListener('pointerdown', onInteract)
+      document.removeEventListener('keydown', onInteract)
+      audio.removeEventListener('canplaythrough', onReady)
+      audio.removeEventListener('loadeddata', onReady)
       audio.pause()
       audio.src = ''
       audioRef.current = null
@@ -238,7 +276,12 @@ export function SoundProvider({
 
   useEffect(() => {
     applyAudioVolume()
-    if (!isTouchDevice() && !mutedRef.current && volumeRef.current > 0) {
+    if (
+      !isTouchDevice() &&
+      shouldAutoPlayThemeSong() &&
+      !mutedRef.current &&
+      volumeRef.current > 0
+    ) {
       void tryPlay()
     }
   }, [volume, muted, tryPlay, applyAudioVolume])
@@ -263,7 +306,18 @@ export function SoundProvider({
 
   return (
     <SoundContext.Provider
-      value={{ muted, volume, musicPlaying, setVolume, setMuted, toggleMute, playClick, ensureMusicPlaying, pauseMusic }}
+      value={{
+        muted,
+        volume,
+        musicPlaying,
+        setVolume,
+        setMuted,
+        toggleMute,
+        playClick,
+        ensureMusicPlaying,
+        pauseMusic,
+        setMusicTrack,
+      }}
     >
       {children}
     </SoundContext.Provider>

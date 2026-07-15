@@ -17,7 +17,11 @@ export const FACEBOOK_URL = 'https://www.facebook.com/p/MoneyTykes-Belize-615845
 
 export const INSTAGRAM_URL = 'https://www.instagram.com/moneytykesbelize/'
 
-export type AppPage = 'home' | 'terms' | 'privacy' | 'plans' | 'faq' | 'story'
+export const TIKTOK_URL = 'https://www.tiktok.com/@moneytykesbelize'
+
+export const YOUTUBE_URL = 'https://www.youtube.com/@moneytykesbelize'
+
+export type AppPage = 'home' | 'terms' | 'privacy' | 'plans' | 'faq' | 'story' | 'dance-challenge'
 
 function basePath(): string {
   return import.meta.env.BASE_URL.replace(/\/?$/, '/')
@@ -26,6 +30,7 @@ function basePath(): string {
 export const PLANS_NAV_HREF = '__plans__'
 export const FAQ_NAV_HREF = '__faq__'
 export const STORY_NAV_HREF = '__story__'
+export const DANCE_CHALLENGE_NAV_HREF = '__dance_challenge__'
 
 export function plansHref(): string {
   return `${basePath()}plans`
@@ -37,6 +42,10 @@ export function faqHref(): string {
 
 export function storyHref(): string {
   return `${basePath()}our-story`
+}
+
+export function danceChallengeHref(): string {
+  return `${basePath()}dance-challenge`
 }
 
 export function termsHref(): string {
@@ -58,6 +67,7 @@ export function getAppPage(pathname = window.location.pathname): AppPage {
   if (normalized.endsWith('/plans')) return 'plans'
   if (normalized.endsWith('/faq')) return 'faq'
   if (normalized.endsWith('/our-story')) return 'story'
+  if (normalized.endsWith('/dance-challenge')) return 'dance-challenge'
   return 'home'
 }
 

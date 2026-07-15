@@ -6,7 +6,18 @@ import { useActiveSection } from '@/hooks/useActiveSection'
 import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { AudioControl } from '@/components/layout/AudioControl'
 import { BrandLogo } from '@/components/ui/BrandLogo'
-import { getAppPage, homeSectionHref, PLANS_NAV_HREF, FAQ_NAV_HREF, STORY_NAV_HREF, plansHref, faqHref, storyHref } from '@/data/links'
+import {
+  getAppPage,
+  homeSectionHref,
+  PLANS_NAV_HREF,
+  FAQ_NAV_HREF,
+  STORY_NAV_HREF,
+  DANCE_CHALLENGE_NAV_HREF,
+  plansHref,
+  faqHref,
+  storyHref,
+  danceChallengeHref,
+} from '@/data/links'
 
 type NavLinkType = 'section' | 'page' | 'plans'
 
@@ -26,6 +37,7 @@ const sectionNavLinks: NavLink[] = [
 
 const pageNavLinks: NavLink[] = [
   { label: 'Our Story', href: STORY_NAV_HREF, type: 'page' },
+  { label: 'Dance Challenge', href: DANCE_CHALLENGE_NAV_HREF, type: 'page' },
   { label: 'Plans', href: PLANS_NAV_HREF, type: 'plans' },
   { label: 'FAQs', href: FAQ_NAV_HREF, type: 'page' },
 ]
@@ -96,6 +108,7 @@ export function Navbar() {
     if (href === PLANS_NAV_HREF) return plansHref()
     if (href === FAQ_NAV_HREF) return faqHref()
     if (href === STORY_NAV_HREF) return storyHref()
+    if (href === DANCE_CHALLENGE_NAV_HREF) return danceChallengeHref()
     return page === 'home' ? href : homeSectionHref(href)
   }
 
@@ -103,6 +116,7 @@ export function Navbar() {
     if (link.href === PLANS_NAV_HREF) return page === 'plans'
     if (link.href === FAQ_NAV_HREF) return page === 'faq'
     if (link.href === STORY_NAV_HREF) return page === 'story'
+    if (link.href === DANCE_CHALLENGE_NAV_HREF) return page === 'dance-challenge'
     return activeHref === link.href
   }
 

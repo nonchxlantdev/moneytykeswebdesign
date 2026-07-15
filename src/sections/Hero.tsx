@@ -1,7 +1,8 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { FiPlay, FiArrowRight, FiDownload } from 'react-icons/fi'
+import { FiArrowRight, FiDownload } from 'react-icons/fi'
 import { Button } from '@/components/ui/Button'
+import { DanceChallengeCta } from '@/components/ui/DanceChallengeCta'
 import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { GlowingOrbs, FloatingParticles } from '@/components/ui/BackgroundEffects'
 import { HeroKidsPhotoBackground, HeroKidsPhotoMobile } from '@/components/ui/HeroKidsPhotoBackground'
@@ -66,18 +67,7 @@ export function Hero() {
               <FiDownload className="text-base shrink-0" />
               Download App
             </DownloadAppButton>
-            <Button
-              variant="secondary"
-              size="md"
-              className="group relative w-full !px-4 !py-3.5 !text-sm min-h-[48px] ring-2 ring-accent/60 shadow-[0_0_20px_rgba(255,213,74,0.4)]"
-              magnetic={false}
-            >
-              <FiPlay className="group-hover:scale-110 transition-transform shrink-0 text-sm" />
-              <span className="flex items-baseline gap-1 whitespace-nowrap">
-                Dance Challenge
-                <span className="text-[11px] sm:text-xs font-bold tracking-wide opacity-90">#comingsoon</span>
-              </span>
-            </Button>
+            <DanceChallengeCta fullWidth />
           </div>
 
           <div className="hidden lg:flex flex-wrap items-center gap-3">
@@ -92,18 +82,7 @@ export function Hero() {
               Parent Sign Up
               <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button
-              variant="secondary"
-              size="md"
-              className="group relative shrink-0 !px-4 !py-3 !text-sm min-h-[44px] ring-2 ring-accent/60 shadow-[0_0_20px_rgba(255,213,74,0.4)] hover:shadow-[0_0_28px_rgba(255,213,74,0.55)]"
-              magnetic={false}
-            >
-              <FiPlay className="group-hover:scale-110 transition-transform shrink-0 text-sm" />
-              <span className="flex items-baseline gap-1 whitespace-nowrap">
-                Dance Challenge
-                <span className="text-xs font-bold tracking-wide opacity-90">#comingsoon</span>
-              </span>
-            </Button>
+            <DanceChallengeCta />
           </div>
         </motion.div>
 

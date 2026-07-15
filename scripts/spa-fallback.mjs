@@ -3,7 +3,7 @@ import { join } from 'node:path'
 
 const distDir = process.argv[2] ?? 'dist'
 const indexPath = join(distDir, 'index.html')
-const routes = ['plans', 'faq', 'our-story', 'terms', 'privacy']
+const routes = ['plans', 'faq', 'our-story', 'terms', 'privacy', 'dance-challenge']
 
 cpSync(indexPath, join(distDir, '404.html'))
 
