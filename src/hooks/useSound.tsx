@@ -25,7 +25,7 @@ interface SoundContextValue {
   playClick: () => void
   ensureMusicPlaying: () => void
   pauseMusic: () => void
-  setMusicTrack: (src: string, options?: { loop?: boolean }) => void
+  setMusicTrack: (src: string, options?: { loop?: boolean; autoplay?: boolean }) => void
 }
 
 const SoundContext = createContext<SoundContextValue>({
@@ -191,15 +191,17 @@ export function SoundProvider({
   }, [tryPlay])
 
   const setMusicTrack = useCallback(
-    (src: string, options?: { loop?: boolean }) => {
+    (src: string, options?: { loop?: boolean; autoplay?: boolean }) => {
       const audio = audioRef.current
       if (!audio) return
       const loop = options?.loop ?? true
+      const autoplay = options?.autoplay ?? false
       const absolute = new URL(src, window.location.href).href
       const sameTrack = audio.src === absolute
 
       if (sameTrack) {
         audio.loop = loop
+        if (autoplay) void tryPlay({ unmute: true })
         return
       }
 
@@ -212,8 +214,18 @@ export function SoundProvider({
       setMusicPlaying(false)
       applyAudioVolume()
 
-      if (shouldResume || !isTouchDevice()) {
-        void tryPlay()
+      const startIfNeeded = () => {
+        if (autoplay || shouldResume || !isTouchDevice()) {
+          void tryPlay({ unmute: autoplay || undefined })
+        }
+      }
+
+      if (autoplay) {
+        audio.addEventListener('canplay', startIfNeeded, { once: true })
+        // Fallback in case canplay already fired
+        window.setTimeout(startIfNeeded, 50)
+      } else {
+        startIfNeeded()
       }
     },
     [applyAudioVolume, tryPlay],

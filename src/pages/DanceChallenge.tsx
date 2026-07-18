@@ -78,9 +78,37 @@ export function DanceChallenge() {
   }, [])
 
   useEffect(() => {
-    setMusicTrack(danceChallengeSong, { loop: false })
-    ensureMusicPlaying()
+    let cancelled = false
+    let unlocked = false
+
+    setMusicTrack(danceChallengeSong, { loop: false, autoplay: true })
+
+    const unlockPlay = () => {
+      if (cancelled || unlocked) return
+      unlocked = true
+      ensureMusicPlaying()
+      removeUnlockListeners()
+    }
+
+    const removeUnlockListeners = () => {
+      document.removeEventListener('pointerdown', unlockPlay)
+      document.removeEventListener('touchstart', unlockPlay)
+      document.removeEventListener('keydown', unlockPlay)
+    }
+
+    // Mobile/tablet often block unmuted autoplay until the first gesture
+    document.addEventListener('pointerdown', unlockPlay, { once: true, passive: true })
+    document.addEventListener('touchstart', unlockPlay, { once: true, passive: true })
+    document.addEventListener('keydown', unlockPlay, { once: true })
+
+    const retry = window.setTimeout(() => {
+      if (!cancelled) ensureMusicPlaying()
+    }, 250)
+
     return () => {
+      cancelled = true
+      window.clearTimeout(retry)
+      removeUnlockListeners()
       setMusicTrack(themeSong, { loop: true })
     }
   }, [setMusicTrack, ensureMusicPlaying])
