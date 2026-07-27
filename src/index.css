@@ -478,6 +478,105 @@ html.dark {
   }
 }
 
+/* Classroom Login hall pass, pinned to the nav bar and swinging.
+   Colors sampled from the real MoneyTykes Classroom dashboard screenshot. */
+:root {
+  --class-teal: #123e35;
+  --class-teal-deep: #0b2b26;
+  --class-wood: #734826;
+  --class-chalk: #f7eedb;
+  --class-stamp: #ce1126;
+}
+
+.hallpass-pin {
+  position: absolute;
+  top: -6px;
+  right: 16px;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  background: linear-gradient(165deg, var(--class-teal) 0%, var(--class-teal-deep) 100%);
+  padding: 9px 18px 10px 13px;
+  border-radius: 4px 12px 12px 12px;
+  box-shadow: 0 12px 22px rgba(6, 26, 22, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  z-index: 30;
+  transform-origin: 16px 0px;
+  animation: hallpass-swing 3.4s ease-in-out infinite;
+}
+
+@media (min-width: 80rem) {
+  .hallpass-pin {
+    display: flex;
+  }
+}
+
+.hallpass-pin:hover {
+  animation-play-state: paused;
+  transform: rotate(0deg) translateY(-2px);
+}
+
+.hallpass-pin:focus-visible {
+  outline: 2px solid var(--class-chalk);
+  outline-offset: 3px;
+}
+
+@keyframes hallpass-swing {
+  0% { transform: rotate(-6deg); }
+  50% { transform: rotate(3deg); }
+  100% { transform: rotate(-6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hallpass-pin {
+    animation: none;
+    transform: rotate(-4deg);
+  }
+}
+
+.hallpass-pin .pin-head {
+  position: absolute;
+  top: -7px;
+  left: 15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff8f8f 0%, var(--class-stamp) 55%, #7c0d15 100%);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.hallpass-pin .eyebrow {
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(247, 238, 219, 0.62);
+}
+
+.hallpass-pin .title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--class-chalk);
+  white-space: nowrap;
+  margin-top: 1px;
+}
+
+.hallpass-pin .stamp {
+  position: absolute;
+  bottom: -9px;
+  right: -11px;
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--class-stamp);
+  border: 1.5px solid var(--class-stamp);
+  border-radius: 5px;
+  padding: 1px 5px;
+  background: rgba(250, 249, 246, 0.95);
+  transform: rotate(9deg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
