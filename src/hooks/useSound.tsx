@@ -237,7 +237,7 @@ export function SoundProvider({
     const touch = isTouchDevice()
     const audio = new Audio(themeSong)
     audio.loop = true
-    audio.preload = 'auto'
+    audio.preload = 'metadata'
     audio.volume = muted ? 0 : volume
     ;(audio as HTMLAudioElement & { playsInline?: boolean }).playsInline = true
     audio.setAttribute('playsinline', '')
