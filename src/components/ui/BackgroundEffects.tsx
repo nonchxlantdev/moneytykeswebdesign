@@ -16,8 +16,9 @@ const orbs = lite
       { size: 350, x: '20%', y: '80%', color: 'rgba(15, 175, 156, 0.08)', delay: 1.5 },
     ]
 
-export function GlowingOrbs() {
+export function GlowingOrbs({ active = true }: { active?: boolean }) {
   const reducedMotion = useReducedMotion()
+  const animate = active && !reducedMotion
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -31,12 +32,11 @@ export function GlowingOrbs() {
             left: orb.x,
             top: orb.y,
             background: `radial-gradient(circle, ${orb.color}, transparent 70%)`,
-            opacity: reducedMotion ? 0.5 : undefined,
+            opacity: animate ? undefined : 0.5,
           }}
           animate={
-            reducedMotion
-              ? undefined
-              : lite
+            animate
+              ? lite
                 ? { opacity: [0.35, 0.5, 0.35] }
                 : {
                     scale: [1, 1.2, 1],
@@ -44,16 +44,17 @@ export function GlowingOrbs() {
                     x: [0, 30, -20, 0],
                     y: [0, -20, 30, 0],
                   }
+              : undefined
           }
           transition={
-            reducedMotion
-              ? undefined
-              : {
+            animate
+              ? {
                   duration: lite ? 6 + i : 8 + i * 2,
                   repeat: Infinity,
                   delay: orb.delay,
                   ease: 'easeInOut',
                 }
+              : undefined
           }
         />
       ))}
@@ -61,9 +62,9 @@ export function GlowingOrbs() {
   )
 }
 
-export function FloatingParticles() {
+export function FloatingParticles({ active = true }: { active?: boolean }) {
   const reducedMotion = useReducedMotion()
-  if (lite || reducedMotion) return null
+  if (lite || reducedMotion || !active) return null
 
   const particles = Array.from({ length: 30 }, (_, i) => ({
     id: i,
