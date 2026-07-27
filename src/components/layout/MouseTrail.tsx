@@ -1,11 +1,14 @@
 import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 export function MouseTrail() {
+  const reducedMotion = useReducedMotion()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const points = useRef<{ x: number; y: number; age: number }[]>([])
 
   useEffect(() => {
+    if (reducedMotion) return
+
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
@@ -49,7 +52,9 @@ export function MouseTrail() {
       window.removeEventListener('mousemove', onMove)
       cancelAnimationFrame(animId)
     }
-  }, [])
+  }, [reducedMotion])
+
+  if (reducedMotion) return null
 
   return (
     <motion.canvas
