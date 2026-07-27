@@ -21,7 +21,7 @@ export const TIKTOK_URL = 'https://www.tiktok.com/@moneytykesbelize'
 
 export const YOUTUBE_URL = 'https://www.youtube.com/@moneytykesbelize'
 
-export type AppPage = 'home' | 'terms' | 'privacy' | 'plans' | 'faq' | 'story' | 'dance-challenge'
+export type AppPage = 'home' | 'terms' | 'privacy' | 'plans' | 'faq' | 'story' | 'dance-challenge' | 'classroom'
 
 function basePath(): string {
   return import.meta.env.BASE_URL.replace(/\/?$/, '/')
@@ -31,6 +31,7 @@ export const PLANS_NAV_HREF = '__plans__'
 export const FAQ_NAV_HREF = '__faq__'
 export const STORY_NAV_HREF = '__story__'
 export const DANCE_CHALLENGE_NAV_HREF = '__dance_challenge__'
+export const CLASSROOM_NAV_HREF = '__classroom__'
 
 export function plansHref(): string {
   return `${basePath()}plans`
@@ -46,6 +47,10 @@ export function storyHref(): string {
 
 export function danceChallengeHref(): string {
   return `${basePath()}dance-challenge`
+}
+
+export function classroomHref(): string {
+  return `${basePath()}classroom`
 }
 
 export function termsHref(): string {
@@ -68,6 +73,7 @@ export function getAppPage(pathname = window.location.pathname): AppPage {
   if (normalized.endsWith('/faq')) return 'faq'
   if (normalized.endsWith('/our-story')) return 'story'
   if (normalized.endsWith('/dance-challenge')) return 'dance-challenge'
+  if (normalized.endsWith('/classroom')) return 'classroom'
   return 'home'
 }
 

@@ -15,6 +15,7 @@ import {
   plansHref,
   faqHref,
   storyHref,
+  classroomHref,
 } from '@/data/links'
 
 type NavLinkType = 'section' | 'page' | 'plans'
@@ -152,7 +153,7 @@ export function Navbar() {
       animate={{ y: 0 }}
     >
       <nav
-        className={`mx-2 sm:mx-4 md:mx-auto md:max-w-7xl rounded-xl sm:rounded-2xl px-2 sm:px-5 lg:px-8 py-2 sm:py-3 flex items-center gap-2 xl:grid xl:grid-cols-[auto_1fr_auto] xl:gap-6 2xl:gap-8 glass glass-mobile premium-shadow transition-[box-shadow,background-color] duration-300 ${
+        className={`relative overflow-visible mx-2 sm:mx-4 md:mx-auto md:max-w-7xl rounded-xl sm:rounded-2xl pl-2 sm:pl-5 lg:pl-8 pr-2 sm:pr-5 lg:pr-8 xl:pr-28 py-2 sm:py-3 flex items-center gap-2 xl:grid xl:grid-cols-[auto_1fr_auto] xl:gap-6 2xl:gap-8 glass glass-mobile premium-shadow transition-[box-shadow,background-color] duration-300 ${
           scrolled
             ? 'shadow-[0_4px_20px_rgba(7,26,45,0.14)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.45)]'
             : ''
@@ -215,6 +216,17 @@ export function Navbar() {
             {mobileOpen ? <FiX className="text-ink dark:text-white text-xl" /> : <FiMenu className="text-ink dark:text-white text-xl" />}
           </button>
         </div>
+
+        <a
+          href={classroomHref()}
+          className="hallpass-pin"
+          aria-label="Classroom Login, sign in for teachers"
+        >
+          <span className="pin-head" aria-hidden="true" />
+          <span className="eyebrow">Hall Pass</span>
+          <span className="title font-cta">Classroom Login</span>
+          <span className="stamp">Soon</span>
+        </a>
       </nav>
 
       <AnimatePresence>
@@ -252,6 +264,15 @@ export function Navbar() {
                   className="block w-full text-left mb-1 last:mb-0"
                 />
               ))}
+              <a
+                href={classroomHref()}
+                className={`block py-3 font-medium border-b border-navy/5 dark:border-white/10 transition-colors ${
+                  page === 'classroom' ? 'text-primary-text' : 'text-ink'
+                }`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Classroom Login
+              </a>
             </div>
 
           </motion.div>
