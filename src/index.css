@@ -150,9 +150,20 @@ html.dark {
   }
 
   .glass {
-    @apply backdrop-blur-xl text-ink;
+    @apply text-ink;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     background-color: color-mix(in srgb, var(--surface-card) 95%, transparent);
     border: 1px solid color-mix(in srgb, var(--text-primary) 12%, transparent);
+  }
+
+  /* Cheaper blur on small screens — fixed navbar is the main cost */
+  @media (max-width: 639px) {
+    .glass,
+    .glass-dark {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
   }
 
   .glass-mobile {
@@ -160,7 +171,9 @@ html.dark {
   }
 
   .glass-dark {
-    @apply backdrop-blur-xl bg-navy/90 border border-white/15 text-white;
+    @apply bg-navy/90 border border-white/15 text-white;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
   }
 
   .section-badge {

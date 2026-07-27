@@ -220,7 +220,7 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="xl:hidden mx-4 mt-2 rounded-2xl glass premium-shadow p-6"
+            className="xl:hidden mx-4 mt-2 rounded-2xl glass glass-mobile premium-shadow p-6"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
