@@ -18,12 +18,6 @@ export default defineConfig({
         // Function form is required by Vite 8+/Rolldown; object form still works on Vite 6
         manualChunks(id) {
           if (
-            id.includes('node_modules/three') ||
-            id.includes('node_modules/@react-three/')
-          ) {
-            return 'three'
-          }
-          if (
             id.includes('node_modules/framer-motion') ||
             id.includes('node_modules/gsap')
           ) {
