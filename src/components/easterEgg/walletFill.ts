@@ -1,4 +1,4 @@
-import coinIcon from '@/img/coinicon.png'
+import coinIcon from '@/img/coinicon.webp'
 
 const MT_WIN_TARGET = 60
 
