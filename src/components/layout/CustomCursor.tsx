@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { CoinImage } from '@/components/ui/CoinImage'
 
 export function CustomCursor() {
+  const reducedMotion = useReducedMotion()
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const [visible, setVisible] = useState(false)
   const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
+    if (reducedMotion) return
+
     const isTouch = window.matchMedia('(pointer: coarse)').matches
     if (isTouch) return
 
@@ -34,9 +37,9 @@ export function CustomCursor() {
       document.removeEventListener('mouseleave', leave)
       document.removeEventListener('mouseover', handleOver)
     }
-  }, [])
+  }, [reducedMotion])
 
-  if (!visible) return null
+  if (reducedMotion || !visible) return null
 
   const size = hovering ? 40 : 32
 

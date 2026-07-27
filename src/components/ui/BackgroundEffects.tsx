@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { isTouchDevice } from '@/hooks/useDevice'
 
 const lite = typeof window !== 'undefined' && isTouchDevice()
@@ -17,6 +17,8 @@ const orbs = lite
     ]
 
 export function GlowingOrbs() {
+  const reducedMotion = useReducedMotion()
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {orbs.map((orb, i) => (
@@ -29,23 +31,30 @@ export function GlowingOrbs() {
             left: orb.x,
             top: orb.y,
             background: `radial-gradient(circle, ${orb.color}, transparent 70%)`,
+            opacity: reducedMotion ? 0.5 : undefined,
           }}
           animate={
-            lite
-              ? { opacity: [0.35, 0.5, 0.35] }
+            reducedMotion
+              ? undefined
+              : lite
+                ? { opacity: [0.35, 0.5, 0.35] }
+                : {
+                    scale: [1, 1.2, 1],
+                    opacity: [0.5, 0.8, 0.5],
+                    x: [0, 30, -20, 0],
+                    y: [0, -20, 30, 0],
+                  }
+          }
+          transition={
+            reducedMotion
+              ? undefined
               : {
-                  scale: [1, 1.2, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                  x: [0, 30, -20, 0],
-                  y: [0, -20, 30, 0],
+                  duration: lite ? 6 + i : 8 + i * 2,
+                  repeat: Infinity,
+                  delay: orb.delay,
+                  ease: 'easeInOut',
                 }
           }
-          transition={{
-            duration: lite ? 6 + i : 8 + i * 2,
-            repeat: Infinity,
-            delay: orb.delay,
-            ease: 'easeInOut',
-          }}
         />
       ))}
     </div>
@@ -53,7 +62,8 @@ export function GlowingOrbs() {
 }
 
 export function FloatingParticles() {
-  if (lite) return null
+  const reducedMotion = useReducedMotion()
+  if (lite || reducedMotion) return null
 
   const particles = Array.from({ length: 30 }, (_, i) => ({
     id: i,
