@@ -1,21 +1,45 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import { usePointerPosition } from '@/hooks/usePointerPosition'
 
 export function MouseTrail() {
   const reducedMotion = useReducedMotion()
+  const [enabled, setEnabled] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const points = useRef<{ x: number; y: number; age: number }[]>([])
+  const pos = usePointerPosition(enabled)
+  const lastPos = useRef<{ x: number; y: number } | null>(null)
 
   useEffect(() => {
-    if (reducedMotion) return
+    if (reducedMotion) {
+      setEnabled(false)
+      return
+    }
+
+    const isTouch = window.matchMedia('(pointer: coarse)').matches
+    if (isTouch) {
+      setEnabled(false)
+      return
+    }
+
+    setEnabled(true)
+  }, [reducedMotion])
+
+  useEffect(() => {
+    if (!enabled || !pos.active) return
+    if (lastPos.current?.x === pos.x && lastPos.current?.y === pos.y) return
+    lastPos.current = { x: pos.x, y: pos.y }
+    points.current.push({ x: pos.x, y: pos.y, age: 0 })
+    if (points.current.length > 20) points.current.shift()
+  }, [enabled, pos])
+
+  useEffect(() => {
+    if (!enabled) return
 
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
-
-    const isTouch = window.matchMedia('(pointer: coarse)').matches
-    if (isTouch) return
 
     const resize = () => {
       canvas.width = window.innerWidth
@@ -23,12 +47,6 @@ export function MouseTrail() {
     }
     resize()
     window.addEventListener('resize', resize)
-
-    const onMove = (e: MouseEvent) => {
-      points.current.push({ x: e.clientX, y: e.clientY, age: 0 })
-      if (points.current.length > 20) points.current.shift()
-    }
-    window.addEventListener('mousemove', onMove)
 
     let animId: number
     const draw = () => {
@@ -49,12 +67,11 @@ export function MouseTrail() {
 
     return () => {
       window.removeEventListener('resize', resize)
-      window.removeEventListener('mousemove', onMove)
       cancelAnimationFrame(animId)
     }
-  }, [reducedMotion])
+  }, [enabled])
 
-  if (reducedMotion) return null
+  if (reducedMotion || !enabled) return null
 
   return (
     <motion.canvas
