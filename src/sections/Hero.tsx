@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { FiArrowRight, FiDownload } from 'react-icons/fi'
 import { Button } from '@/components/ui/Button'
 import { DanceChallengeCta } from '@/components/ui/DanceChallengeCta'
@@ -15,6 +15,7 @@ const touchMotion = isTouchDevice() ? 'visible' : 'hidden'
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
+  const heroInView = useInView(sectionRef, { margin: '0px', amount: 0 })
 
   return (
     <section
@@ -24,8 +25,8 @@ export function Hero() {
     >
       <HeroKidsPhotoBackground sectionRef={sectionRef} />
       <div className="hidden sm:block absolute inset-0 pointer-events-none">
-        <GlowingOrbs />
-        <FloatingParticles />
+        <GlowingOrbs active={heroInView} />
+        <FloatingParticles active={heroInView} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-[6.25rem] sm:pt-28 pb-8 sm:pb-16 lg:pt-[7.25rem] lg:pb-8 relative z-10 w-full flex flex-col">
