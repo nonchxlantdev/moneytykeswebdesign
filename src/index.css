@@ -621,12 +621,12 @@ html.dark {
 .tape.center { top: -11px; left: 50%; margin-left: -36px; }
 
 .photo-frame {
-  padding: 8px 8px 30px;
+  padding: 8px 8px 34px;
   isolation: isolate;
 }
 @media (min-width: 768px) {
   .photo-frame {
-    padding: 12px 12px 38px;
+    padding: 12px 12px 42px;
   }
 }
 .photo-frame img {
@@ -644,10 +644,11 @@ html.dark {
   font-size: clamp(16px, 4vw, 20px);
   color: var(--class-teal-deep);
   text-align: center;
-  margin-top: -20px;
+  margin-top: -28px;
   position: relative;
   z-index: 2;
   padding-inline: 8px;
+  line-height: 1.1;
 }
 
 .index-card {
