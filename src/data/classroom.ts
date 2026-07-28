@@ -117,7 +117,7 @@ export const classroomAssessmentCentre = {
 export const classroomParentCallout = {
   badge: 'Soon',
   title: 'Parents get to see it too',
-  body: 'Parents will follow along in the same MoneyTykes app, from grades to lesson progress, right alongside what happens in the classroom.',
+  body: 'Parents will follow along in the MoneyTykes app, from grades to lesson progress, right alongside what happens in the classroom.',
 }
 
 export const classroomLoginPanel = {
