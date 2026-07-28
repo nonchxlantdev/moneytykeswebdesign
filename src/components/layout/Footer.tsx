@@ -156,37 +156,41 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-navy/10 dark:border-white/10 pt-6 pb-2 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-subtle dark:text-white/75 pr-16 sm:pr-20 md:pr-24">
-          <p>&copy; {new Date().getFullYear()} MoneyTykes Ltd. All rights reserved.</p>
-          <div className="flex flex-wrap justify-center md:justify-end items-center gap-6">
-            <button
-              type="button"
-              onClick={openFaq}
-              className="hover:text-ink dark:hover:text-white transition-colors"
-            >
-              FAQs
-            </button>
-            <a
-              href={privacyHref()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-ink dark:hover:text-white transition-colors"
-            >
-              Privacy
-            </a>
-            <a
-              href={termsHref()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-ink dark:hover:text-white transition-colors"
-            >
-              Terms &amp; Conditions
-            </a>
+        <div className="border-t border-navy/10 dark:border-white/10 pt-6 pb-2 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-subtle dark:text-white/75 text-center md:text-left md:pr-24">
+          <p className="text-center md:text-left">
+            &copy; {new Date().getFullYear()} MoneyTykes Ltd. All rights reserved.
+          </p>
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-end items-center gap-4 sm:gap-6 w-full md:w-auto">
+            <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3">
+              <button
+                type="button"
+                onClick={openFaq}
+                className="hover:text-ink dark:hover:text-white transition-colors"
+              >
+                FAQs
+              </button>
+              <a
+                href={privacyHref()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-ink dark:hover:text-white transition-colors"
+              >
+                Privacy
+              </a>
+              <a
+                href={termsHref()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-ink dark:hover:text-white transition-colors"
+              >
+                Terms &amp; Conditions
+              </a>
+            </div>
             <a
               href="https://visionforge.bz"
               target="_blank"
               rel="noopener noreferrer"
-              className="vf-credit inline-flex items-center gap-2 transition-opacity hover:opacity-90"
+              className="vf-credit inline-flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
               aria-label="Created by Vision Forge"
             >
               <span className="text-[11px] font-medium text-white/45">Created by</span>

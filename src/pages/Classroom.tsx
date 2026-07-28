@@ -20,6 +20,7 @@ import { FaGraduationCap, FaUniversity } from 'react-icons/fa'
 import { Button } from '@/components/ui/Button'
 import { CoinImage } from '@/components/ui/CoinImage'
 import { ChalkboardBoard } from '@/components/ui/ChalkboardBoard'
+import { LightboxImage } from '@/components/ui/ImageLightbox'
 import { classroomLoginPreview, classroomDashPreview } from '@/img'
 import { SUPPORT_EMAIL, SPONSOR_WHATSAPP_URL } from '@/data/links'
 import {
@@ -270,11 +271,15 @@ function TapedPhoto({
       className="mb-10 sm:mb-14 photo-preview-wrap"
       style={{ ['--photo-tilt' as string]: rotate }}
     >
-      <div className="taped photo-frame">
+      <LightboxImage
+        src={src}
+        alt={alt}
+        className="taped photo-frame lightbox-trigger--photo"
+        imgClassName="w-full h-auto object-cover object-top"
+      >
         <span className="tape left" />
         <span className="tape right" />
-        <img src={src} alt={alt} className="w-full h-auto object-cover object-top" loading="lazy" decoding="async" />
-      </div>
+      </LightboxImage>
       <p className="photo-caption">{caption}</p>
     </div>
   )
@@ -328,7 +333,7 @@ export function Classroom() {
           <span className="section-badge !bg-transparent !border-[color-mix(in_srgb,var(--class-chalk-gold)_40%,transparent)] text-chalk-gold">
             MoneyTykes Classroom
           </span>
-          <h1 className="font-cta text-[1.45rem] leading-snug sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold tracking-tight text-chalk mb-4 md:mb-5 max-w-3xl mx-auto">
+          <h1 className="font-cta text-[1.85rem] leading-[1.2] sm:text-4xl md:text-5xl lg:text-[3.35rem] font-bold tracking-tight text-chalk mb-4 md:mb-5 max-w-4xl mx-auto px-1">
             {classroomHeroTagline.beforeTech}
             <span className="text-[#3b82f6]">{classroomHeroTagline.tech}</span>
             {classroomHeroTagline.mid}
