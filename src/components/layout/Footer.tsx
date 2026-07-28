@@ -156,9 +156,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-navy/10 dark:border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-subtle dark:text-white/75">
+        <div className="border-t border-navy/10 dark:border-white/10 pt-6 pb-2 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-subtle dark:text-white/75 pr-16 sm:pr-20 md:pr-24">
           <p>&copy; {new Date().getFullYear()} MoneyTykes Ltd. All rights reserved.</p>
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-6">
             <button
               type="button"
               onClick={openFaq}
@@ -181,6 +181,24 @@ export function Footer() {
               className="hover:text-ink dark:hover:text-white transition-colors"
             >
               Terms &amp; Conditions
+            </a>
+            <a
+              href="https://visionforge.bz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="vf-credit inline-flex items-center gap-2 transition-opacity hover:opacity-90"
+              aria-label="Created by Vision Forge"
+            >
+              <span className="text-[11px] font-medium text-white/45">Created by</span>
+              <span className="text-[11px] font-black uppercase tracking-[0.08em]">
+                <span className="text-white">Vision</span>{' '}
+                <span className="text-[#5B8BFF]">Forge</span>
+              </span>
+              <span
+                className="vf-status-dot"
+                aria-hidden="true"
+                title="All systems operational"
+              />
             </a>
           </div>
         </div>

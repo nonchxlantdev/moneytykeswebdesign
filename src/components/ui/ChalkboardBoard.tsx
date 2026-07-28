@@ -16,7 +16,7 @@ export function ChalkboardBoard({ children }: ChalkboardBoardProps) {
         ))}
       </div>
       <div className="relative z-10 pt-36 sm:pt-40 px-4 sm:px-5 md:px-8">
-        <div className="max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto">{children}</div>
+        <div className="max-w-3xl md:max-w-5xl lg:max-w-6xl mx-auto">{children}</div>
       </div>
       <div className="wood-tray" aria-hidden="true">
         <div className="chalk-bits">

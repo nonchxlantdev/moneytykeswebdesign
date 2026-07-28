@@ -1,0 +1,116 @@
+{
+    "$description": "Design reference for the Classroom page closing section (feature card icons, four benefit icons, and the closing call to action block). This is a spec to check a build against, not code the site runs. No photos are included by request, this covers style, layout, and copy structure only.",
+    "sourceReference": "User supplied reference image of a sponsor style closing section, matched as closely as possible while swapping in MoneyTykes Classroom's real content and only real, existing contact channels.",
+    "scope": ["featureCardIcons", "benefitRow", "closingCtaBlock", "contactStrip"],
+    "outOfScope": ["photos", "phone contact", "live chat"],
+  
+    "typography": {
+      "faces": [
+        { "role": "headline", "family": "Fredoka", "weight": 700, "usedFor": "the big closing headline and section titles, already the page's display face" },
+        { "role": "body", "family": "Inter", "weight": [400, 600, 700], "usedFor": "all paragraph copy, card text, button labels, already the page's body face" },
+        { "role": "ghostAccent", "family": "Caveat", "weight": 600, "usedFor": "the faint chalk ghost words and the two photo captions elsewhere on the page, unchanged by this spec" },
+        { "role": "casualLabel", "family": "Kalam", "weight": 700, "usedFor": "one line only, the short prompt beside the closing call to action buttons, e.g. Ready to get started? Bolder and blockier than Caveat so it does not compete with it, this is the only place Kalam appears on the page or the site" }
+      ],
+      "googleFontsLinkAddition": "Kalam:wght@700"
+    },
+  
+    "iconBadge": {
+      "$note": "Applies to every icon badge covered by this spec: the nine feature card icons, the four benefit icons, and the two icon chips inside the plain closing CTA buttons. This replaces the earlier pale tint version, which read as too quiet against the dark board.",
+      "shape": "circle",
+      "sizeFeatureCard": "48px, up from 42px",
+      "sizeBenefitRow": "50px, up from 44px",
+      "sizeCtaChip": "36px, up from 32px, chips inside the plain buttons only, the gold primary button keeps its existing lighter chip treatment since the button itself already carries full color",
+      "fill": "solid, full saturation brand hue, not a pale tint",
+      "glyphColor": "#ffffff",
+      "ring": { "width": "2px", "color": "var(--class-chalk)", "opacity": 0.9 },
+      "shadow": "0 4px 10px rgba(0,0,0,0.35)",
+      "rotationFeatureCard": "matches the existing tilt already applied to each taped feature card, no separate rotation on the badge itself",
+      "rotationOther": "none, benefit and contact icons sit upright"
+    },
+  
+    "featureCardIcons": {
+      "$note": "Same nine cards already in classroomFeatures, badge fill swapped from the pale accent.bg tint to the solid accent.fg hue, glyph goes white.",
+      "items": [
+        { "id": "dashboard", "icon": "FiGrid", "solidFill": "#2563eb" },
+        { "id": "my-day", "icon": "FiSun", "solidFill": "#d97706" },
+        { "id": "calendar", "icon": "FiCalendar", "solidFill": "#7c3aed" },
+        { "id": "report-cards", "icon": "FiFileText", "solidFill": "#dc2626", "note": "hero card, keeps its New badge and the grade widget below the text" },
+        { "id": "students", "icon": "FiUsers", "solidFill": "#ea580c" },
+        { "id": "lessons", "icon": "FiBookOpen", "solidFill": "#16a34a" },
+        { "id": "quizzes", "icon": "FiClipboard", "solidFill": "#0891b2" },
+        { "id": "rewards", "icon": "FiAward", "solidFill": "#ca8a04" },
+        { "id": "game", "icon": "FaGamepad", "solidFill": "#c026d3" }
+      ]
+    },
+  
+    "benefitRow": {
+      "$note": "Four columns under the closing headline, icon choices adjusted to track the reference image's closest equivalents where the content lines up.",
+      "layout": "four equal columns on desktop, two columns under 820px",
+      "items": [
+        { "id": "time", "title": "Save teachers time", "icon": "FiClock", "solidFill": "#d97706", "referenceMatch": "matches the reference's own clock icon almost exactly" },
+        { "id": "engage", "title": "Engage students", "icon": "FaGraduationCap", "solidFill": "#2563eb", "referenceMatch": "swapped from a plain bolt icon to a graduation cap, closer to the reference and a better fit for a lessons context" },
+        { "id": "parents", "title": "Keep parents in the loop", "icon": "FiBell", "solidFill": "#16a34a", "referenceMatch": "kept as a bell rather than the reference's people icon, more accurate to a communication and updates benefit" },
+        { "id": "school", "title": "Built for your whole school", "icon": "FaUniversity", "solidFill": "#7c3aed", "referenceMatch": "swapped from a house icon to a small institution icon, matches the reference's bank style icon for its closest equivalent benefit" }
+      ]
+    },
+  
+    "closingCtaBlock": {
+      "headline": {
+        "structure": "before + highlight + after, highlight rendered in var(--class-chalk-gold)",
+        "example": "Bring a [Connected Classroom] to your school",
+        "subtitleFace": "Inter"
+      },
+      "container": {
+        "$note": "New in this pass, the reference wraps its whole call to action row in one bordered pill shaped panel with a casual handwritten line on one side and the buttons on the other. The page did not have this label or container before.",
+        "shape": "rounded panel, border 1.5px solid rgba(247,238,219,0.25), background rgba(0,0,0,0.15)",
+        "layout": "label on the left, buttons filling the right, stacks to label above buttons under 820px"
+      },
+      "label": {
+        "text": "Ready to get started?",
+        "face": "Kalam",
+        "color": "var(--class-chalk)",
+        "note": "placeholder wording, matches the reference's tone without copying its sponsorship specific phrase, change freely"
+      },
+      "buttons": [
+        {
+          "key": "sponsor",
+          "label": "Sponsor a classroom",
+          "sub": "Support a school in your community",
+          "style": "primary, solid var(--class-chalk-gold) fill",
+          "icon": "FiHeart",
+          "iconChip": "light chip on the gold button, not the solid saturated treatment",
+          "action": "links to the sponsorship section that already exists on the home page"
+        },
+        {
+          "key": "demo",
+          "label": "Request a demo",
+          "sub": "We will walk your school through it",
+          "style": "plain, translucent dark fill",
+          "icon": "FiCalendar",
+          "iconChip": { "solidFill": "#2563eb" },
+          "action": "opens a pre filled email to the real support address, swapped from an envelope icon to a calendar icon to track the reference even though the mechanism is still email, there is no booking tool live yet"
+        },
+        {
+          "key": "login",
+          "label": "School login",
+          "sub": "For teachers already set up",
+          "style": "plain, translucent dark fill",
+          "icon": "FiUser",
+          "iconChip": { "solidFill": "#16a34a" },
+          "action": "same gated login behavior as the rest of the page, disabled with a note until the real login URL is set"
+        }
+      ]
+    },
+  
+    "contactStrip": {
+      "$note": "Only real, existing channels. Call Us and Live Chat from the reference image are intentionally left out, the site has no phone line or live chat today and this spec should not imply otherwise.",
+      "items": [
+        { "key": "email", "label": "Email us", "icon": "FiMail", "solidFill": "#2563eb", "action": "mailto to the real support address" },
+        { "key": "message", "label": "Message us", "icon": "FiMessageCircle", "solidFill": "#16a34a", "action": "the real sponsor WhatsApp link, colored to match WhatsApp's own green since that is the actual channel" }
+      ],
+      "omitted": [
+        { "key": "call", "reason": "no phone line exists on the site today" },
+        { "key": "liveChat", "reason": "no live chat tool exists on the site today" }
+      ]
+    }
+  }
