@@ -29,7 +29,7 @@ export function Hero() {
         <FloatingParticles active={heroInView} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-[6.25rem] sm:pt-28 pb-8 sm:pb-16 lg:pt-[7.25rem] lg:pb-8 relative z-10 w-full flex flex-col">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-[7.5rem] sm:pt-36 pb-8 sm:pb-16 lg:pt-40 lg:pb-8 relative z-10 w-full flex flex-col">
         <motion.div
           variants={slideInLeft}
           initial={touchMotion}

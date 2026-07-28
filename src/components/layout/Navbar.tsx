@@ -5,17 +5,15 @@ import { useTheme } from '@/hooks/useTheme'
 import { useActiveSection } from '@/hooks/useActiveSection'
 import { DownloadAppButton } from '@/components/ui/DownloadAppButton'
 import { AudioControl } from '@/components/layout/AudioControl'
+import { ClassroomAnnouncementBanner } from '@/components/layout/ClassroomAnnouncementBanner'
 import { BrandLogo } from '@/components/ui/BrandLogo'
 import {
   getAppPage,
   homeSectionHref,
   PLANS_NAV_HREF,
-  FAQ_NAV_HREF,
   STORY_NAV_HREF,
   plansHref,
-  faqHref,
   storyHref,
-  classroomHref,
 } from '@/data/links'
 
 type NavLinkType = 'section' | 'page' | 'plans'
@@ -24,6 +22,7 @@ interface NavLink {
   label: string
   href: string
   type: NavLinkType
+  badge?: string
 }
 
 const sectionNavLinks: NavLink[] = [
@@ -37,7 +36,6 @@ const sectionNavLinks: NavLink[] = [
 const pageNavLinks: NavLink[] = [
   { label: 'Our Story', href: STORY_NAV_HREF, type: 'page' },
   { label: 'Plans', href: PLANS_NAV_HREF, type: 'plans' },
-  { label: 'FAQs', href: FAQ_NAV_HREF, type: 'page' },
 ]
 
 function NavItem({
@@ -82,7 +80,7 @@ function NavItem({
     <a
       href={resolveHref(link.href)}
       onClick={onNavigate}
-      className={`relative inline-flex items-center px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-semibold leading-normal whitespace-nowrap rounded-lg shrink-0 transition-[color,background-color,border-color,box-shadow] duration-200 ${textClass} ${shellClass} ${className}`}
+      className={`relative inline-flex items-center gap-1 px-2.5 xl:px-3 py-2 text-[13px] xl:text-sm font-semibold leading-normal whitespace-nowrap rounded-lg shrink-0 transition-[color,background-color,border-color,box-shadow] duration-200 ${textClass} ${shellClass} ${className}`}
     >
       <span className="relative z-10">{link.label}</span>
       {isActive && link.type === 'section' && (
@@ -99,29 +97,32 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const scrolledRef = useRef(false)
-  const { theme, toggle } = useTheme()
+  const { theme, toggle, setTheme } = useTheme()
   const page = getAppPage()
   const activeHref = useActiveSection(sectionNavLinks.map((l) => l.href))
   const resolveHref = (href: string) => {
     if (href === PLANS_NAV_HREF) return plansHref()
-    if (href === FAQ_NAV_HREF) return faqHref()
     if (href === STORY_NAV_HREF) return storyHref()
     return page === 'home' ? href : homeSectionHref(href)
   }
 
   const isNavActive = (link: NavLink) => {
     if (link.href === PLANS_NAV_HREF) return page === 'plans'
-    if (link.href === FAQ_NAV_HREF) return page === 'faq'
     if (link.href === STORY_NAV_HREF) return page === 'story'
     return activeHref === link.href
   }
+
+  useEffect(() => {
+    // Dark mode toggle is hidden for now; keep the site on light mode.
+    setTheme('light')
+  }, [setTheme])
 
   useEffect(() => {
     let frame = 0
 
     const updateScrolled = () => {
       const y = window.scrollY
-      const next = scrolledRef.current ? y > 20 : y > 72
+      const next = scrolledRef.current ? y > 8 : y > 16
 
       if (next !== scrolledRef.current) {
         scrolledRef.current = next
@@ -148,16 +149,17 @@ export function Navbar() {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)] py-2 sm:py-4"
+      className={`fixed top-0 left-0 right-0 z-50 pt-[env(safe-area-inset-top)] bg-white dark:bg-navy transition-[box-shadow,border-color] duration-300 ${
+        scrolled
+          ? 'shadow-[0_1px_2px_rgba(7,26,45,0.04),0_4px_14px_rgba(7,26,45,0.06)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_4px_16px_rgba(0,0,0,0.28)] border-b border-transparent'
+          : 'shadow-none border-b border-navy/[0.06] dark:border-white/10'
+      }`}
       initial={false}
       animate={{ y: 0 }}
     >
+      <ClassroomAnnouncementBanner />
       <nav
-        className={`relative overflow-visible mx-2 sm:mx-4 md:mx-auto md:max-w-7xl rounded-xl sm:rounded-2xl pl-2 sm:pl-5 lg:pl-8 pr-2 sm:pr-5 lg:pr-8 xl:pr-28 py-2 sm:py-3 flex items-center gap-2 xl:grid xl:grid-cols-[auto_1fr_auto] xl:gap-6 2xl:gap-8 glass glass-mobile premium-shadow transition-[box-shadow,background-color] duration-300 ${
-          scrolled
-            ? 'shadow-[0_4px_20px_rgba(7,26,45,0.14)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.45)]'
-            : ''
-        }`}
+        className="relative mx-auto max-w-7xl pl-2 sm:pl-3 lg:pl-4 pr-3 sm:pr-5 lg:pr-8 py-2.5 sm:py-3 flex items-center gap-2 xl:grid xl:grid-cols-[auto_1fr_auto] xl:gap-6 2xl:gap-8"
         aria-label="Main navigation"
       >
         <a href={resolveHref('#home')} className="flex items-center shrink-0 min-w-0 xl:mr-2 group" data-magnetic>
@@ -191,9 +193,10 @@ export function Navbar() {
         <div className="flex items-center shrink-0 xl:justify-self-end gap-1 2xl:gap-1.5">
           <div className="flex items-center gap-0.5 sm:gap-1.5">
             <AudioControl />
+            {/* Dark mode toggle hidden for now — keep code, restore by removing `hidden` */}
             <button
               onClick={toggle}
-              className="w-9 h-9 min-w-9 min-h-9 flex items-center justify-center rounded-full hover:bg-navy/5 dark:hover:bg-white/10 transition-colors touch-manipulation"
+              className="hidden w-9 h-9 min-w-9 min-h-9 items-center justify-center rounded-full hover:bg-navy/5 dark:hover:bg-white/10 transition-colors touch-manipulation"
               aria-label="Toggle dark mode"
             >
               {theme === 'light' ? <FiMoon className="text-ink" /> : <FiSun className="text-accent" />}
@@ -216,23 +219,12 @@ export function Navbar() {
             {mobileOpen ? <FiX className="text-ink dark:text-white text-xl" /> : <FiMenu className="text-ink dark:text-white text-xl" />}
           </button>
         </div>
-
-        <a
-          href={classroomHref()}
-          className="hallpass-pin"
-          aria-label="Classroom Login, sign in for teachers"
-        >
-          <span className="pin-head" aria-hidden="true" />
-          <span className="eyebrow">Hall Pass</span>
-          <span className="title font-cta">Classroom Login</span>
-          <span className="stamp">Soon</span>
-        </a>
       </nav>
 
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="xl:hidden mx-4 mt-2 rounded-2xl glass glass-mobile premium-shadow p-6"
+            className="xl:hidden mx-3 sm:mx-4 mb-3 rounded-2xl bg-white dark:bg-navy-light border border-navy/8 dark:border-white/10 shadow-[0_8px_24px_rgba(7,26,45,0.08)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.35)] p-6"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -261,18 +253,9 @@ export function Navbar() {
                   isActive={isNavActive(link)}
                   resolveHref={resolveHref}
                   onNavigate={() => setMobileOpen(false)}
-                  className="block w-full text-left mb-1 last:mb-0"
+                  className="w-full text-left mb-1 last:mb-0"
                 />
               ))}
-              <a
-                href={classroomHref()}
-                className={`block py-3 font-medium border-b border-navy/5 dark:border-white/10 transition-colors ${
-                  page === 'classroom' ? 'text-primary-text' : 'text-ink'
-                }`}
-                onClick={() => setMobileOpen(false)}
-              >
-                Classroom Login
-              </a>
             </div>
 
           </motion.div>

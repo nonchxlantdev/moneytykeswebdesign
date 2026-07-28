@@ -110,7 +110,7 @@ export function OurStory() {
         <Navbar />
       </Suspense>
 
-      <article className="pt-28 md:pt-32 pb-14 md:pb-16 px-4 md:px-8">
+      <article className="pt-36 md:pt-40 pb-14 md:pb-16 px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="lg:grid lg:grid-cols-[10.5rem_minmax(0,1fr)] xl:grid-cols-[11.5rem_minmax(0,1fr)] lg:gap-10 xl:gap-14">
             <aside className="hidden lg:block relative">

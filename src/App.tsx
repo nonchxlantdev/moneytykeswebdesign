@@ -8,6 +8,8 @@ import { CustomCursor } from '@/components/layout/CustomCursor'
 import { MouseTrail } from '@/components/layout/MouseTrail'
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary'
 import { ThemeSongPrompt } from '@/components/layout/ThemeSongPrompt'
+import { FaqWidgetProvider } from '@/components/faq/FaqWidgetContext'
+import { FaqWidget } from '@/components/faq/FaqWidget'
 import { Home } from '@/pages/Home'
 import { Terms } from '@/pages/Terms'
 import { Privacy } from '@/pages/Privacy'
@@ -38,45 +40,48 @@ export default function App() {
 
   return (
     <SoundProvider ready={loaded}>
-      <AnimatePresence mode="wait">
-        {!loaded ? (
-          <LoadingScreen key="loading" onComplete={handleLoadComplete} />
-        ) : (
-          <motion.div
-            key="app"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-          >
-            {desktopFx && (
-              <>
-                <CustomCursor />
-                <MouseTrail />
-              </>
-            )}
-            <ErrorBoundary>
-              <ThemeSongPrompt />
-              {page === 'terms' ? (
-                <Terms />
-              ) : page === 'privacy' ? (
-                <Privacy />
-              ) : page === 'plans' ? (
-                <Plans />
-              ) : page === 'faq' ? (
-                <FaqPage />
-              ) : page === 'story' ? (
-                <OurStory />
-              ) : page === 'dance-challenge' ? (
-                <DanceChallenge />
-              ) : page === 'classroom' ? (
-                <Classroom />
-              ) : (
-                <Home />
+      <FaqWidgetProvider>
+        <AnimatePresence mode="wait">
+          {!loaded ? (
+            <LoadingScreen key="loading" onComplete={handleLoadComplete} />
+          ) : (
+            <motion.div
+              key="app"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+            >
+              {desktopFx && (
+                <>
+                  <CustomCursor />
+                  <MouseTrail />
+                </>
               )}
-            </ErrorBoundary>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <ErrorBoundary>
+                <ThemeSongPrompt />
+                {page === 'terms' ? (
+                  <Terms />
+                ) : page === 'privacy' ? (
+                  <Privacy />
+                ) : page === 'plans' ? (
+                  <Plans />
+                ) : page === 'faq' ? (
+                  <FaqPage />
+                ) : page === 'story' ? (
+                  <OurStory />
+                ) : page === 'dance-challenge' ? (
+                  <DanceChallenge />
+                ) : page === 'classroom' ? (
+                  <Classroom />
+                ) : (
+                  <Home />
+                )}
+              </ErrorBoundary>
+              <FaqWidget />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </FaqWidgetProvider>
     </SoundProvider>
   )
 }

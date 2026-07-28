@@ -7,8 +7,8 @@ import {
   TIKTOK_URL,
   YOUTUBE_URL,
   SUPPORT_EMAIL,
+  classroomHref,
   danceChallengeHref,
-  faqHref,
   getAppPage,
   homeSectionHref,
   privacyHref,
@@ -16,13 +16,14 @@ import {
   termsHref,
 } from '@/data/links'
 import { BrandLogo } from '@/components/ui/BrandLogo'
+import { useFaqWidget } from '@/components/faq/FaqWidgetContext'
 
 const quickLinks = [
   { label: 'Our Story', href: '__story_page__' },
   { label: 'Dance Challenge', href: '__dance_challenge_page__' },
+  { label: 'Classroom', href: '__classroom_page__' },
   { label: 'Features', href: '#features' },
   { label: 'How It Works', href: '#journey' },
-  { label: 'FAQ', href: '__faq_page__' },
 ]
 
 const partnerLinks = [{ label: 'Be A Sponsor', href: '#sponsors' }]
@@ -36,10 +37,11 @@ const socials = [
 
 export function Footer() {
   const page = getAppPage()
+  const { openFaq } = useFaqWidget()
   const resolveHref = (href: string) => {
-    if (href === '__faq_page__') return faqHref()
     if (href === '__story_page__') return storyHref()
     if (href === '__dance_challenge_page__') return danceChallengeHref()
+    if (href === '__classroom_page__') return classroomHref()
     return page === 'home' ? href : homeSectionHref(href)
   }
 
@@ -156,7 +158,14 @@ export function Footer() {
 
         <div className="border-t border-navy/10 dark:border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-subtle dark:text-white/75">
           <p>&copy; {new Date().getFullYear()} MoneyTykes Ltd. All rights reserved.</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
+            <button
+              type="button"
+              onClick={openFaq}
+              className="hover:text-ink dark:hover:text-white transition-colors"
+            >
+              FAQs
+            </button>
             <a
               href={privacyHref()}
               target="_blank"

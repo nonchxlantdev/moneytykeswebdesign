@@ -9,7 +9,7 @@ interface BrandLogoProps {
 const sizes = {
   nav: 'h-10 md:h-11 w-auto',
   web: 'h-16 sm:h-[4.75rem] md:h-[5.5rem] w-auto',
-  'web-nav': 'h-8 sm:h-10 md:h-11 xl:h-[3.25rem] w-auto max-w-[7.5rem] sm:max-w-[9rem] xl:max-w-none',
+  'web-nav': 'h-9 sm:h-11 md:h-12 xl:h-[3.6rem] w-auto max-w-[8.25rem] sm:max-w-[9.9rem] xl:max-w-none',
   hero: 'h-28 md:h-36 w-auto',
   footer: 'h-14 w-auto',
   loading: 'h-36 md:h-44 w-auto',
@@ -30,16 +30,8 @@ export function BrandLogo({ variant = 'nav', className = '' }: BrandLogoProps) {
     />
   )
 
-  if (variant === 'web') {
+  if (variant === 'web' || variant === 'web-nav') {
     return img
-  }
-
-  if (variant === 'web-nav') {
-    return (
-      <div className="rounded-lg sm:rounded-xl bg-white px-1.5 py-0.5 sm:px-2.5 sm:py-1.5 shadow-sm ring-1 ring-navy/8">
-        {img}
-      </div>
-    )
   }
 
   if (variant === 'nav') {

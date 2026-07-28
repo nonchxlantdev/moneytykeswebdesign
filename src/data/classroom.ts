@@ -76,7 +76,7 @@ export const classroomFeatures: ClassroomFeature[] = [
 export const classroomParentCallout = {
   badge: 'Soon',
   title: 'Parents get to see it too',
-  body: 'A parent app is coming so families can follow along too, from grades to lesson progress, right alongside what happens in the classroom.',
+  body: 'Parents will follow along in the same MoneyTykes app, from grades to lesson progress, right alongside what happens in the classroom.',
 }
 
 export const classroomLoginPanel = {
@@ -88,12 +88,20 @@ export const classroomLoginPanel = {
 export const classroomImagePlaceholders = {
   login: {
     heading: 'Classroom login preview',
-    caption: 'This spot will hold a real screenshot of the MoneyTykes Classroom login screen once it is ready to share.',
-    alt: 'Placeholder for the MoneyTykes Classroom login screen',
+    alt: 'The MoneyTykes Classroom login screen',
   },
   dashboard: {
     heading: 'Dashboard preview',
-    caption: 'This spot will hold a real screenshot of the MoneyTykes Classroom dashboard once it is ready to share.',
-    alt: 'Placeholder for the MoneyTykes Classroom dashboard',
+    alt: 'The MoneyTykes Classroom dashboard',
   },
 }
+
+export const classroomChalkWords = [
+  'Quizzes',
+  'Lessons',
+  'Calendar',
+  'Grades',
+  'Games',
+  'Rewards',
+  'Students',
+]

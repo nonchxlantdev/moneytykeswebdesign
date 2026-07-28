@@ -126,7 +126,7 @@ export function DanceChallenge() {
         <Navbar />
       </Suspense>
 
-      <div className="relative flex-1 pt-32 sm:pt-40 md:pt-44 pb-10 md:pb-14 px-3 sm:px-5 md:px-8">
+      <div className="relative flex-1 pt-40 sm:pt-44 md:pt-48 pb-10 md:pb-14 px-3 sm:px-5 md:px-8">
         {/* Playful stage backdrop */}
         <div className="dc-stage-bg" aria-hidden />
         <div className="dc-confetti" aria-hidden />
