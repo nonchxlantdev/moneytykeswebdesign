@@ -50,6 +50,7 @@ html.dark {
   --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-cta: "Fredoka", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-handwriting: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
 }
 
 @layer base {
@@ -478,16 +479,23 @@ html.dark {
   }
 }
 
-/* Classroom Login hall pass, pinned to the nav bar and swinging.
-   Colors sampled from the real MoneyTykes Classroom dashboard screenshot. */
+/* Classroom page and nav trigger. Colors sampled from the real
+   MoneyTykes Classroom dashboard screenshot. */
 :root {
   --class-teal: #123e35;
   --class-teal-deep: #0b2b26;
+  --class-teal-high: #1a4d42;
   --class-wood: #734826;
+  --class-wood-light: #9c6a3c;
   --class-chalk: #f7eedb;
+  --class-chalk-gold: #f7d075;
   --class-stamp: #ce1126;
+  --class-paper: #fdfaf1;
+  --class-paper-line: rgba(18, 62, 53, 0.14);
+  --class-note-gold: #f5ca63;
 }
 
+/* ---- nav trigger: the only pin left on the site ---- */
 .hallpass-pin {
   position: absolute;
   top: -6px;
@@ -504,78 +512,233 @@ html.dark {
   transform-origin: 16px 0px;
   animation: hallpass-swing 3.4s ease-in-out infinite;
 }
-
 @media (min-width: 80rem) {
-  .hallpass-pin {
-    display: flex;
-  }
+  .hallpass-pin { display: flex; }
 }
-
-.hallpass-pin:hover {
-  animation-play-state: paused;
-  transform: rotate(0deg) translateY(-2px);
-}
-
-.hallpass-pin:focus-visible {
-  outline: 2px solid var(--class-chalk);
-  outline-offset: 3px;
-}
-
+.hallpass-pin:hover { animation-play-state: paused; transform: rotate(0deg) translateY(-2px); }
+.hallpass-pin:focus-visible { outline: 2px solid var(--class-chalk); outline-offset: 3px; }
 @keyframes hallpass-swing {
   0% { transform: rotate(-6deg); }
   50% { transform: rotate(3deg); }
   100% { transform: rotate(-6deg); }
 }
-
 @media (prefers-reduced-motion: reduce) {
-  .hallpass-pin {
-    animation: none;
-    transform: rotate(-4deg);
-  }
+  .hallpass-pin { animation: none; transform: rotate(-4deg); }
 }
-
 .hallpass-pin .pin-head {
-  position: absolute;
-  top: -7px;
-  left: 15px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+  position: absolute; top: -7px; left: 15px; width: 12px; height: 12px; border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff8f8f 0%, var(--class-stamp) 55%, #7c0d15 100%);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
 }
-
 .hallpass-pin .eyebrow {
-  font-size: 8.5px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 8.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
   color: rgba(247, 238, 219, 0.62);
 }
-
-.hallpass-pin .title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--class-chalk);
-  white-space: nowrap;
-  margin-top: 1px;
-}
-
+.hallpass-pin .title { font-size: 15px; font-weight: 700; color: var(--class-chalk); white-space: nowrap; margin-top: 1px; }
 .hallpass-pin .stamp {
-  position: absolute;
-  bottom: -9px;
-  right: -11px;
-  font-size: 8.5px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--class-stamp);
-  border: 1.5px solid var(--class-stamp);
-  border-radius: 5px;
-  padding: 1px 5px;
-  background: rgba(250, 249, 246, 0.95);
-  transform: rotate(9deg);
+  position: absolute; bottom: -9px; right: -11px;
+  font-size: 8.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--class-stamp);
+  border: 1.5px solid var(--class-stamp); border-radius: 5px; padding: 1px 5px;
+  background: rgba(250, 249, 246, 0.95); transform: rotate(9deg);
 }
+
+.nav-classroom-chalk {
+  filter: drop-shadow(0 0 4px rgba(206, 17, 38, 0.55))
+    drop-shadow(0 0 10px rgba(206, 17, 38, 0.35));
+}
+
+/* ---- the board, one continuous field for the whole page ---- */
+.chalkboard-board {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 4%, rgba(255, 255, 255, 0.05), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 85% 96%, rgba(0, 0, 0, 0.25), transparent 65%),
+    linear-gradient(175deg, var(--class-teal-high) 0%, var(--class-teal) 35%, var(--class-teal) 65%, var(--class-teal-deep) 100%);
+}
+/* Chalk dust texture stays behind content — never stacked over photos */
+.chalkboard-board::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0; opacity: 0.35; pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+  background-size: 140px 140px;
+  mix-blend-mode: soft-light;
+}
+.chalkboard-ghosts { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.chalk-ghost,
+.photo-caption {
+  font-family: 'Caveat', cursive;
+}
+.chalk-ghost {
+  position: absolute; font-weight: 600; color: var(--class-chalk);
+  white-space: nowrap; filter: blur(0.3px);
+}
+.chalk-ghost-0 { top: 6%;  left: 4%;  font-size: 30px; opacity: 0.08; transform: rotate(-6deg); }
+.chalk-ghost-1 { top: 5%;  left: 78%; font-size: 26px; opacity: 0.07; transform: rotate(5deg); }
+.chalk-ghost-2 { top: 34%; left: 2%;  font-size: 22px; opacity: 0.06; transform: rotate(4deg); }
+.chalk-ghost-3 { top: 46%; left: 84%; font-size: 24px; opacity: 0.07; transform: rotate(-5deg); }
+.chalk-ghost-4 { top: 66%; left: 3%;  font-size: 34px; opacity: 0.06; transform: rotate(-4deg); }
+.chalk-ghost-5 { top: 80%; left: 80%; font-size: 22px; opacity: 0.07; transform: rotate(6deg); }
+.chalk-ghost-6 { top: 93%; left: 6%;  font-size: 26px; opacity: 0.06; transform: rotate(3deg); }
+@media (max-width: 480px) {
+  .chalk-ghost-4, .chalk-ghost-1 { display: none; }
+}
+
+.text-chalk { color: var(--class-chalk); }
+.text-chalk-gold { color: var(--class-chalk-gold); }
+
+.chalk-zigzag {
+  display: flex;
+  justify-content: center;
+  color: var(--class-chalk);
+  opacity: 0.72;
+  filter: blur(0.25px);
+  pointer-events: none;
+}
+.chalk-zigzag-svg {
+  width: 100%;
+  max-width: 42rem;
+  height: 22px;
+  overflow: visible;
+}
+
+/* ---- taped objects, one attachment method for everything on the board ---- */
+.taped {
+  position: relative;
+  background: var(--class-paper);
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18), 0 18px 34px rgba(0, 0, 0, 0.28);
+}
+.tape {
+  position: absolute;
+  width: 72px; height: 24px;
+  background: repeating-linear-gradient(100deg, rgba(255, 255, 255, 0.85) 0px, rgba(255, 255, 255, 0.85) 3px, rgba(255, 255, 255, 0.64) 3px, rgba(255, 255, 255, 0.64) 6px);
+  clip-path: polygon(3% 0%, 97% 0%, 100% 26%, 96% 50%, 100% 74%, 95% 100%, 5% 100%, 0% 76%, 4% 50%, 0% 24%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+}
+.tape.left { top: -11px; left: 20px; transform: rotate(-7deg); }
+.tape.right { top: -11px; right: 20px; transform: rotate(6deg); }
+.tape.center { top: -11px; left: 50%; margin-left: -36px; }
+
+.photo-frame {
+  padding: 8px 8px 30px;
+  isolation: isolate;
+}
+@media (min-width: 768px) {
+  .photo-frame {
+    padding: 12px 12px 38px;
+  }
+}
+.photo-frame img {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  background: #dfe6ea;
+  mix-blend-mode: normal;
+}
+.photo-caption {
+  font-weight: 600;
+  font-size: clamp(16px, 4vw, 20px);
+  color: var(--class-teal-deep);
+  text-align: center;
+  margin-top: -20px;
+  position: relative;
+  z-index: 2;
+  padding-inline: 8px;
+}
+
+.index-card {
+  padding: 26px 26px 24px;
+  background-image: repeating-linear-gradient(var(--class-paper) 0px, var(--class-paper) 27px, var(--class-paper-line) 28px);
+}
+
+.feature-card { padding: 18px 16px 15px; }
+
+.feature-card-wrap {
+  isolation: isolate;
+}
+.feature-card-light {
+  position: absolute;
+  inset: -4px;
+  z-index: 0;
+  border-radius: 10px;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(247, 208, 117, 0.4) 0%,
+    rgba(247, 238, 219, 0.16) 55%,
+    transparent 78%
+  );
+  filter: blur(8px);
+}
+
+.photo-preview-wrap {
+  width: 100%;
+  max-width: none;
+  transform: none;
+}
+@media (min-width: 640px) {
+  .photo-preview-wrap {
+    transform: rotate(var(--photo-tilt, 0deg));
+  }
+}
+
+.sticky-note {
+  width: 280px;
+  background: var(--class-note-gold);
+  padding: 20px 20px 18px;
+  position: relative;
+  color: #3c2a05;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18), 0 18px 30px rgba(0, 0, 0, 0.26);
+  transform: rotate(2.5deg);
+}
+.sticky-note::after {
+  content: '';
+  position: absolute; right: 0; bottom: 0; width: 0; height: 0;
+  border-style: solid; border-width: 0 0 22px 22px;
+  border-color: transparent transparent rgba(0, 0, 0, 0.16) transparent;
+}
+.sticky-note .sticky-badge {
+  display: block; font-size: 10px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+  color: #7a4a06; margin-bottom: 6px;
+}
+.sticky-note p { color: #5c4413; }
+
+@media (max-width: 639px) {
+  .sticky-note {
+    width: min(280px, 100%);
+  }
+  .index-card {
+    padding: 20px 16px 18px;
+  }
+  .chalk-zigzag-svg {
+    height: 16px;
+  }
+}
+
+@media (hover: none) {
+  .feature-card-light {
+    display: none;
+  }
+}
+
+/* ---- wood tray, once, at the very bottom of the board ---- */
+.wood-tray {
+  position: relative;
+  z-index: 10;
+  height: 32px;
+  margin-top: 46px;
+  background: repeating-linear-gradient(90deg, var(--class-wood-light) 0px, var(--class-wood) 3px, var(--class-wood) 22px, var(--class-wood-light) 25px);
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.4), inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+}
+.wood-tray .chalk-bits { position: absolute; left: 26px; bottom: 9px; display: flex; gap: 7px; }
+.chalk-bit { width: 16px; height: 6px; border-radius: 3px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
+.chalk-bit-a { background: var(--class-chalk); }
+.chalk-bit-b { background: var(--class-chalk-gold); }
+.chalk-bit-c { background: #e4d3be; }
 
 @media (prefers-reduced-motion: reduce) {
   *,

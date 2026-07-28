@@ -42,7 +42,7 @@ export function Plans() {
       </Suspense>
 
       {/* Hero */}
-      <section className="pt-28 md:pt-32 pb-10 md:pb-14 px-4 md:px-8">
+      <section className="pt-36 md:pt-40 pb-10 md:pb-14 px-4 md:px-8">
         <motion.div
           className="max-w-3xl mx-auto text-center"
           variants={fadeInUp}

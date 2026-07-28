@@ -26,7 +26,7 @@ export function Terms() {
         <Navbar />
       </Suspense>
 
-      <section className="pt-28 md:pt-32 pb-14 md:pb-16 px-4 md:px-8">
+      <section className="pt-36 md:pt-40 pb-14 md:pb-16 px-4 md:px-8">
         <div className="max-w-3xl mx-auto">
           <motion.div variants={fadeInUp} initial="hidden" animate="visible">
             <span className="section-badge">Legal</span>

@@ -11,6 +11,9 @@ import digiWalletLogo from './digiwallettext.png'
 import founderSham from './FounderSham.jpeg'
 import sponsorClassroom from './classroom.webp'
 import sponsorFamily from './family.webp'
+import classroomLoginPreview from './classroom-loginpage.jpg'
+import classroomDashPreview from './classroom-dash-1.jpg'
+import classroomChalkIcon from './classroom-chalk-icon.png'
 
 export const images = {
   logo,
@@ -26,6 +29,9 @@ export const images = {
   founderSham,
   sponsorClassroom,
   sponsorFamily,
+  classroomLoginPreview,
+  classroomDashPreview,
+  classroomChalkIcon,
 } as const
 
 export {
@@ -42,4 +48,7 @@ export {
   founderSham,
   sponsorClassroom,
   sponsorFamily,
+  classroomLoginPreview,
+  classroomDashPreview,
+  classroomChalkIcon,
 }
