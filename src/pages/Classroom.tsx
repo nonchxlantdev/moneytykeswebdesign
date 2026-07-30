@@ -484,7 +484,7 @@ export function Classroom() {
             <h2 id="classroom-demo-heading" className="font-cta text-2xl sm:text-3xl md:text-4xl font-bold text-chalk mb-3">
               {classroomDemoSection.title}
             </h2>
-            <p className="text-sm sm:text-base text-chalk/90 leading-relaxed mb-5 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-white leading-relaxed mb-5 max-w-2xl mx-auto">
               {classroomDemoSection.body}
             </p>
             <div className="classroom-demo__actions">
@@ -587,7 +587,7 @@ export function Classroom() {
               </span>
               <span>
                 <span className="label">School login</span>
-                <span className="sub">Open the Teacher Dashboard</span>
+                <span className="sub">Open the Teacher's Classroom</span>
               </span>
             </button>
           </div>
