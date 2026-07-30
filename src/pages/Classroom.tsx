@@ -15,6 +15,8 @@ import {
   FiBarChart2,
   FiMessageSquare,
   FiPieChart,
+  FiExternalLink,
+  FiKey,
 } from 'react-icons/fi'
 import { FaGraduationCap, FaUniversity } from 'react-icons/fa'
 import { Button } from '@/components/ui/Button'
@@ -32,15 +34,16 @@ import {
   classroomFeaturesSection,
   classroomAssessmentCentre,
   classroomParentCallout,
-  classroomLoginPanel,
+  classroomDemoSection,
   classroomImagePlaceholders,
   classroomClosingHeadline,
   classroomClosingBenefits,
   classroomCtaReadyLabel,
   classroomSponsorHref,
   classroomDemoRequestUrl,
+  classroomDemoAccessUrl,
+  CLASSROOM_LOGIN_URL,
   goToClassroomLogin,
-  isClassroomLoginConfigured,
   type ClassroomFeature,
 } from '@/data/classroom'
 
@@ -285,18 +288,50 @@ function TapedPhoto({
   )
 }
 
-function LoginButton({ className = '' }: { className?: string }) {
-  const ready = isClassroomLoginConfigured()
+function TryDemoButton({ className = '' }: { className?: string }) {
   return (
     <Button
       variant="secondary"
-      onClick={goToClassroomLogin}
-      disabled={!ready}
-      magnetic={ready}
-      className={`${ready ? '' : 'opacity-50 cursor-not-allowed'} ${className}`.trim()}
+      href={`#${classroomDemoSection.id}`}
+      target="_self"
+      magnetic
+      className={className}
     >
-      Log In
+      Try the demo
     </Button>
+  )
+}
+
+function ClassroomDemoLaunch() {
+  return (
+    <div className="classroom-demo-frame taped classroom-demo-launch">
+      <span className="tape left" />
+      <span className="tape right" />
+      <div className="classroom-demo-launch__media">
+        <img
+          src={classroomDashPreview}
+          alt={classroomImagePlaceholders.dashboard.alt}
+          className="classroom-demo-launch__img"
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="classroom-demo-launch__scrim" aria-hidden="true" />
+      </div>
+      <div className="classroom-demo-launch__panel">
+        <span className="classroom-demo-launch__eyebrow">{classroomDemoSection.launchEyebrow}</span>
+        <h3 className="classroom-demo-launch__title">{classroomDemoSection.launchTitle}</h3>
+        <p className="classroom-demo-launch__body">{classroomDemoSection.launchBody}</p>
+        <a
+          href={CLASSROOM_LOGIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="classroom-demo-launch__cta"
+        >
+          <FiExternalLink aria-hidden />
+          {classroomDemoSection.launchCta}
+        </a>
+      </div>
+    </div>
   )
 }
 
@@ -313,8 +348,6 @@ export function Classroom() {
       meta?.setAttribute('content', previous)
     }
   }, [])
-
-  const loginReady = isClassroomLoginConfigured()
 
   return (
     <>
@@ -344,7 +377,7 @@ export function Classroom() {
             {classroomPageMeta}
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none mx-auto">
-            <LoginButton className="w-full sm:w-auto justify-center" />
+            <TryDemoButton className="w-full sm:w-auto justify-center" />
             <Button
               variant="ghost"
               href="#classroom-features"
@@ -442,6 +475,48 @@ export function Classroom() {
           rotate="2deg"
         />
 
+        <section
+          id={classroomDemoSection.id}
+          className="classroom-demo mb-14 scroll-mt-28"
+          aria-labelledby="classroom-demo-heading"
+        >
+          <div className="classroom-demo__intro">
+            <h2 id="classroom-demo-heading" className="font-cta text-2xl sm:text-3xl md:text-4xl font-bold text-chalk mb-3">
+              {classroomDemoSection.title}
+            </h2>
+            <p className="text-sm sm:text-base text-chalk/90 leading-relaxed mb-5 max-w-2xl mx-auto">
+              {classroomDemoSection.body}
+            </p>
+            <div className="classroom-demo__actions">
+              <a
+                href={CLASSROOM_LOGIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-btn plain classroom-demo__action"
+              >
+                <span className="ic" style={{ background: '#16a34a' }}>
+                  <FiExternalLink />
+                </span>
+                <span>
+                  <span className="label">{classroomDemoSection.openLabel}</span>
+                  <span className="sub">{classroomDemoSection.openSub}</span>
+                </span>
+              </a>
+              <a href={classroomDemoAccessUrl} className="cta-btn plain classroom-demo__action">
+                <span className="ic" style={{ background: '#d97706' }}>
+                  <FiKey />
+                </span>
+                <span>
+                  <span className="label">{classroomDemoSection.requestLabel}</span>
+                  <span className="sub">{classroomDemoSection.requestSub}</span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <ClassroomDemoLaunch />
+        </section>
+
         <ChalkZigZag className="mb-10" />
 
         <div className="flex justify-center mb-14">
@@ -505,25 +580,18 @@ export function Classroom() {
             <button
               type="button"
               onClick={goToClassroomLogin}
-              disabled={!loginReady}
-              className={`cta-btn plain text-left ${loginReady ? '' : 'opacity-60 cursor-not-allowed'}`}
+              className="cta-btn plain text-left"
             >
               <span className="ic" style={{ background: '#16a34a' }}>
                 <FiUser />
               </span>
               <span>
                 <span className="label">School login</span>
-                <span className="sub">For teachers already set up</span>
+                <span className="sub">Open the Teacher Dashboard</span>
               </span>
             </button>
           </div>
         </div>
-
-        {!loginReady ? (
-          <p role="status" className="text-center text-sm text-chalk opacity-70 leading-relaxed mb-6">
-            {classroomLoginPanel.notConfiguredNote}
-          </p>
-        ) : null}
 
         <div className="contact-strip pb-4">
           <a href={`mailto:${SUPPORT_EMAIL}`} className="contact-item">

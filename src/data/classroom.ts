@@ -1,6 +1,6 @@
 import { SUPPORT_EMAIL, homeSectionHref } from '@/data/links'
 
-export const CLASSROOM_LOGIN_URL = ''
+export const CLASSROOM_LOGIN_URL = 'https://teachers.moneytykes.com/'
 
 export function isClassroomLoginConfigured(): boolean {
   return CLASSROOM_LOGIN_URL.trim().startsWith('https://')
@@ -8,7 +8,7 @@ export function isClassroomLoginConfigured(): boolean {
 
 export function goToClassroomLogin(): void {
   if (isClassroomLoginConfigured()) {
-    window.location.href = CLASSROOM_LOGIN_URL
+    window.open(CLASSROOM_LOGIN_URL, '_blank', 'noopener,noreferrer')
   }
 }
 
@@ -126,6 +126,20 @@ export const classroomLoginPanel = {
   notConfiguredNote: 'Login is not connected yet. Reach out to your MoneyTykes contact to get your school set up.',
 }
 
+export const classroomDemoSection = {
+  id: 'classroom-demo',
+  title: 'Try the Teacher Dashboard',
+  body: 'Login is required. Request the demo password from MoneyTykes, then open the live Teacher Dashboard in a new tab to sign in and explore.',
+  requestLabel: 'Request demo access',
+  requestSub: 'We will send you the demo password',
+  openLabel: 'Open Teacher Dashboard',
+  openSub: 'Sign in and explore the live demo',
+  launchEyebrow: 'Live demo',
+  launchTitle: 'Teacher Dashboard',
+  launchBody: 'Opens the real Classroom app in a new tab so login and data connections work reliably.',
+  launchCta: 'Launch demo',
+}
+
 export const classroomClosingHeadline = {
   line1: 'Help Build a',
   highlight: 'Connected Classroom',
@@ -173,6 +187,8 @@ export const classroomCtaReadyLabel = 'Ready to get started?'
 export const classroomSponsorHref = homeSectionHref('#sponsors')
 
 export const classroomDemoRequestUrl = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('MoneyTykes Classroom demo request')}`
+
+export const classroomDemoAccessUrl = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('MoneyTykes Classroom demo password request')}&body=${encodeURIComponent('Hi MoneyTykes,\n\nI would like the demo password to try the Teacher Dashboard.\n\nName:\nSchool:\nRole:\n\nThank you!')}`
 
 export const classroomImagePlaceholders = {
   login: {

@@ -11,7 +11,7 @@ export interface LearningLevel {
 export const learningLevels: LearningLevel[] = [
   {
     id: 'tykers',
-    name: 'Tykers',
+    name: 'Tykes',
     ageRange: '5–7',
     description: 'Introduction to coins, simple chores, and saving for small rewards.',
     skills: ['Coin recognition', 'Basic chores', 'First savings jar'],
